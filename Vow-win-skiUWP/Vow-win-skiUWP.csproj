@@ -96,10 +96,15 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Database\ConnectionHolder.cs" />
+    <Compile Include="Database\ORM\Entities\Entity.cs" />
+    <Compile Include="Database\ORM\Entities\SystemExceptions.cs" />
+    <Compile Include="Database\ORM\Entities\Log.cs" />
+    <Compile Include="Database\ORM\Queries.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Log\Reporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

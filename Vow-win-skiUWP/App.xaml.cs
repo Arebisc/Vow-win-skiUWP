@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Vow_win_skiUWP.Database.ORM;
 
 namespace Vow_win_skiUWP
 {
@@ -30,6 +31,13 @@ namespace Vow_win_skiUWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            Queries.InitDatabaseTables();
+        }
+
+        ~App()
+        {
+            Database.ConnectionHolder.CloseConnection();
         }
 
         /// <summary>
