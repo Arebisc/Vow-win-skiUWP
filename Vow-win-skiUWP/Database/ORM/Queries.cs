@@ -23,7 +23,7 @@ namespace Vow_win_skiUWP.Database.ORM
             }
         }
 
-        public static TableQuery<Entities.Log> GetLogs(SQLiteConnection connection)
+        public static TableQuery<Entities.Log> GetLogs()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace Vow_win_skiUWP.Database.ORM
             return default(TableQuery<Entities.Log>);
         }
 
-        public static TableQuery<Entities.SystemExceptions> GetApplicationExceptions(SQLiteConnection connection)
+        public static TableQuery<Entities.SystemExceptions> GetApplicationExceptions()
         {
             try
             {
