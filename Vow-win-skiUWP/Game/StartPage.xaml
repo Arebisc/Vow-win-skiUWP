@@ -33,13 +33,5 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <Canvas x:Name="LayoutRoot" FocusVisualPrimaryBrush="{x:Null}">
-            <Canvas.Resources>
-                <Storyboard x:Name="Move"/>
-            </Canvas.Resources>
-            <Canvas.Background>
-                <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/Game/StartGameBackground.jpg"/>
-            </Canvas.Background>
-        </Canvas>
     </Grid>
 </Page>
