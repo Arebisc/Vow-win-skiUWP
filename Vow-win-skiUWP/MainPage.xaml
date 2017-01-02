@@ -40,7 +40,12 @@
                 </ListBox>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame x:Name="RootFrame" />
+                <StackPanel Orientation="Vertical">
+                    <Frame x:Name="RootFrame" Width="Auto" Height="400" />
+                    <TextBlock Margin="10 0" Height="30" FontSize="24" FontFamily="Vivaldi" FontWeight="Bold">Log systemowy</TextBlock>
+                    <TextBlock Height="150" x:Name="LogTb" />
+                    <TextBox Name="CmdTb" GotFocus="TextBox_OnGotFocus" LostFocus="TextBox_OnFocusLost" KeyDown="Cmd_EnterPressed"></TextBox>
+                </StackPanel>
             </SplitView.Content>
         </SplitView>
     </Grid>

@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Vow_win_skiUWP.Database.ORM;
+using Vow_win_skiUWP.Database.ORM.Entities;
 
 namespace Vow_win_skiUWP
 {
@@ -33,6 +34,7 @@ namespace Vow_win_skiUWP
             this.Suspending += OnSuspending;
 
             Queries.InitDatabaseTables();
+            Queries.InsertEntity(new SystemExceptions(DateTime.Now.Ticks, "błąd", "stack"));
         }
 
         ~App()
