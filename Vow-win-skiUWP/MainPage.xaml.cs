@@ -67,7 +67,24 @@ namespace Vow_win_skiUWP
 
         private void IconsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            switch (((sender as ListBox).SelectedItem as ListBoxItem).Name)
+            {
+                case "ProcessesListBoxItem":
+                    RootFrame.Navigate(typeof(Views.ProcessesPage));
+                    break;
+                case "MemoryListBoxItem":
+                    RootFrame.Navigate(typeof(Views.MemoryPage));
+                    break;
+                case "SyncAndIPCListBoxItem":
+                    RootFrame.Navigate(typeof(Views.SyncAndIPCPage));
+                    break;
+                case "CPUListBoxItem":
+                    RootFrame.Navigate(typeof(Views.CPUPage));
+                    break;
+                case "DiscListBoxItem":
+                    RootFrame.Navigate(typeof(Views.DiscPage));
+                    break;
+            }
         }
 
         private void Cmd_EnterPressed(object sender, KeyRoutedEventArgs e)

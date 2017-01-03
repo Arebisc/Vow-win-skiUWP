@@ -105,7 +105,22 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Log\Reporter.cs" />
+    <Compile Include="Views\CPUPage.xaml.cs">
+      <DependentUpon>CPUPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DiscPage.xaml.cs">
+      <DependentUpon>DiscPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Helpers\Watermark.cs" />
+    <Compile Include="Views\MemoryPage.xaml.cs">
+      <DependentUpon>MemoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessesPage.xaml.cs">
+      <DependentUpon>ProcessesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SyncAndIPCPage.xaml.cs">
+      <DependentUpon>SyncAndIPCPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -131,6 +146,26 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CPUPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DiscPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MemoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SyncAndIPCPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />
