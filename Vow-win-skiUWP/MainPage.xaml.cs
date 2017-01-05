@@ -93,18 +93,8 @@ namespace Vow_win_skiUWP
             {
                 Cmd_ExecuteCommand(CmdTb.Text);
                 CmdTb.Text = String.Empty;
-                ForceLoseFocus(sender);
+                this.Focus(FocusState.Programmatic);
             }
-        }
-
-        private void ForceLoseFocus(object sender)
-        {
-            var control = sender as Control;
-            var isTabStop = control.IsTabStop;
-            control.IsTabStop = false;
-            control.IsEnabled = false;
-            control.IsEnabled = true;
-            control.IsTabStop = isTabStop;
         }
 
         //TODO

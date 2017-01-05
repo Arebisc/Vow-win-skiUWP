@@ -95,6 +95,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\CPU\CPU.cs" />
+    <Compile Include="Core\CPU\Register.cs" />
     <Compile Include="Database\ConnectionHolder.cs" />
     <Compile Include="Database\ORM\Entities\Entity.cs" />
     <Compile Include="Database\ORM\Entities\SystemExceptions.cs" />

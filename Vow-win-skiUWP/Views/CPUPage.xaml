@@ -8,11 +8,24 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <RelativePanel Name="CPUPanelRegisters">
-            <TextBlock Name="ARegister" />
-            <TextBlock Name="BRegister" />
-            <TextBlock Name="CRegister" />
-            <TextBlock Name="DRegister" />
-        </RelativePanel>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" Width="200" Height="200">
+                <TextBlock FontSize="20">Rejestry procesora</TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <StackPanel>
+                        <TextBlock FontSize="20">A</TextBlock>
+                        <TextBlock FontSize="20">B</TextBlock>
+                        <TextBlock FontSize="20">C</TextBlock>
+                        <TextBlock FontSize="20">D</TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="20, 0, 0, 0">
+                        <TextBlock FontSize="20" Text="{Binding Path=A}" />
+                        <TextBlock FontSize="20" Text="{Binding Path=B}" />
+                        <TextBlock FontSize="20" Text="{Binding Path=C}" />
+                        <TextBlock FontSize="20" Text="{Binding Path=D}" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
