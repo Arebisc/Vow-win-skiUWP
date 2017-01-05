@@ -89,16 +89,33 @@ namespace Vow_win_skiUWP
 
         private void Cmd_EnterPressed(object sender, KeyRoutedEventArgs e)
         {
-            if(e.Key == VirtualKey.Enter)
+            if (e.Key == VirtualKey.Enter)
+            {
                 Cmd_ExecuteCommand(CmdTb.Text);
+                CmdTb.Text = String.Empty;
+                ForceLoseFocus(sender);
+            }
         }
-        //TODO
-        private async void Cmd_ExecuteCommand(string command)
+
+        private void ForceLoseFocus(object sender)
         {
-            var dialog = new MessageDialog(command);
-            await dialog.ShowAsync();
-            CmdTb.Text = "";
-            Watermark.OnFocusLost(CmdTb, _defaultWatermarkDictionary[CmdTb.Name]);
+            var control = sender as Control;
+            var isTabStop = control.IsTabStop;
+            control.IsTabStop = false;
+            control.IsEnabled = false;
+            control.IsEnabled = true;
+            control.IsTabStop = isTabStop;
+        }
+
+        //TODO
+        private void Cmd_ExecuteCommand(string command)
+        {
+            AddLog(command);
+        }
+
+        public void AddLog(string text)
+        {
+            LogTb.Text = text + '\n' + LogTb.Text;
         }
     }
 }

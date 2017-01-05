@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -25,6 +26,11 @@ namespace Vow_win_skiUWP.Views
         public CPUPage()
         {
             this.InitializeComponent();
+            string fileName = "/Assets/ProcessorIcon.png";
+            BitmapImage image = new BitmapImage(new Uri(this.BaseUri + fileName));
+            ImageBrush brush = new ImageBrush();
+            brush.ImageSource = image;
+            CPUPanelRegisters.Background = brush;
         }
     }
 }

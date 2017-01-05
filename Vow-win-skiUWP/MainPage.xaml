@@ -15,11 +15,11 @@
         <RelativePanel>
             <Button Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="36" Click="HamburgerButton_Click" HorizontalAlignment="Stretch" />
         </RelativePanel>
-        <SplitView Name="MySplitView" 
-                   Grid.Row="1" 
-                   DisplayMode="CompactInline" 
-                   OpenPaneLength="220" 
-                   CompactPaneLength="56" 
+        <SplitView Name="MySplitView"
+                   Grid.Row="1"
+                   DisplayMode="CompactInline"
+                   OpenPaneLength="220"
+                   CompactPaneLength="56"
                    HorizontalAlignment="Stretch">
             <SplitView.Pane>
                 <ListBox SelectionMode="Single" 
@@ -58,12 +58,23 @@
                 </ListBox>
             </SplitView.Pane>
             <SplitView.Content>
-                <StackPanel Orientation="Vertical">
-                    <Frame x:Name="RootFrame" Width="Auto" Height="400" />
-                    <TextBlock Margin="10 0" Height="30" FontSize="24" FontFamily="Vivaldi" FontWeight="Bold">Log systemowy</TextBlock>
-                    <TextBlock Height="150" x:Name="LogTb" />
-                    <TextBox Name="CmdTb" GotFocus="TextBox_OnGotFocus" LostFocus="TextBox_OnFocusLost" KeyDown="Cmd_EnterPressed"></TextBox>
-                </StackPanel>
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" Margin="50">
+                        <Frame x:Name="RootFrame" Width="Auto" Height="300" />
+                        <StackPanel Background="#363636" Margin="0, 15, 0 0" CornerRadius="2, 2, 2, 2">
+                            <TextBlock Margin="10" Height="30" FontSize="24" FontFamily="Vivaldi" FontWeight="Bold" Foreground="AliceBlue">Log systemowy</TextBlock>
+                            <ScrollViewer ZoomMode="Enabled"  VerticalScrollMode="Auto" Height="200">
+                                <TextBlock VerticalAlignment="Stretch" Margin="10"
+                                        HorizontalAlignment="Stretch"
+                                        TextWrapping="Wrap"   
+                                        ScrollViewer.VerticalScrollBarVisibility="Visible"   
+                                        ScrollViewer.ZoomMode="Enabled"
+                                        x:Name="LogTb" Foreground="AliceBlue" />
+                            </ScrollViewer>
+                            <TextBox Name="CmdTb" GotFocus="TextBox_OnGotFocus" LostFocus="TextBox_OnFocusLost" KeyUp="Cmd_EnterPressed"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </SplitView.Content>
         </SplitView>
     </Grid>
