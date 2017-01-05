@@ -1,0 +1,10 @@
+MF silniaPlik
+MN C,5
+MN A,1
+SILNIA:
+MU A,C
+JM SILNIA
+WF silniaPlik,A
+WF silniaPlik,-ID
+WR silniaPlik,A
+HLT

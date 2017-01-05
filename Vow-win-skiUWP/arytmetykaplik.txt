@@ -1,0 +1,13 @@
+MF arytmetykaPlik
+MN A,3
+MN B,6
+AD A,B
+WF arytmetykaPlik,Wynik3+6=
+WR arytmetykaPlik,A
+MU B,A
+WF arytmetykaPlik,Wynik6*9=
+WR arytmetykaPlik,B
+SB B,A
+WF arytmetykaPlik,Wynik45-9=
+WR arytmetykaPlik,B
+HLT

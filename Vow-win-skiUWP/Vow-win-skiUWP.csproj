@@ -96,7 +96,32 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\CPU\CPU.cs" />
+    <Compile Include="Core\CPU\Interpreter.cs" />
     <Compile Include="Core\CPU\Register.cs" />
+    <Compile Include="Core\CPU\Scheduler.cs" />
+    <Compile Include="Core\FileSystem\Block.cs" />
+    <Compile Include="Core\FileSystem\Disc.cs" />
+    <Compile Include="Core\FileSystem\File.cs" />
+    <Compile Include="Core\FileSystem\Folder.cs" />
+    <Compile Include="Core\IPC\Message.cs" />
+    <Compile Include="Core\IPC\PipeServer.cs" />
+    <Compile Include="Core\MemoryModule\ExchangeFile.cs" />
+    <Compile Include="Core\MemoryModule\ExchangeFileProcess.cs" />
+    <Compile Include="Core\MemoryModule\FifoQueue.cs" />
+    <Compile Include="Core\MemoryModule\Frame.cs" />
+    <Compile Include="Core\MemoryModule\FreeFramesList.cs" />
+    <Compile Include="Core\MemoryModule\Memory.cs" />
+    <Compile Include="Core\MemoryModule\Page.cs" />
+    <Compile Include="Core\MemoryModule\PhysicalMemory.cs" />
+    <Compile Include="Core\MemoryModule\ProcessPages.cs" />
+    <Compile Include="Core\Processes\Lockers.cs" />
+    <Compile Include="Core\Processes\LockersHolder.cs" />
+    <Compile Include="Core\Processes\Managing.cs" />
+    <Compile Include="Core\Processes\PCBFields.cs" />
+    <Compile Include="Core\Processes\PCBMethods.cs" />
+    <Compile Include="Core\Processes\UserInterface.cs" />
+    <Compile Include="Core\OldCoreProgram.cs" />
+    <Compile Include="Core\Shell.cs" />
     <Compile Include="Database\ConnectionHolder.cs" />
     <Compile Include="Database\ORM\Entities\Entity.cs" />
     <Compile Include="Database\ORM\Entities\SystemExceptions.cs" />
@@ -131,6 +156,9 @@
     <None Include="Vow-win-skiUWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\CoreAssets\close.wav" />
+    <Content Include="Assets\CoreAssets\spin.wav" />
+    <Content Include="Assets\CoreAssets\start.wav" />
     <Content Include="Assets\ProcessorIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
