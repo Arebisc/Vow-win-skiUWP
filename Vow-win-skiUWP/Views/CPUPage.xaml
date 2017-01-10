@@ -12,13 +12,13 @@
             <StackPanel Orientation="Vertical" Width="200" Height="200">
                 <TextBlock FontSize="20">Rejestry procesora</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <StackPanel>
+                    <StackPanel Width="40">
                         <TextBlock FontSize="20">A</TextBlock>
                         <TextBlock FontSize="20">B</TextBlock>
                         <TextBlock FontSize="20">C</TextBlock>
                         <TextBlock FontSize="20">D</TextBlock>
                     </StackPanel>
-                    <StackPanel Margin="20, 0, 0, 0">
+                    <StackPanel Margin="20, 0, 0, 0" Width="40">
                         <TextBlock FontSize="20" Text="{Binding Path=A}" />
                         <TextBlock FontSize="20" Text="{Binding Path=B}" />
                         <TextBlock FontSize="20" Text="{Binding Path=C}" />
