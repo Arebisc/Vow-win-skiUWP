@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="Vow_win_skiUWP.Game.OnePlayerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Vow_win_skiUWP.Game"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Width="800" Height="480">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Game/GameBackground.jpg"/>
+        </Grid.Background>
+        <Button x:Name="_1x1Button" Content="" HorizontalAlignment="Left" Height="117" Margin="135,44,0,0" VerticalAlignment="Top" Width="144" Background="{x:Null}" ClickMode="Press" FontSize="72" FontFamily="Snap ITC" Click="_1x1Button_Click"/>
+        <Button x:Name="_1x2Button" Content="" HorizontalAlignment="Left" Height="117" Margin="300,44,0,0" VerticalAlignment="Top" Width="144" Click="_1x2Button_Click" ClickMode="Press" Background="{x:Null}"/>
+        <Button x:Name="_1x3Button" Content="" HorizontalAlignment="Left" Height="117" Margin="464,44,0,0" VerticalAlignment="Top" Width="144" Click="_1x3Button_Click" Background="{x:Null}" ClickMode="Press"/>
+        <Button x:Name="_2x1Button" Content="" HorizontalAlignment="Left" Height="117" Margin="135,186,0,0" VerticalAlignment="Top" Width="144" Click="_2x1Button_Click" Background="{x:Null}" ClickMode="Press"/>
+        <Button x:Name="_2x2Button" Content="" HorizontalAlignment="Left" Height="117" Margin="300,186,0,0" VerticalAlignment="Top" Width="144" Click="_2x2Button_Click" Background="{x:Null}" ClickMode="Press"/>
+        <Button x:Name="_2x3Button" Content="" HorizontalAlignment="Left" Height="117" Margin="464,186,0,0" VerticalAlignment="Top" Width="144" Click="_2x3Button_Click" Background="{x:Null}" ClickMode="Press"/>
+        <Button x:Name="_3x1Button" Content="" HorizontalAlignment="Left" Height="117" Margin="135,325,0,0" VerticalAlignment="Top" Width="144" Click="_3x1Button_Click" Background="{x:Null}" ClickMode="Press"/>
+        <Button x:Name="_3x2Button" Content="" HorizontalAlignment="Left" Height="117" Margin="300,325,0,0" VerticalAlignment="Top" Width="144" Click="_3x2Button_Click" Background="{x:Null}" ClickMode="Press"/>
+        <Button x:Name="_3x3Button" Content="" HorizontalAlignment="Left" Height="117" Margin="464,325,0,0" VerticalAlignment="Top" Width="144" Click="_3x3Button_Click" Background="{x:Null}" ClickMode="Press"/>
+
+    </Grid>
+</Page>

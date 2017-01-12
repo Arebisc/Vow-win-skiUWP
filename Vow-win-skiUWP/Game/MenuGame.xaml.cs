@@ -13,8 +13,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-
-
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Vow_win_skiUWP.Game
@@ -22,15 +20,25 @@ namespace Vow_win_skiUWP.Game
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GamePage : Page
+    public sealed partial class MenuGame : Page
     {
-        public GamePage()
+        public MenuGame()
         {
             this.InitializeComponent();
         }
 
-        private void OnStart(object sender, RoutedEventArgs e)
-        { 
+        private void OnePlayerBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void TwoPlayersBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitGameBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
 
         }
     }
