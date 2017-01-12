@@ -142,14 +142,17 @@
       <DependentUpon>HelpPopupDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Helpers\Watermark.cs" />
+    <Compile Include="Views\IPCPage.xaml.cs">
+      <DependentUpon>IPCPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LockersPage.xaml.cs">
+      <DependentUpon>LockersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MemoryPage.xaml.cs">
       <DependentUpon>MemoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProcessesPage.xaml.cs">
       <DependentUpon>ProcessesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SyncAndIPCPage.xaml.cs">
-      <DependentUpon>SyncAndIPCPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -193,15 +196,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\IPCPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LockersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MemoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProcessesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SyncAndIPCPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -80,8 +80,11 @@ namespace Vow_win_skiUWP
                 case "MemoryListBoxItem":
                     RootFrame.Navigate(typeof(Views.MemoryPage));
                     break;
-                case "SyncAndIPCListBoxItem":
-                    RootFrame.Navigate(typeof(Views.SyncAndIPCPage));
+                case "IPCListBoxItem":
+                    RootFrame.Navigate(typeof(Views.IPCPage));
+                    break;
+                case "LockersListBoxItem":
+                    RootFrame.Navigate(typeof(Views.LockersPage));
                     break;
                 case "CPUListBoxItem":
                     RootFrame.Navigate(typeof(Views.CPUPage));
@@ -173,6 +176,13 @@ namespace Vow_win_skiUWP
                       + "SDB [nr]\t   Wyświetla dane wszystkich bloków, [nr] bloków na ekran\n";
 
             return result;
+        }
+
+        private async void NextOrderButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var popup = new HelpPopupDialog();
+            popup.setText("Jeszcze nie działam!");
+            await popup.ShowAsync();
         }
     }
 }

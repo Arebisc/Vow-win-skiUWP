@@ -20,9 +20,9 @@ namespace Vow_win_skiUWP.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SyncAndIPCPage : Page
+    public sealed partial class LockersPage : Page
     {
-        public SyncAndIPCPage()
+        public LockersPage()
         {
             this.InitializeComponent();
         }
