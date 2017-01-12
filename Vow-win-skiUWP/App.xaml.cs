@@ -14,8 +14,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Vow_win_skiUWP.Core.IPC;
 using Vow_win_skiUWP.Database.ORM;
 using Vow_win_skiUWP.Database.ORM.Entities;
+using Vow_win_skiUWP.Core.Processes;
 
 namespace Vow_win_skiUWP
 {
@@ -24,6 +26,13 @@ namespace Vow_win_skiUWP
     /// </summary>
     sealed partial class App : Application
     {
+        void InitializeSystemResources()
+        {
+            LockersHolder.InitLockers();
+            PipeServer.InitServer();
+            PCB.CreateIdleProcess();
+        }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -33,8 +42,9 @@ namespace Vow_win_skiUWP
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
+            InitializeSystemResources();
+
             Queries.InitDatabaseTables();
-            Queries.InsertEntity(new SystemExceptions(DateTime.Now.Ticks, "błąd", "stack"));
         }
 
         ~App()

@@ -4,10 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.ServiceModel.Channels;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,6 +18,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Vow_win_skiUWP.Core;
+using Vow_win_skiUWP.Log;
 using Vow_win_skiUWP.Views.Helpers;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -106,6 +111,68 @@ namespace Vow_win_skiUWP
         public void AddLog(string text)
         {
             LogTb.Text = text + '\n' + LogTb.Text;
+        }
+
+        private async void HelpButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var popup = new HelpPopupDialog();
+            popup.setText(GetHelp());
+            await popup.ShowAsync();
+        }
+
+        private string GetHelp()
+        {
+            string result = String.Empty;
+            result += "\n"
+                      + "Parametry: [opcjonalny] {wymagany}\n"
+                      + "\n"
+                      + "\n"
+                      + "Polecenia\t\t   Opis\n"
+                      + "-------------------------------Ogólne---------------------------------\n"
+                      + "HELP\t\t   Wyświetla tę listę\n"
+                      + "EX [-all]\t   Wykonuje kolejny rozkaz, [-all] - wszystkie rozkazy\n"
+                      + "QUIT\t\t   Zamyka system\n"
+                      + "\n"
+                      + "------------------------------Procesor--------------------------------\n"
+                      + "SRP\t\t   Wyświetla listę procesów Ready\n"
+                      + "SRG\t\t   Wyświetla rejestry procesora\n"
+                      + "\n"
+                      + "-------------------------------Procesy--------------------------------\n"
+                      + "CP {nazwa} {prog}  Tworzy proces {nazwa} z programu {prog} na dysku Windows\n"
+                      + "CPD {nazwa} {prog} Tworzy proces {nazwa} z programu {prog} na dysku systemu\n"
+                      + "CPP {nazwa} {pr}   Ustawia priorytet procesu {nazwa} na {pr}\n"
+                      + "NPR {nazwa/\"-all\"} Uruchom nowy proces {nazwa}, {-all} - wszystkie procesy\n"
+                      + "HP {nazwa}\t   Zatrzymuje proces {nazwa}\n"
+                      + "SAP\t\t   Wyświetla listę wszystkich procesów\n"
+                      + "SPCB {nazwa}\t   Wyświetla listę PCB procesu {nazwa}\n"
+                      + "WP {nazwa}\t   Usypia uruchomiony proces {nazwa}\n"
+                      + "RP {nazwa}\t   Wznawia uśpiony proces {nazwa}\n"
+                      + "\n"
+                      + "-------------------------------Pamięć---------------------------------\n"
+                      + "SPL {nazwa}\t   Wyświetla listę stron procesu {nazwa}\n"
+                      + "SPC {nazwa} {nr}   Wyświetla zawartość strony {nr} procesu {nazwa}\n"
+                      + "SEP\t\t   Wyświetla puste stron\n"
+                      + "SM\t\t   Wyświetla całą pamięć\n"
+                      + "SLM\t\t   Wyświetla ostatnią wiadomość z pamięci\n"
+                      + "SFIFO\t\t   Wyświetla kolejke FIFO\n"
+                      + "\n"
+                      + "-----------------------------Komunikacja------------------------------\n"
+                      + "SAM\t\t   Wyświetla wszystkie oczekujące komunikaty\n"
+                      + "SMH\t\t   Wyświetla historię komunikatów\n"
+                      + "\n"
+                      + "----------------------------Synchronizacja----------------------------\n"
+                      + "SW\t\t   Wyświetla procesy oczekujące pod zamkiem komunikatów\n"
+                      + "\n"
+                      + "--------------------------------Dysk----------------------------------\n"
+                      + "DIR/LS\t\t   Wyświetla listę plików\n"
+                      + "CW {nazwa} {plik}  Tworzy plik {nazwa} i wypełnia danymi z {plik} Windows\n"
+                      + "CF {nazwa} [dane]  Tworzy plik {nazwa} i wypełnia [dane]\n"
+                      + "APP {nazwa} [dane] Dołącza [dane] do pliku {nazwa}\n"
+                      + "TYPE {nazwa}\t   Wyświetla dane z pliku {nazwa}\n"
+                      + "DF {nazwa}\t   Usuwa plik {nazwa}\n"
+                      + "SDB [nr]\t   Wyświetla dane wszystkich bloków, [nr] bloków na ekran\n";
+
+            return result;
         }
     }
 }

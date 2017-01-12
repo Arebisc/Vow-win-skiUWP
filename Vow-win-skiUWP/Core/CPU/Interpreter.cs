@@ -260,10 +260,10 @@ namespace Vow_win_skiUWP.Core.CPU
         public void JMOrder(string tag)
         {
             Console.WriteLine("Rozkaz JM z parametrem " + tag);
+            CPU.GetInstance.Register.C--;
 
             if (CPU.GetInstance.Register.C != 0)
             {
-                CPU.GetInstance.Register.C--;
                 var runningPCB = Scheduler.GetInstance.GetRunningPCB();
                 runningPCB.InstructionCounter = 0;
 

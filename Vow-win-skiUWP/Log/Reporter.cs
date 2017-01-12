@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Vow_win_skiUWP.Database.ORM;
 
+public delegate void PrintLog(string log);
+
 namespace Vow_win_skiUWP.Log
 {
     class Reporter
-    {
+    { 
         public static void Report(Exception e)
         {
             Console.WriteLine(e.Message + " " + e.StackTrace);

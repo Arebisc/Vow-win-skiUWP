@@ -138,6 +138,9 @@
     <Compile Include="Views\DiscPage.xaml.cs">
       <DependentUpon>DiscPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Helpers\HelpPopupDialog.xaml.cs">
+      <DependentUpon>HelpPopupDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Helpers\Watermark.cs" />
     <Compile Include="Views\MemoryPage.xaml.cs">
       <DependentUpon>MemoryPage.xaml</DependentUpon>
@@ -183,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DiscPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Helpers\HelpPopupDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

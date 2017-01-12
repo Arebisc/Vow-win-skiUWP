@@ -1,0 +1,48 @@
+﻿<ContentDialog
+    x:Class="Vow_win_skiUWP.Views.Helpers.HelpPopupDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Komendy Shella"
+    PrimaryButtonText="Zamknij"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="400" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PopupContentTb.FontSize" Value="7" />
+                        <Setter Target="scrollTb.Height" Value="300" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="800" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PopupContentTb.FontSize" Value="15" />
+                        <Setter Target="scrollTb.Height" Value="600" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <StackPanel Orientation="Vertical">
+            <ScrollViewer ZoomMode="Enabled" Name="ScrollTb" VerticalScrollMode="Auto" Height="600">
+                <TextBlock VerticalAlignment="Stretch" Margin="10"
+                                        HorizontalAlignment="Stretch"
+                                        TextWrapping="Wrap"
+                                        ScrollViewer.VerticalScrollBarVisibility="Visible"   
+                                        ScrollViewer.ZoomMode="Enabled"
+                                        Name="PopupContentTb"/>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</ContentDialog>
