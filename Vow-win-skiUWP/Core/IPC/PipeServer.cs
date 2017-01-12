@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.IPC
 {
     public class PipeServer
     {
+        private Reporter reporter;
         private static PipeServer _instance;
         private List<Message> Messages;
         private List<Message> History;
@@ -25,7 +27,9 @@ namespace Vow_win_skiUWP.Core.IPC
 
         public PipeServer()
         {
+            reporter = new Reporter();
             Console.WriteLine("Tworzenie Serwera IPC.");
+            reporter.AddLog("Tworzenie Serwera IPC.");
             Build();
         }
 
@@ -39,18 +43,22 @@ namespace Vow_win_skiUWP.Core.IPC
         public void Show()
         {
             Console.WriteLine("Waiting messages for receive: ");
+            reporter.AddLog("Waiting messages for receive: ");
             foreach (var x in Messages)
             {
                 Console.WriteLine(x.GetSenderId() + " to " + x.GetReceiverId() + " " + x.GetMessage());
+                reporter.AddLog(x.GetSenderId() + " to " + x.GetReceiverId() + " " + x.GetMessage());
             }
         }
 
         public void ShowHistory()
         {
             Console.WriteLine("Communication history: ");
+            reporter.AddLog("Communication history: ");
             foreach (var x in History)
             {
                 Console.WriteLine(x.GetSenderId() + " to " + x.GetReceiverId() + " " + x.GetMessage());
+                reporter.AddLog(x.GetSenderId() + " to " + x.GetReceiverId() + " " + x.GetMessage());
             }
         }
 

@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.MemoryModule
 {
     public class Frame
     {
+        private Reporter reporter;
         private int _frameSize;
         private readonly char[] _fields;
         public int Offset;
 
         public Frame(int frameSize)
         {
+            reporter = new Reporter();
             _frameSize = frameSize;
             _fields = new char[_frameSize];
             ClearFrame();
@@ -47,17 +50,21 @@ namespace Vow_win_skiUWP.Core.MemoryModule
                 if (_fields[i] == '\r')
                 {
                     Console.Write("\\r ");
+                    reporter.AddLog("\\r ");
                 }
                 else if (_fields[i] == '\n')
                 {
                     Console.Write("\\n ");
+                    reporter.AddLog("\\n ");
                 }
                 else
                 {
                     Console.Write(_fields[i] + " ");
+                    reporter.AddLog(_fields[i] + " ");
                 }
             }
             Console.WriteLine("");
+            reporter.AddLog("");
         }
 
         public char GetByte(int index)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vow_win_skiUWP.Core.MemoryModule;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.Processes
 {
@@ -26,6 +27,7 @@ namespace Vow_win_skiUWP.Core.Processes
     public partial class PCB
     {
 
+        Reporter reporter;
         private static LinkedList<PCB> _CreatedPCBs = new LinkedList<PCB>();
         private static int _NextPID = -1;
 
@@ -34,6 +36,7 @@ namespace Vow_win_skiUWP.Core.Processes
         /// </summary>
         public PCB()
         {
+            reporter = new Reporter();
             _PID = ++_NextPID;
         }
 
@@ -73,6 +76,7 @@ namespace Vow_win_skiUWP.Core.Processes
                 catch
                 {
                     Console.WriteLine("Nie udalo sie utworzyc procesu: w Windows nie znaleziono pliku o nazwie " + ProgramFilePath);
+                    reporter.AddLog("Nie udalo sie utworzyc procesu: w Windows nie znaleziono pliku o nazwie " + ProgramFilePath);
                     State = ProcessState.Terminated;
                     return;
                 }
@@ -83,6 +87,7 @@ namespace Vow_win_skiUWP.Core.Processes
                 if (Program == null)
                 {
                     Console.WriteLine("Nie udalo sie utworzyc procesu: na dysku systemu nie znaleziono pliku o nazwie " + ProgramFilePath);
+                    reporter.AddLog("Nie udalo sie utworzyc procesu: na dysku systemu nie znaleziono pliku o nazwie " + ProgramFilePath);
                     State = ProcessState.Terminated;
                     return;
                 }
@@ -97,12 +102,14 @@ namespace Vow_win_skiUWP.Core.Processes
 
                 Name = Name_ + i.ToString();
                 Console.WriteLine("Podana nazwa [" + Name_ + "] jest juz uzywana, proces otrzymal nazwe " + Name + ".");
+                reporter.AddLog("Podana nazwa [" + Name_ + "] jest juz uzywana, proces otrzymal nazwe " + Name + ".");
 
             }
             else
             {
                 Name = Name_;
                 Console.WriteLine("Proces otrzymal nazwe " + Name + ".");
+                reporter.AddLog("Proces otrzymal nazwe " + Name + ".");
             }
 
             //Utwórz PCB
@@ -111,6 +118,7 @@ namespace Vow_win_skiUWP.Core.Processes
             if (Priority < 0 || Priority > 7)
             {
                 Console.WriteLine("Priorytet musi miescic sie w zakresie 0 - 7. Proces otrzymal priorytet 7.");
+                reporter.AddLog("Priorytet musi miescic sie w zakresie 0 - 7. Proces otrzymal priorytet 7.");
                 CurrentPriority = 7;
                 StartPriority = 7;
             }
@@ -127,6 +135,7 @@ namespace Vow_win_skiUWP.Core.Processes
 
             _CreatedPCBs.AddLast(this);
             Console.WriteLine("Utworzono proces: " + this.ToString());
+            reporter.AddLog("Utworzono proces: " + this.ToString());
         }
 
         public static PCB CreateIdleProcess()

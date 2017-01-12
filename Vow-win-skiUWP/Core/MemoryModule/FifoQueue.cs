@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.MemoryModule
 {
@@ -13,12 +14,14 @@ namespace Vow_win_skiUWP.Core.MemoryModule
     }
     public class FifoQueue
     {
+        private Reporter reporter;
         private List<FrameData> _queue;
         public int Size;
 
 
         public FifoQueue()
         {
+            reporter = new Reporter();
             _queue = new List<FrameData>();
             Size = 0;
         }
@@ -49,9 +52,11 @@ namespace Vow_win_skiUWP.Core.MemoryModule
         {
             var display = _queue.Select(x => x.FrameNumber).Reverse().ToList();
             Console.WriteLine("Kolejka FIFO");
+            reporter.AddLog("Kolejka FIFO");
             foreach (var field in display)
             {
                 Console.Write(field + " ");
+                reporter.AddLog(field + " ");
             }
         }
     }

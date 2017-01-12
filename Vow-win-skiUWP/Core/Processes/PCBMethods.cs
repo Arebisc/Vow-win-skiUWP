@@ -20,7 +20,6 @@ namespace Vow_win_skiUWP.Core.Processes
 
     public partial class PCB
     {
-
         /// <summary>
         /// Zamyka proces (stan = terminated)
         /// </summary>
@@ -37,12 +36,14 @@ namespace Vow_win_skiUWP.Core.Processes
             if (Reason == ReasonOfProcessTerminating.KilledByOther && ClosingProcess == null)
             {
                 Console.WriteLine("Blad zamykania procesu: nie podano procesu zamykajacego.");
+                reporter.AddLog("Blad zamykania procesu: nie podano procesu zamykajacego.");
                 return 2;
             }
 
             if (PID == 0)
             {
                 Console.WriteLine("Nie mozna zamknac procesu systemowego.");
+                reporter.AddLog("Nie mozna zamknac procesu systemowego.");
                 return 3;
             }
 
@@ -82,8 +83,11 @@ namespace Vow_win_skiUWP.Core.Processes
                 CPU.Scheduler.GetInstance.RemoveProcess(this);
 
                 Console.WriteLine("Zakonczono proces " + this.ToString() + ".");
+                reporter.AddLog("Zakonczono proces " + this.ToString() + ".");
                 Console.WriteLine("Powod zamkniecia: " + ReasonString);
+                reporter.AddLog("Powod zamkniecia: " + ReasonString);
                 Console.WriteLine("Kod wyjscia procesu: " + ExitCode.ToString());
+                reporter.AddLog("Kod wyjscia procesu: " + ExitCode.ToString());
                 this.RemoveProcess();
                 return 0;
 
@@ -92,9 +96,13 @@ namespace Vow_win_skiUWP.Core.Processes
             {
                 WaitingForStopping = true;
                 Console.WriteLine("Oczekiwanie na zamkniecie procesu: " + this.ToString() + ".");
+                reporter.AddLog("Oczekiwanie na zamkniecie procesu: " + this.ToString() + ".");
                 Console.WriteLine("Proces zostanie zamkniety po przejsciu do stanu Running.");
+                reporter.AddLog("Proces zostanie zamkniety po przejsciu do stanu Running.");
                 Console.WriteLine("Kod wyjscia procesu: " + ExitCode.ToString());
+                reporter.AddLog("Kod wyjscia procesu: " + ExitCode.ToString());
                 Console.WriteLine("Powod zamkniecia: " + ReasonString);
+                reporter.AddLog("Powod zamkniecia: " + ReasonString);
 
                 //Zablokuj proces zamykający
                 if (Reason == ReasonOfProcessTerminating.KilledByOther)
@@ -123,6 +131,7 @@ namespace Vow_win_skiUWP.Core.Processes
             {
                 State = ProcessState.Ready;
                 Console.WriteLine("Uruchomiono proces " + this.ToString() + ".");
+                reporter.AddLog("Uruchomiono proces " + this.ToString() + ".");
 
                 CPU.Scheduler.GetInstance.AddProcess(this);
                 return 0;
@@ -131,6 +140,7 @@ namespace Vow_win_skiUWP.Core.Processes
             else
             {
                 Console.WriteLine("Blad uruchamiania procesu: Proces musi miec stan New. [" + this.ToString() + "]");
+                reporter.AddLog("Blad uruchamiania procesu: Proces musi miec stan New. [" + this.ToString() + "]");
                 return 2;
             }
 
@@ -157,10 +167,12 @@ namespace Vow_win_skiUWP.Core.Processes
                     }
 
                     Console.WriteLine("Odblokowano proces oczekujacy na zamkniecie biezacego procesu: ");
+                    reporter.AddLog("Odblokowano proces oczekujacy na zamkniecie biezacego procesu: ");
 
                     State = ProcessState.Terminated;
                     CPU.Scheduler.GetInstance.RemoveProcess(this);
                     Console.WriteLine("Zamknieto czekajacy na zamkniecie proces wchodzacy do stanu Running: " + this.ToString() + ".");
+                    reporter.AddLog("Zamknieto czekajacy na zamkniecie proces wchodzacy do stanu Running: " + this.ToString() + ".");
 
                     this.RemoveProcess();
                     return 2;
@@ -170,6 +182,7 @@ namespace Vow_win_skiUWP.Core.Processes
                 {
                     State = ProcessState.Running;
                     Console.WriteLine("Uruchomiono proces czekajacy na procesor: " + this.ToString() + ".");
+                    reporter.AddLog("Uruchomiono proces czekajacy na procesor: " + this.ToString() + ".");
 
 
                     return 0;
@@ -179,6 +192,7 @@ namespace Vow_win_skiUWP.Core.Processes
             else
             {
                 Console.WriteLine("Blad uruchamiania czekajacego procesu: Proces ma stan inny niz Ready: " + this.ToString() + ".");
+                reporter.AddLog("Blad uruchamiania czekajacego procesu: Proces ma stan inny niz Ready: " + this.ToString() + ".");
                 return 1;
             }
         }
@@ -191,6 +205,7 @@ namespace Vow_win_skiUWP.Core.Processes
             if (PID == 0)
             {
                 Console.WriteLine("Nie mozna uspic procesu; proces jest procesem systemowym.");
+                reporter.AddLog("Nie mozna uspic procesu; proces jest procesem systemowym.");
                 return 3;
             }
 
@@ -200,12 +215,14 @@ namespace Vow_win_skiUWP.Core.Processes
                 CPU.Scheduler.GetInstance.RemoveProcess(this);
 
                 Console.WriteLine("Proces " + this.ToString() + " przeszedl w stan oczekiwania na odblokowanie.");
+                reporter.AddLog("Proces " + this.ToString() + " przeszedl w stan oczekiwania na odblokowanie.");
                 return 0;
 
             }
             else
             {
                 Console.WriteLine("Nie udalo sie wstrzymac procesu. Proces ma stan inny niz Running: " + this.ToString() + ".");
+                reporter.AddLog("Nie udalo sie wstrzymac procesu. Proces ma stan inny niz Running: " + this.ToString() + ".");
                 return 1;
             }
         }
@@ -221,12 +238,14 @@ namespace Vow_win_skiUWP.Core.Processes
                 CPU.Scheduler.GetInstance.AddProcess(this);
 
                 Console.WriteLine("Proces " + this.ToString() + " przeszedl w stan oczekiwania na przydzial procesora.");
+                reporter.AddLog("Proces " + this.ToString() + " przeszedl w stan oczekiwania na przydzial procesora.");
                 return 0;
             }
             else
             {
 
                 Console.WriteLine("Nie udalo sie odblokowac procesu. Proces ma stan inny niz Waiting: " + this.ToString() + ".");
+                reporter.AddLog("Nie udalo sie odblokowac procesu. Proces ma stan inny niz Waiting: " + this.ToString() + ".");
                 return 1;
             }
         }
@@ -241,6 +260,7 @@ namespace Vow_win_skiUWP.Core.Processes
 
 
                 Console.WriteLine("Przerwano realizacje przez procesor procesu: " + this.ToString() + ".");
+                reporter.AddLog("Przerwano realizacje przez procesor procesu: " + this.ToString() + ".");
                 return 0;
 
             }
@@ -248,6 +268,7 @@ namespace Vow_win_skiUWP.Core.Processes
             {
 
                 Console.WriteLine("Blad przerywania procesu: Proces ma stan inny niz Running: " + this.ToString() + ".");
+                reporter.AddLog("Blad przerywania procesu: Proces ma stan inny niz Running: " + this.ToString() + ".");
                 return 1;
             }
         }
@@ -265,6 +286,7 @@ namespace Vow_win_skiUWP.Core.Processes
             if (PID == 0)
             {
                 Console.WriteLine("Nie mozna usunac procesu systemowego.");
+                reporter.AddLog("Nie mozna usunac procesu systemowego.");
                 return 3;
             }
 
@@ -274,12 +296,14 @@ namespace Vow_win_skiUWP.Core.Processes
                 _CreatedPCBs.Remove(this);
 
                 Console.WriteLine("Usunieto proces " + this.ToString() + ".");
+                reporter.AddLog("Usunieto proces " + this.ToString() + ".");
                 return 0;
 
             }
             else
             {
                 Console.WriteLine("Blad usuwania procesu: Proces nie zostal zatrzymany przed usunieciem: " + this.ToString() + ".");
+                reporter.AddLog("Blad usuwania procesu: Proces nie zostal zatrzymany przed usunieciem: " + this.ToString() + ".");
                 return 2;
             }
 
@@ -307,10 +331,22 @@ namespace Vow_win_skiUWP.Core.Processes
             Console.WriteLine("Stan: " + State.ToString());
             Console.WriteLine("Licznik instrukcji: " + InstructionCounter);
             Console.WriteLine("Strony pamieci: ");
+            reporter.AddLog("Zawartosc bloku PCB procesu:\n" +
+                            "PID: " + PID +
+                            "Nazwa: " + Name +
+                            "Priorytet: " + CurrentPriority +
+                            "Poczatkowy priorytet: " + StartPriority +
+                            "Czas posiadania obecnego priorytetu: " + WaitingForProcessorTime +
+                            "Rejestry: " + Registers.ToString() +
+                            "Stan: " + State.ToString() +
+                            "Licznik instrukcji: " + InstructionCounter +
+                            "Strony pamieci: ");
             MemoryModule.Memory.GetInstance.DisplayPageList(PID);
             Console.WriteLine("Zamek odbioru wiadomosci: " + ReceiverMessageLock);
             Console.WriteLine("Oczekiwanie na zamkniecie: " + WaitingForStopping);
             Console.WriteLine();
+            reporter.AddLog("Zamek odbioru wiadomosci: " + ReceiverMessageLock +
+                            "Oczekiwanie na zamkniecie: " + WaitingForStopping + "\n");
         }
 
         public void Send(string receivername, string message)

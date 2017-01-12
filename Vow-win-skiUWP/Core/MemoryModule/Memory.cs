@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vow_win_skiUWP.Core.Processes;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.MemoryModule
 {
     public class Memory
     {
+        private Reporter reporter;
         private const int FramesCount = 16;
         private const int FramesSize = 16;
         private int _messageLength;
@@ -23,6 +25,7 @@ namespace Vow_win_skiUWP.Core.MemoryModule
 
         private Memory()
         {
+            reporter = new Reporter();
             _exchangeFile = new ExchangeFile();
             _fifoQueue = new FifoQueue();
             _physicalMemory = new PhysicalMemory(FramesCount, FramesSize);
@@ -350,16 +353,19 @@ namespace Vow_win_skiUWP.Core.MemoryModule
                     if (pages.IsPageInMemory(i))
                     {
                         Console.WriteLine("Strona " + i + " znajduje się w ramce nr " + pages.ReadFrameNumber(i));
+                        reporter.AddLog("Strona " + i + " znajduje się w ramce nr " + pages.ReadFrameNumber(i));
                     }
                     else
                     {
                         Console.WriteLine("Strona " + i + " nie ma przypisanej ramki.");
+                        reporter.AddLog("Strona " + i + " nie ma przypisanej ramki.");
                     }
                 }
             }
             catch (NullReferenceException)
             {
                 Console.WriteLine("Tego procesu nie ma w pamięci");
+                reporter.AddLog("Tego procesu nie ma w pamięci");
             }
         }
 
@@ -372,17 +378,20 @@ namespace Vow_win_skiUWP.Core.MemoryModule
                 if (pages.IsPageInMemory(number))
                 {
                     Console.WriteLine("Zawarość ramki nr: " + number);
+                    reporter.AddLog("Zawarość ramki nr: " + number);
                     _physicalMemory.GetFrame(pages.ReadFrameNumber(number)).ShowFrame();
                 }
                 else
                 {
                     Console.WriteLine("Danej strony nie ma w pamięci.");
+                    reporter.AddLog("Danej strony nie ma w pamięci.");
                 }
 
             }
             catch (Exception)
             {
                 Console.WriteLine("Nie ma danego procesu w pamieci.");
+                reporter.AddLog("Nie ma danego procesu w pamieci.");
             }
         }
 
@@ -391,10 +400,12 @@ namespace Vow_win_skiUWP.Core.MemoryModule
             if (_freeFramesList.FreeFramesCount == 0)
             {
                 Console.WriteLine("Brak wolnych ramek.");
+                reporter.AddLog("Brak wolnych ramek.");
             }
             else
             {
                 Console.WriteLine("Lista wolnych ramek.");
+                reporter.AddLog("Lista wolnych ramek.");
                 _freeFramesList.DisplayFreeFrames();
             }
         }
@@ -402,9 +413,11 @@ namespace Vow_win_skiUWP.Core.MemoryModule
         public void DisplayPhysicalMemory()
         {
             Console.WriteLine("Wyświetlenie całej pamięci.");
+            reporter.AddLog("Wyświetlenie całej pamięci.");
             for (int i = 0; i < FramesCount; i++)
             {
                 Console.Write("Ramka nr " + i + ": ");
+                reporter.AddLog("Ramka nr " + i + ": ");
                 _physicalMemory.ShowFrame(i);
             }
         }

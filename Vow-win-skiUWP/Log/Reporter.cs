@@ -13,7 +13,7 @@ namespace Vow_win_skiUWP.Log
     {
         private Frame rootFrame;
         private Page mainPage;
-        private TextBlock logTb;
+        private static TextBlock logTb;
 
         public Reporter()
         {
@@ -22,7 +22,7 @@ namespace Vow_win_skiUWP.Log
             logTb = mainPage.FindName("LogTb") as TextBlock;
         }
 
-        public void AddLog(string text)
+        public static void AddLog(string text)
         {
             logTb.Text = text + '\n' + logTb.Text;
         }

@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vow_win_skiUWP.Core.Processes;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.CPU
 {
     public sealed class Scheduler
     {
+        private Reporter reporter;
         private static volatile Scheduler _instance;
         private static readonly object SyncRoot = new object();
         private List<PCB> WaitingForProcessor;
 
         private Scheduler()
         {
+            reporter = new Reporter();
             WaitingForProcessor = new List<PCB>();
         }
 
@@ -60,6 +63,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void PrintList()
         {
             Console.WriteLine(ToString());
+            reporter.AddLog(ToString());
         }
 
         public override string ToString()
@@ -123,6 +127,7 @@ namespace Vow_win_skiUWP.Core.CPU
                     {
                         pcb.CurrentPriority--;
                         Console.WriteLine("Postarzono proces: " + pcb.Name);
+                        reporter.AddLog("Postarzono proces: " + pcb.Name);
                     }
                 }
             }
@@ -140,6 +145,7 @@ namespace Vow_win_skiUWP.Core.CPU
                     {
                         runningPcb.CurrentPriority++;
                         Console.WriteLine("Odmłodzono process: " + runningPcb.Name);
+                        reporter.AddLog("Odmłodzono process: " + runningPcb.Name);
                     }
                 }
             }

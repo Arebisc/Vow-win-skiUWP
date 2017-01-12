@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.Processes
 {
     public class Lockers
     {
+        private Reporter reporter;
         private byte open = 0;
         private List<PCB> waiting;
         private string Name;
@@ -15,6 +17,7 @@ namespace Vow_win_skiUWP.Core.Processes
 
         public Lockers()
         {
+            reporter = new Reporter();
             waiting = new List<PCB>();
         }
 
@@ -82,11 +85,27 @@ namespace Vow_win_skiUWP.Core.Processes
                 foreach (var i in waiting)
                 {
                     Console.WriteLine(i.PID + "\t" + i.Name);
+                    reporter.AddLog(i.PID + "\t" + i.Name);
                 }
             }
             else
             {
                 Console.WriteLine("Brak procesów pod zamkien.");
+                reporter.AddLog("Brak procesów pod zamkien.");
+            }
+        }
+
+        public void ShowIn()
+        {
+            if (Check())
+            {
+                Console.WriteLine("Brak procesów w zamku.");
+                reporter.AddLog("Brak procesów w zamku.");
+            }
+            else
+            {
+                Console.WriteLine(proces.PID + "\t" + proces.Name);
+                reporter.AddLog(proces.PID + "\t" + proces.Name);
             }
         }
 

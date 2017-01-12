@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.Processes
 {
     static class UserInterface
     {
-
+        private static Reporter reporter = new Reporter();
         public static void CreateProcess(string Name, string Path)
         {
             Name = Name.Trim();
@@ -17,11 +18,13 @@ namespace Vow_win_skiUWP.Core.Processes
             if (Name == "")
             {
                 Console.WriteLine("Nie podano nazwy procesu.");
+                reporter.AddLog("Nie podano nazwy procesu.");
                 return;
             }
             if (Path == "")
             {
                 Console.WriteLine("Nie podano sciezki do programu.");
+                reporter.AddLog("Nie podano sciezki do programu.");
                 return;
             }
 
@@ -37,11 +40,13 @@ namespace Vow_win_skiUWP.Core.Processes
             if (Name == "")
             {
                 Console.WriteLine("Nie podano nazwy procesu.");
+                reporter.AddLog("Nie podano nazwy procesu.");
                 return;
             }
             if (Path == "")
             {
                 Console.WriteLine("Nie podano sciezki do programu.");
+                reporter.AddLog("Nie podano sciezki do programu.");
                 return;
             }
 
@@ -98,6 +103,7 @@ namespace Vow_win_skiUWP.Core.Processes
             if (!int.TryParse(Priority, out NewPriority))
             {
                 Console.WriteLine("Podana wartosc nie jest liczba.");
+                reporter.AddLog("Podana wartosc nie jest liczba.");
                 return;
             }
 
@@ -110,11 +116,13 @@ namespace Vow_win_skiUWP.Core.Processes
                     pcb.StartPriority = NewPriority;
                     pcb.WaitingForProcessorTime = 1;
                     Console.WriteLine("Ustawiono nowy priorytet (" + NewPriority + ") dla procesu " + Name + ".");
+                    reporter.AddLog("Ustawiono nowy priorytet (" + NewPriority + ") dla procesu " + Name + ".");
                 }
             }
             else
             {
                 Console.WriteLine("Priorytet procesu musi miescic sie w zakresie od 0 do 7.");
+                reporter.AddLog("Priorytet procesu musi miescic sie w zakresie od 0 do 7.");
             }
         }
 

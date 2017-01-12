@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.FileSystem
 {
     public class Disc
     {
+
+        private Reporter reporter;
         private static Disc _instance;
 
         private readonly int _blockSize = 32;
@@ -41,7 +44,10 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
         private Disc()
         {
+            reporter = new Reporter();
             Console.WriteLine("Tworzenie dysku z domyślną ilością bloków (32).");
+            reporter.AddLog("Tworzenie dysku z domyślną ilością bloków (32).");
+
             _numberOfBlocks = 32;
             _blocks = new Block[_numberOfBlocks].Select(b => new Block()).ToArray(); //initialize elements in array
             _occupiedBlocksArray = new BitArray(_numberOfBlocks);
@@ -51,6 +57,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
         private Disc(int numberOfblocks)
         {
             Console.WriteLine("Tworzenie dysku z niestandardową ilością bloków: " + numberOfblocks);
+            reporter.AddLog("Tworzenie dysku z niestandardową ilością bloków: " + numberOfblocks);
             _numberOfBlocks = numberOfblocks;
             _blocks = new Block[_numberOfBlocks].Select(b => new Block()).ToArray(); //initialize elements in array
             _occupiedBlocksArray = new BitArray(_numberOfBlocks);
@@ -62,16 +69,20 @@ namespace Vow_win_skiUWP.Core.FileSystem
         public void ShowDirectory()
         {
             Console.WriteLine("Zawartość folderu root\\\n");
+            reporter.AddLog("Zawartość folderu root\\\n");
             if (_rootFolder.FilesInDirectory.Count == 0)
             {
                 Console.WriteLine("Folder jest pusty.");
+                reporter.AddLog("Folder jest pusty.");
                 return;
             }
 
             Console.WriteLine("Nazwa pliku".PadRight(17) + "Rozmiar\t" + "Data utworzenia\t\t" + "Nr bloku indeksowego");
+            reporter.AddLog("Nazwa pliku".PadRight(17) + "Rozmiar\t" + "Data utworzenia\t\t" + "Nr bloku indeksowego");
             foreach (var file in _rootFolder.FilesInDirectory)
             {
                 Console.WriteLine(file.FileName.PadRight(17) + file.FileSize + " B\t\t" + file.CreationDateTime + "\t" + file.DataBlockPointer);
+                reporter.AddLog(file.FileName.PadRight(17) + file.FileSize + " B\t\t" + file.CreationDateTime + "\t" + file.DataBlockPointer);
             }
         }
 
@@ -87,22 +98,31 @@ namespace Vow_win_skiUWP.Core.FileSystem
             int occupiedblocks = (from bool bit in _occupiedBlocksArray where bit select bit).Count();
 
             Console.WriteLine("\nIlość bloków: " + _numberOfBlocks + "\tRozmiar bloku: " + _blockSize + " B");
+            reporter.AddLog("\nIlość bloków: " + _numberOfBlocks + "\tRozmiar bloku: " + _blockSize + " B");
             Console.WriteLine("Pojemność: " + _numberOfBlocks * _blockSize + " B");
+            reporter.AddLog("Pojemność: " + _numberOfBlocks * _blockSize + " B");
             Console.WriteLine("Wolne miejsce: " + freeblocks * _blockSize + " B (" +
                               (float)freeblocks / _numberOfBlocks * 100 + "%)\tZajęte miejsce: " +
                               occupiedblocks * _blockSize + " B (" + (float)occupiedblocks / _numberOfBlocks * 100 + "%)");
+            reporter.AddLog("Wolne miejsce: " + freeblocks * _blockSize + " B (" +
+                              (float)freeblocks / _numberOfBlocks * 100 + "%)\tZajęte miejsce: " +
+                              occupiedblocks * _blockSize + " B (" + (float)occupiedblocks / _numberOfBlocks * 100 + "%)");
             Console.WriteLine("Wolne bloki: " + freeblocks + "\t\tZajęte bloki: " + occupiedblocks + "\n");
+            reporter.AddLog("Wolne bloki: " + freeblocks + "\t\tZajęte bloki: " + occupiedblocks + "\n");
 
             for (var i = 0; i < _numberOfBlocks; i++)
             {
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("[Blok nr " + i + "]: ");
+                reporter.AddLog("[Blok nr " + i + "]: ");
                 Console.Write(_occupiedBlocksArray[i] ? "Zajęty\n" : "Wolny\n");
+                reporter.AddLog(_occupiedBlocksArray[i] ? "Zajęty\n" : "Wolny\n");
                 Console.ForegroundColor = ConsoleColor.Gray;
 
                 foreach (byte t in _blocks[i].BlockData)
                 {
                     Console.Write(t.ToString().PadRight(5));
+                    reporter.AddLog(t.ToString().PadRight(5));
                 }
                 temp++;
                 if (temp == mod)
@@ -110,6 +130,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
                     if (mod == _numberOfBlocks) continue;
                     temp = 0;
                     Console.Write("Naciśnij dowolny klawisz...");
+                    reporter.AddLog("Naciśnij dowolny klawisz...");
                     Console.ReadKey();
                     Console.WriteLine();
                 }
@@ -123,6 +144,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (data.Any(d => d > 255))
             {
                 Console.WriteLine("Błąd: dane zawierają niedozwolony znak");
+                reporter.AddLog("Błąd: dane zawierają niedozwolony znak");
                 return false;
             }
 
@@ -131,6 +153,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (_rootFolder.FilesInDirectory.Any(file => file.FileName == nameForNewFile))
             {
                 Console.WriteLine("Błąd: Plik \"" + nameForNewFile + "\" już istnieje");
+                reporter.AddLog("Błąd: Plik \"" + nameForNewFile + "\" już istnieje");
                 return false;
             }
 
@@ -138,8 +161,11 @@ namespace Vow_win_skiUWP.Core.FileSystem
                 nameForNewFile.Contains("/") || nameForNewFile.Contains("\t") || nameForNewFile == "root")
             {
                 Console.WriteLine("Błąd: Nieprawidłowa nazwa pliku");
+                reporter.AddLog("Błąd: Nieprawidłowa nazwa pliku");
                 Console.WriteLine("Nazwa pliku musi składać się z 1 do 15 znaków i nie może zawierać:");
+                reporter.AddLog("Nazwa pliku musi składać się z 1 do 15 znaków i nie może zawierać:");
                 Console.WriteLine("'\t' '/' '\\' 'root'");
+                reporter.AddLog("'\t' '/' '\\' 'root'");
                 return false;
             }
 
@@ -148,7 +174,10 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (blocksneeded > _blockSize + 1)
             {
                 Console.WriteLine("Błąd: Przekroczono maksymalny rozmiar pliku");
+                reporter.AddLog("Błąd: Przekroczono maksymalny rozmiar pliku");
                 Console.WriteLine("Wymagany rozmiar: " + newFileSize + " B\tMaksymalny dozwolony rozmiar: " +
+                                  _blockSize * _blockSize + " B");
+                reporter.AddLog("Wymagany rozmiar: " + newFileSize + " B\tMaksymalny dozwolony rozmiar: " +
                                   _blockSize * _blockSize + " B");
                 return false;
             }
@@ -157,7 +186,9 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (blocksneeded > freeBlocks)
             {
                 Console.WriteLine("Za mało wolnych bloków by utworzyć nowy plik");
+                reporter.AddLog("Za mało wolnych bloków by utworzyć nowy plik");
                 Console.WriteLine("Wymagane: " + blocksneeded + "\tDostępne: " + freeBlocks);
+                reporter.AddLog("Wymagane: " + blocksneeded + "\tDostępne: " + freeBlocks);
                 return false;
             }
 
@@ -199,6 +230,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
             _rootFolder.FilesInDirectory.Add(new File(nameForNewFile, newFileSize, blocksToBeOccupied[0]));
             Console.WriteLine("Nowy plik \"" + nameForNewFile + "\" został utworzony w folderze root\\");
+            reporter.AddLog("Nowy plik \"" + nameForNewFile + "\" został utworzony w folderze root\\");
             return true;
         }
 
@@ -209,6 +241,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (_rootFolder.FilesInDirectory.All(x => x.FileName != fileToOpen))
             {
                 Console.WriteLine("Błąd: Wskazany plik \"" + fileToOpen + "\" nie istnieje w folderze root\\");
+                reporter.AddLog("Błąd: Wskazany plik \"" + fileToOpen + "\" nie istnieje w folderze root\\");
                 return null;
             }
             int indexBlock = _rootFolder.FilesInDirectory.Single(x => x.FileName == fileToOpen).DataBlockPointer;
@@ -241,6 +274,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (_rootFolder.FilesInDirectory.All(x => x.FileName != filenameToDelete))
             {
                 Console.WriteLine("Błąd: Wskazany plik \"" + filenameToDelete + "\" nie istnieje w folderze root\\");
+                reporter.AddLog("Błąd: Wskazany plik \"" + filenameToDelete + "\" nie istnieje w folderze root\\");
                 return false;
             }
             File fileToDelete = _rootFolder.FilesInDirectory.Single(x => x.FileName == filenameToDelete);
@@ -254,6 +288,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             _rootFolder.FilesInDirectory.RemoveAll(x => x.FileName == filenameToDelete);
 
             Console.WriteLine("Plik \"" + filenameToDelete + "\" został usunięty");
+            reporter.AddLog("Plik \"" + filenameToDelete + "\" został usunięty");
             return true;
         }
 
@@ -269,6 +304,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             catch (Exception e)
             {
                 Console.Write("Błąd: " + e.Message);
+                reporter.AddLog("Błąd: " + e.Message);
                 return false;
             }
             return CreateFile(nameForNewFile, data);
@@ -281,6 +317,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (_rootFolder.FilesInDirectory.All(x => x.FileName != filenameToAppend))
             {
                 Console.WriteLine("Błąd: Wskazany plik \"" + filenameToAppend + "\" nie istnieje w folderze root\\");
+                reporter.AddLog("Błąd: Wskazany plik \"" + filenameToAppend + "\" nie istnieje w folderze root\\");
                 return false;
             }
             File fileToAppend = _rootFolder.FilesInDirectory.Single(x => x.FileName == filenameToAppend);
@@ -288,6 +325,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (data.Any(d => d > 255))
             {
                 Console.WriteLine("Błąd: dane zawierają niedozwolony znak");
+                reporter.AddLog("Błąd: dane zawierają niedozwolony znak");
                 return false;
             }
 
@@ -312,7 +350,9 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (blocksNeeded > freeBlocks)
             {
                 Console.WriteLine("Błąd: Za mało wolnych bloków by dopisać dane do pliku");
+                reporter.AddLog("Błąd: Za mało wolnych bloków by dopisać dane do pliku");
                 Console.WriteLine("Wymagane: " + blocksNeeded + "\tDostępne: " + freeBlocks);
+                reporter.AddLog("Wymagane: " + blocksNeeded + "\tDostępne: " + freeBlocks);
                 return false;
             }
 
@@ -325,7 +365,9 @@ namespace Vow_win_skiUWP.Core.FileSystem
             if (blocksNeeded > freePointers)
             {
                 Console.WriteLine("Błąd: Przekroczono maksymalny rozmiar pliku");
+                reporter.AddLog("Błąd: Przekroczono maksymalny rozmiar pliku");
                 Console.WriteLine("Wymagany rozmiar: " + fileToAppend.FileSize + data.Length + " B\tMaksymalny dozwolony rozmiar: " + _blockSize * _blockSize + " B");
+                reporter.AddLog("Wymagany rozmiar: " + fileToAppend.FileSize + data.Length + " B\tMaksymalny dozwolony rozmiar: " + _blockSize * _blockSize + " B");
                 return false;
             }
 
@@ -379,6 +421,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             }
             fileToAppend.Append(allBytesToAppend);
             Console.WriteLine(allBytesToAppend + " B zostało dopisane do pliku \"" + filenameToAppend + "\"");
+            reporter.AddLog(allBytesToAppend + " B zostało dopisane do pliku \"" + filenameToAppend + "\"");
             return true;
         }
 

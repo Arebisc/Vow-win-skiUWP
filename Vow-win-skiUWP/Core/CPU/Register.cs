@@ -6,11 +6,13 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.CPU
 {
     public class Register : IEquatable<Register>, INotifyPropertyChanged
     {
+        private Reporter reporter;
         private int _A;
         private int _B;
         private int _C;
@@ -62,6 +64,7 @@ namespace Vow_win_skiUWP.Core.CPU
             B = 0;
             C = 0;
             D = 0;
+            reporter = new Reporter();
         }
 
         public Register(int a, int b, int c, int d)
@@ -92,6 +95,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void PrintRegisters()
         {
             Console.WriteLine(this.ToString());
+            reporter.AddLog(this.ToString());
         }
 
         public static bool operator ==(Register a, Register b)

@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.MemoryModule
 {
     public class FreeFramesList
     {
+        private Reporter reporter;
         public int FreeFramesCount;
         private List<int> _freeFrames;
 
         public FreeFramesList(int framesCount)
         {
+            reporter = new Reporter();
             FreeFramesCount = framesCount;
             _freeFrames = new List<int>();
             for (int i = 0; i < framesCount; i++)
@@ -40,6 +43,7 @@ namespace Vow_win_skiUWP.Core.MemoryModule
             foreach (var frame in _freeFrames)
             {
                 Console.WriteLine(frame);
+                reporter.AddLog(frame.ToString());
             }
         }
     }

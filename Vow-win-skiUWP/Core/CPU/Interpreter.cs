@@ -5,15 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Vow_win_skiUWP.Core.FileSystem;
 using Vow_win_skiUWP.Core.Processes;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.CPU
 {
     public sealed class Interpreter
     {
+        private Reporter reporter;
+
         private static readonly object SyncRoot = new object();
         private static volatile Interpreter _instance;
 
-        private Interpreter() { }
+        private Interpreter()
+        {
+            reporter = new Reporter();
+        }
 
         public static Interpreter GetInstance
         {
@@ -44,12 +50,14 @@ namespace Vow_win_skiUWP.Core.CPU
                     if (result == 2)
                     {
                         Console.WriteLine("Proces został zakończony");
+                        reporter.AddLog("Proces został zakończony");
                         return;
                     }
                     Scheduler.GetInstance.GetRunningPCB().WaitingForProcessorTime = 1;
                     Scheduler.GetInstance.RevriteRegistersToCPU();
                 }
                 Console.WriteLine("Przełączono CPU na process: " + Scheduler.GetInstance.GetRunningPCB().Name);
+                reporter.AddLog("Przełączono CPU na process: " + Scheduler.GetInstance.GetRunningPCB().Name);
                 Scheduler.GetInstance.NegatedAgingWaitingForProcesorTime();
                 return;
             }
@@ -57,7 +65,10 @@ namespace Vow_win_skiUWP.Core.CPU
             var order = GetOrderFromMemory(Scheduler.GetInstance.GetRunningPCB());
 
             if (order.TrimEnd().EndsWith(":"))
+            {
                 Console.WriteLine("Etykieta o nazwie: " + order.TrimEnd().TrimEnd(':'));
+                reporter.AddLog("Etykieta o nazwie: " + order.TrimEnd().TrimEnd(':'));
+            }
             else
             {
                 switch (GetOrderName(order))
@@ -121,6 +132,7 @@ namespace Vow_win_skiUWP.Core.CPU
                         break;
                     default:
                         Console.WriteLine("Nie rozpoznano rozkazu: " + order);
+                        reporter.AddLog("Nie rozpoznano rozkazu: " + order);
                         break;
                 }
             }
@@ -211,13 +223,16 @@ namespace Vow_win_skiUWP.Core.CPU
         public void POOrder(string register)
         {
             Console.WriteLine("Rozkaz PO z parametrem " + register);
+            reporter.AddLog("Rozkaz PO z parametrem " + register);
 
             Console.WriteLine(register);
+            reporter.AddLog(register);
         }
 
         public void DFOrder(string fileName)
         {
             Console.WriteLine("Rozkaz DF z parametrem " + " " + fileName);
+            reporter.AddLog("Rozkaz DF z parametrem " + " " + fileName);
 
             Disc.GetDisc.DeleteFile(fileName);
         }
@@ -225,6 +240,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void WROrder(string fileName, string register)
         {
             Console.WriteLine("Rozkaz WR z parametrem " + fileName + " " + register);
+            reporter.AddLog("Rozkaz WR z parametrem " + fileName + " " + register);
 
             Disc.GetDisc.AppendToFile(fileName, CPU.GetInstance.Register.GetRegisterValueByName(register).ToString());
         }
@@ -232,6 +248,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void WFOrder(string fileName, string content)
         {
             Console.WriteLine("Rozkaz WF z parametrem " + fileName + " " + content);
+            reporter.AddLog("Rozkaz WF z parametrem " + fileName + " " + content);
 
             Disc.GetDisc.AppendToFile(fileName, content);
         }
@@ -239,6 +256,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void MFOrder(string fileName)
         {
             Console.WriteLine("Rozkaz MF z parametrem " + " " + fileName);
+            reporter.AddLog("Rozkaz MF z parametrem " + " " + fileName);
 
             Disc.GetDisc.CreateFile(fileName, String.Empty);
         }
@@ -246,12 +264,15 @@ namespace Vow_win_skiUWP.Core.CPU
         public void MNOrder(string register, int number)
         {
             Console.WriteLine("Rozkaz MN z parametrem " + register + " " + number);
+            reporter.AddLog("Rozkaz MN z parametrem " + register + " " + number);
+
             CPU.GetInstance.Register.SetRegisterValueByName(register, number);
         }
 
         public void MVOrder(string register1, string register2)
         {
             Console.WriteLine("Rozkaz MV z parametrem " + register1 + " " + register2);
+            reporter.AddLog("Rozkaz MV z parametrem " + register1 + " " + register2);
 
             CPU.GetInstance.Register.SetRegisterValueByName(register1,
                 CPU.GetInstance.Register.GetRegisterValueByName(register2));
@@ -260,6 +281,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void JMOrder(string tag)
         {
             Console.WriteLine("Rozkaz JM z parametrem " + tag);
+            reporter.AddLog("Rozkaz JM z parametrem " + tag);
             CPU.GetInstance.Register.C--;
 
             if (CPU.GetInstance.Register.C != 0)
@@ -297,6 +319,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void MUOrder(string register1, string register2)
         {
             Console.WriteLine("Rozkaz MV z parametrem " + register1 + " " + register2);
+            reporter.AddLog("Rozkaz MV z parametrem " + register1 + " " + register2);
             if (!IsNumeric(register2))
             {
                 var oldReg1Value = CPU.GetInstance.Register.GetRegisterValueByName(register1);
@@ -315,6 +338,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void SBOrder(string register1, string register2)
         {
             Console.WriteLine("Rozkaz SB z parametrem " + register1 + " " + register2);
+            reporter.AddLog("Rozkaz SB z parametrem " + register1 + " " + register2);
             if (!IsNumeric(register2))
             {
                 var oldReg1Value = CPU.GetInstance.Register.GetRegisterValueByName(register1);
@@ -333,7 +357,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void ADOrder(string register1, string register2)
         {
             Console.WriteLine("Rozkaz AD z parametrem " + register1 + " " + register2);
-
+            reporter.AddLog("Rozkaz AD z parametrem " + register1 + " " + register2);
             if (!IsNumeric(register2))
             {
                 var oldReg1Value = CPU.GetInstance.Register.GetRegisterValueByName(register1);
@@ -361,6 +385,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void XZOrder(string processName)
         {
             Console.WriteLine("Rozkaz XZ z parametrem " + processName);
+            reporter.AddLog("Rozkaz XZ z parametrem " + processName);
 
             PCB.GetPCB(processName).TerminateProcess(ReasonOfProcessTerminating.Ended);
         }
@@ -368,6 +393,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void XYOrder(string processName)
         {
             Console.WriteLine("Rozkaz XY z parametrem " + processName);
+            reporter.AddLog("Rozkaz XY z parametrem " + processName);
 
             PCB.GetPCB(processName).RunNewProcess();
         }
@@ -375,6 +401,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void XNOrder(string processName)
         {
             Console.WriteLine("Rozkaz XN z parametrem " + processName);
+            reporter.AddLog("Rozkaz XN z parametrem " + processName);
 
             var pcbID = PCB.GetPCB(processName).PID;
             CPU.GetInstance.Register.SetRegisterValueByName("A", pcbID);
@@ -383,18 +410,21 @@ namespace Vow_win_skiUWP.Core.CPU
         public void XSOrder(string processName, string communicate)
         {
             Console.WriteLine("Rozkaz XS z parametrem " + processName + " " + communicate);
+            reporter.AddLog("Rozkaz XS z parametrem " + processName + " " + communicate);
             Scheduler.GetInstance.GetRunningPCB().Send(processName, communicate);
         }
 
         public void XROrder()
         {
             Console.WriteLine("Rozkaz XR");
+            reporter.AddLog("Rozkaz XR");
             Scheduler.GetInstance.GetRunningPCB().Receive();
         }
 
         public void XDOrder(string processName)
         {
             Console.WriteLine("Rozkaz XD z parametrem " + processName);
+            reporter.AddLog("Rozkaz XD z parametrem " + processName);
 
             var flag = PCB.GetPCB(processName).TerminateProcess(ReasonOfProcessTerminating.KilledByOther,
                 Scheduler.GetInstance.GetRunningPCB());
@@ -406,6 +436,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void XCOrder(string processName, string fileName)
         {
             Console.WriteLine("Rozkaz XC z parametrem " + processName + " " + fileName);
+            reporter.AddLog("Rozkaz XC z parametrem " + processName + " " + fileName);
 
             UserInterface.CreateProcessFromDisc(processName, fileName);
         }
@@ -413,6 +444,7 @@ namespace Vow_win_skiUWP.Core.CPU
         public void HLTOrder()
         {
             Console.WriteLine("Rozkaz HLT");
+            reporter.AddLog("Rozkaz HLT");
             Scheduler.GetInstance.GetRunningPCB().TerminateProcess(ReasonOfProcessTerminating.Ended);
 
             if (!Scheduler.GetInstance.ListEmpty())

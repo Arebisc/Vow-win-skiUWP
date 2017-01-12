@@ -6,11 +6,13 @@ using Vow_win_skiUWP.Core.FileSystem;
 using Vow_win_skiUWP.Core.IPC;
 using Vow_win_skiUWP.Core.MemoryModule;
 using Vow_win_skiUWP.Core.Processes;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core
 {
     public class Shell
     {
+        private Reporter reporter;
         private Shell()
         { }
 
@@ -36,11 +38,13 @@ namespace Vow_win_skiUWP.Core
 
         public void OpenShell()
         {
+            reporter = new Reporter();
             bool exit = false;
             while (!exit)
             {
                 Console.WriteLine();
                 Console.Write("root\\>");
+                reporter.AddLog("\nroot\\>");
                 string cmdline = Console.ReadLine();
 
                 // ReSharper disable once PossibleNullReferenceException
@@ -68,6 +72,7 @@ namespace Vow_win_skiUWP.Core
                         break;
                     case "QUIT":
                         Console.WriteLine("Zamykanie systemu...");
+                        reporter.AddLog("Zamykanie systemu..." );
                         Task.Delay(2500).Wait();
                         exit = true;
                         break;
@@ -120,6 +125,7 @@ namespace Vow_win_skiUWP.Core
                             Memory.GetInstance.DisplayPageContent(PCB.GetPCB(p1).PID, nr);
                         else
                             Console.WriteLine("Błąd: Nieprawidłowy numer strony.");
+                            reporter.AddLog("Błąd: Nieprawidłowy numer strony.");
                         break;
                     case "SEP":
                         Memory.GetInstance.DisplayFreeFrames();
@@ -132,6 +138,7 @@ namespace Vow_win_skiUWP.Core
                         break;
                     case "SLM":
                         Console.WriteLine(Memory.GetInstance.ReadMessage() + "\n");
+                        reporter.AddLog(Memory.GetInstance.ReadMessage() + "\n");
                         break;
                     //===================================================
                     case "SAM":
@@ -157,6 +164,7 @@ namespace Vow_win_skiUWP.Core
                         break;
                     case "TYPE":
                         Console.WriteLine(Disc.GetDisc.GetFileData(p1) ?? "Błąd czytania pliku");
+                        reporter.AddLog(Disc.GetDisc.GetFileData(p1) ?? "Błąd czytania pliku");
                         break;
                     case "DF":
                         Disc.GetDisc.DeleteFile(p1);
@@ -169,6 +177,7 @@ namespace Vow_win_skiUWP.Core
                         break;
                     default:
                         Console.WriteLine("Nieznane polecenie\nWpisz \"help\" aby wyświetlić listę dostępnych poleceń");
+                        reporter.AddLog("Nieznane polecenie\nWpisz \"help\" aby wyświetlić listę dostępnych poleceń");
                         break;
                 }
             }
@@ -181,6 +190,7 @@ namespace Vow_win_skiUWP.Core
             Console.WriteLine("Parametry: [opcjonalny] {wymagany}");
             Console.WriteLine();
             Console.WriteLine("Polecenia\t\t   Opis");
+            reporter.AddLog("\nParametry: [opcjonalny] {wymagany}\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("-------------------------------Ogólne---------------------------------");
             Console.ForegroundColor = ConsoleColor.Gray;
