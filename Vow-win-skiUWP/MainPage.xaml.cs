@@ -100,7 +100,7 @@ namespace Vow_win_skiUWP
             if (e.Key == VirtualKey.Enter)
             {
                 Cmd_ExecuteCommand(CmdTb.Text);
-                CmdTb.Text = String.Empty;
+                CmdTb.Text = string.Empty;
                 this.Focus(FocusState.Programmatic);
             }
         }

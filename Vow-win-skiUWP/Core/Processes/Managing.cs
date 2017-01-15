@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vow_win_skiUWP.Core.MemoryModule;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP.Core.Processes
 {
@@ -155,8 +156,7 @@ namespace Vow_win_skiUWP.Core.Processes
                     return en.Current;
                 }
             }
-
-            Console.WriteLine("Nie znaleziono procesu o PID = " + PID.ToString() + ".");
+            Console.WriteLine("Znaleziono proces o podanym PID: " + en.Current.ToString());
             return null;
         }
 

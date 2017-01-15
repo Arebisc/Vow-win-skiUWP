@@ -7,20 +7,23 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Vow_win_skiUWP.Database.ORM;
 
+public delegate void AddLogToMainPage(string text);
+
 namespace Vow_win_skiUWP.Log
 {
     class Reporter
     {
-        private Frame rootFrame;
-        private Page mainPage;
         private static TextBlock logTb;
+        public static AddLogToMainPage addLog;
 
-        public Reporter()
-        {
-            rootFrame = Window.Current.Content as Frame;
-            mainPage = rootFrame.Content as MainPage;
-            logTb = mainPage.FindName("LogTb") as TextBlock;
-        }
+        public Reporter(){ }
+
+        //public static void InitStaticReporter()
+        //{
+        //    Frame rootFrame = Window.Current.Content as Frame;
+        //    Page mainPage = rootFrame.Content as MainPage;
+        //    logTb = mainPage.FindName("LogTb") as TextBlock;
+        //}
 
         public static void AddLog(string text)
         {
