@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Vow_win_skiUWP.Core.CPU;
+using Vow_win_skiUWP.Core.Processes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,18 +25,11 @@ namespace Vow_win_skiUWP.Views
     /// </summary>
     public sealed partial class CPUPage : Page
     {
-        private Page mainPage;
-
         public CPUPage()
         {
             this.InitializeComponent();
             this.DataContext = CPU.GetInstance.Register;
-
-            //string fileName = "/Assets/ProcessorIcon.png";
-            //BitmapImage image = new BitmapImage(new Uri(this.BaseUri + fileName));
-            //ImageBrush brush = new ImageBrush();
-            //brush.ImageSource = image;
-            //CPUPanelRegisters.Background = brush;
+            this.ReadProcessesListView.ItemsSource = Scheduler.GetInstance.GetProcessList();
         }
     }
 }

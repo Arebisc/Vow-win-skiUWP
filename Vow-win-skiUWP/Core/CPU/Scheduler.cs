@@ -177,5 +177,10 @@ namespace Vow_win_skiUWP.Core.CPU
             GetRunningPCB().WaitingForProcessorTime = 1;
             RevriteRegistersToCPU();
         }
+
+        public List<PCB> GetProcessList()
+        {
+            return WaitingForProcessor;
+        }
     }
 }

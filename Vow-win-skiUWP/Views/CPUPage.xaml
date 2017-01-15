@@ -11,7 +11,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical" Margin="0, 0, 100, 0">
-                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Rejestry</TextBlock>
+                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Registers</TextBlock>
                 <RelativePanel Width="200" Height="200">
                     <StackPanel Width="75" Height="75" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True">
                         <TextBlock FontSize="20" TextAlignment="Center">A</TextBlock>
@@ -40,17 +40,37 @@
                 </RelativePanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Can get procesor</TextBlock>
+                <StackPanel Orientation="Vertical" Width="600">
+                    <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Procesor List</TextBlock>
                     <ScrollViewer Margin="20">
-                        <StackPanel Orientation="Vertical">
+                        <!--<StackPanel Orientation="Vertical">
                             <helpers:ProcessMinBox></helpers:ProcessMinBox>
                             <helpers:ProcessMinBox></helpers:ProcessMinBox>
                             <helpers:ProcessMinBox></helpers:ProcessMinBox>
                             <helpers:ProcessMinBox></helpers:ProcessMinBox>
                             <helpers:ProcessMinBox></helpers:ProcessMinBox>
                             <helpers:ProcessMinBox></helpers:ProcessMinBox>
-                        </StackPanel>
+                        </StackPanel>-->
+                        <ListView x:Name="ReadProcessesListView">
+                            <ListView.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Name" Margin="10" FontWeight="Bold" />
+                                        <TextBlock Text="State" Margin="10" FontWeight="Bold" />
+                                        <TextBlock Text="Current Priority" Margin="10" FontWeight="Bold" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.HeaderTemplate>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" Margin="10" />
+                                        <TextBlock Text="{Binding State}" Margin="10" />
+                                        <TextBlock Text="{Binding CurrentPriority}" Margin="10" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </ScrollViewer>
                 </StackPanel>
             </StackPanel>

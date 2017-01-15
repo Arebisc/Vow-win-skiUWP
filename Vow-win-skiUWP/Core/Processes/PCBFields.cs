@@ -31,7 +31,7 @@ namespace Vow_win_skiUWP.Core.Processes
     public partial class PCB
     {
         /// <remarks>0 - najwyższy priorytet, 7 - najniższy</remarks>
-        public int CurrentPriority = 7;
+        public int CurrentPriority { get; set; } = 7;
 
         public int StartPriority = 7;
 
@@ -42,7 +42,7 @@ namespace Vow_win_skiUWP.Core.Processes
         /// <summary>
         /// Nazwa procesu, musi być unikalna
         /// </summary>
-        public string Name = "";
+        public string Name { get; set; } = "";
 
         /// <summary>
         /// Identyfikator procesu, musi być unikalny
@@ -57,7 +57,7 @@ namespace Vow_win_skiUWP.Core.Processes
             }
         }
 
-        public ProcessState State = ProcessState.Terminated;
+        public ProcessState State { get; set; } = ProcessState.Terminated;
 
         public int InstructionCounter = 0;
 

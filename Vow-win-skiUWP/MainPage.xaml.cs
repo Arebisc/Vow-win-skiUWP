@@ -106,14 +106,11 @@ namespace Vow_win_skiUWP
         }
 
         //TODO
-        private void Cmd_ExecuteCommand(string command)
+        private async void Cmd_ExecuteCommand(string command)
         {
-            AddLog(command);
-        }
-
-        public void AddLog(string text)
-        {
-            LogTb.Text = text + '\n' + LogTb.Text;
+            var popup = new HelpPopupDialog();
+            popup.setText("Jeszcze nie działam!");
+            await popup.ShowAsync();
         }
 
         private async void HelpButton_OnClick(object sender, RoutedEventArgs e)

@@ -68,19 +68,8 @@
             <SplitView.Content>
                 <ScrollViewer>
                     <StackPanel Orientation="Vertical" Margin="50">
-                        <Frame x:Name="RootFrame" Width="Auto" Height="300" />
-                        <StackPanel Background="#363636" Margin="0, 15, 0 0" CornerRadius="2, 2, 2, 2">
-                            <TextBlock Margin="10" Height="30" FontSize="24" FontFamily="Vivaldi" FontWeight="Bold" Foreground="AliceBlue">Log systemowy</TextBlock>
-                            <ScrollViewer ZoomMode="Enabled"  VerticalScrollMode="Auto" Height="200">
-                                <TextBlock VerticalAlignment="Stretch" Margin="10"
-                                        HorizontalAlignment="Stretch"
-                                        TextWrapping="Wrap"   
-                                        ScrollViewer.VerticalScrollBarVisibility="Visible"   
-                                        ScrollViewer.ZoomMode="Enabled"
-                                        x:Name="LogTb" Foreground="AliceBlue" />
-                            </ScrollViewer>
-                            <TextBox Name="CmdTb" GotFocus="TextBox_OnGotFocus" LostFocus="TextBox_OnFocusLost" KeyUp="Cmd_EnterPressed"></TextBox>
-                        </StackPanel>
+                        <Frame x:Name="RootFrame" Width="Auto" Height="500" />
+                        <TextBox Name="CmdTb" GotFocus="TextBox_OnGotFocus" LostFocus="TextBox_OnFocusLost" KeyUp="Cmd_EnterPressed"></TextBox>
                     </StackPanel>
                 </ScrollViewer>
             </SplitView.Content>
