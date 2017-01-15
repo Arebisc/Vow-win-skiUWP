@@ -156,7 +156,7 @@ namespace Vow_win_skiUWP.Core.Processes
                     return en.Current;
                 }
             }
-            Console.WriteLine("Znaleziono proces o podanym PID: " + en.Current.ToString());
+            Console.WriteLine("Nie znaleziono procesu o podanym PID: " + en.Current.ToString());
             return null;
         }
 
@@ -214,6 +214,11 @@ namespace Vow_win_skiUWP.Core.Processes
             }
 
             return false;
+        }
+
+        public static LinkedList<PCB> GetPcbsList()
+        {
+            return _CreatedPCBs;
         }
 
     }

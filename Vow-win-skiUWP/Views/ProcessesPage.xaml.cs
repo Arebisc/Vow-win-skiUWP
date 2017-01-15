@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Vow_win_skiUWP.Core.Processes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +26,12 @@ namespace Vow_win_skiUWP.Views
         public ProcessesPage()
         {
             this.InitializeComponent();
+
+            this.ProcessList.ItemsSource = PCB.GetPcbsList();
+
+            UserInterface.CreateProcess("Nazwa", "Path1");
+            UserInterface.CreateProcess("Nazwa1", "Path2");
+            UserInterface.CreateProcess("Nazwa2", "Path3");
         }
     }
 }

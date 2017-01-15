@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +14,11 @@ namespace Vow_win_skiUWP.Core.CPU
     {
         private static volatile Scheduler _instance;
         private static readonly object SyncRoot = new object();
-        private List<PCB> WaitingForProcessor;
+        private ObservableCollection<PCB> WaitingForProcessor { get; set; }
 
         private Scheduler()
         {
-            WaitingForProcessor = new List<PCB>();
+            WaitingForProcessor = new ObservableCollection<PCB>();
         }
 
         public static Scheduler GetInstance
@@ -49,13 +52,13 @@ namespace Vow_win_skiUWP.Core.CPU
 
         public void RemoveProcess(PCB process)
         {
-            WaitingForProcessor.RemoveAll(element => element.PID == process.PID);
+            //WaitingForProcessor.RemoveAt(element => element.PID == process.PID);
         }
 
-        public PCB SearchForProcessInList(PCB process)
-        {
-            return WaitingForProcessor.Find(element => element.PID == process.PID);
-        }
+        //public PCB SearchForProcessInList(PCB process)
+        //{
+        //    //return WaitingForProcessor.Find(element => element.PID == process.PID);
+        //}
 
         public void PrintList()
         {
@@ -178,7 +181,7 @@ namespace Vow_win_skiUWP.Core.CPU
             RevriteRegistersToCPU();
         }
 
-        public List<PCB> GetProcessList()
+        public ObservableCollection<PCB> GetProcessList()
         {
             return WaitingForProcessor;
         }

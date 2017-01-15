@@ -19,6 +19,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Vow_win_skiUWP.Core;
+using Vow_win_skiUWP.Core.CPU;
+using Vow_win_skiUWP.Core.Processes;
 using Vow_win_skiUWP.Log;
 using Vow_win_skiUWP.Views.Helpers;
 
@@ -177,9 +179,11 @@ namespace Vow_win_skiUWP
 
         private async void NextOrderButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var popup = new HelpPopupDialog();
-            popup.setText("Jeszcze nie działam!");
-            await popup.ShowAsync();
+            Scheduler.GetInstance.PriorityAlgorithm().Name = "NazwaInna";
+
+            //var popup = new HelpPopupDialog();
+            //popup.setText("Jeszcze nie działam!");
+            //await popup.ShowAsync();
         }
     }
 }

@@ -16,25 +16,25 @@
                     <StackPanel Width="75" Height="75" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True">
                         <TextBlock FontSize="20" TextAlignment="Center">A</TextBlock>
                         <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
-                            <TextBlock FontSize="20" Text="{Binding Path=A}" TextAlignment="Center" />
+                            <TextBlock FontSize="20" Text="{Binding register.A, Mode=OneWay}" TextAlignment="Center" />
                         </Border>
                     </StackPanel>
                     <StackPanel Width="75" Height="75" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True">
                         <TextBlock FontSize="20" TextAlignment="Center">B</TextBlock>
                         <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
-                            <TextBlock FontSize="20" Text="{Binding Path=B}" TextAlignment="Center" />
+                            <TextBlock FontSize="20" Text="{Binding register.B, Mode=OneWay}" TextAlignment="Center" />
                         </Border>
                     </StackPanel>
                     <StackPanel Width="75" Height="75" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWithPanel="True">
                         <TextBlock FontSize="20" TextAlignment="Center">C</TextBlock>
                         <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
-                            <TextBlock FontSize="20" Text="{Binding Path=C}" TextAlignment="Center" />
+                            <TextBlock FontSize="20" Text="{Binding register.C, Mode=OneWay}" TextAlignment="Center" />
                         </Border>
                     </StackPanel>
                     <StackPanel Width="75" Height="75" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWithPanel="True">
                         <TextBlock FontSize="20" TextAlignment="Center">D</TextBlock>
                         <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
-                            <TextBlock FontSize="20" Text="{Binding Path=D}" TextAlignment="Center" />
+                            <TextBlock FontSize="20" Text="{Binding register.D, Mode=OneWay}" TextAlignment="Center" />
                         </Border>
                     </StackPanel>
                 </RelativePanel>
@@ -43,15 +43,7 @@
                 <StackPanel Orientation="Vertical" Width="600">
                     <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Procesor List</TextBlock>
                     <ScrollViewer Margin="20">
-                        <!--<StackPanel Orientation="Vertical">
-                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
-                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
-                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
-                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
-                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
-                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
-                        </StackPanel>-->
-                        <ListView x:Name="ReadProcessesListView">
+                        <ListView x:Name="ReadProcessesListView" ItemsSource="{Binding list, Mode=OneWay}">
                             <ListView.HeaderTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
