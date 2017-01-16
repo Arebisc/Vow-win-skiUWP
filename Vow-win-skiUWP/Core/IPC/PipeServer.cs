@@ -1,16 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Views;
 
 namespace Vow_win_skiUWP.Core.IPC
 {
+
+
+
     public class PipeServer
     {
         private static PipeServer _instance;
         private List<Message> Messages;
         private List<Message> History;
+
+        private ObservableCollection<Message> WaitingMessages;
+        private ObservableCollection<Message> ReceivedMessages;
 
 
         public static void InitServer()
@@ -25,7 +33,6 @@ namespace Vow_win_skiUWP.Core.IPC
 
         public PipeServer()
         {
-            Console.WriteLine("Tworzenie Serwera IPC.");
             Build();
         }
 
@@ -33,25 +40,19 @@ namespace Vow_win_skiUWP.Core.IPC
         {
             Messages = new List<Message>();
             History = new List<Message>();
+            WaitingMessages = new ObservableCollection<Message>();
+            ReceivedMessages = new ObservableCollection<Message>();
         }
 
 
-        public void Show()
+        public ObservableCollection<Message> ShowWaiting()
         {
-            Console.WriteLine("Waiting messages for receive: ");
-            foreach (var x in Messages)
-            {
-                Console.WriteLine(x.GetSenderId() + " to " + x.GetReceiverId() + " " + x.GetMessage());
-            }
+            return WaitingMessages;
         }
 
-        public void ShowHistory()
+        public ObservableCollection<Message> ShowHistory()
         {
-            Console.WriteLine("Communication history: ");
-            foreach (var x in History)
-            {
-                Console.WriteLine(x.GetSenderId() + " to " + x.GetReceiverId() + " " + x.GetMessage());
-            }
+            return ReceivedMessages;
         }
 
 
@@ -59,18 +60,21 @@ namespace Vow_win_skiUWP.Core.IPC
         {
             Messages.Add(new Message(message, receiver, sender));
             History.Add(new Message(message, receiver, sender));
+            WaitingMessages.Add(new Message(message, receiver, sender));
         }
 
 
         public bool ReadMessage(string receiver)
         {
-            if (Messages.All(x => x.GetReceiverId() != receiver))
+            if (Messages.All(x => x.GetReceiverId != receiver))
             {
                 return false;
             }
             else
             {
-                Messages.Remove(Messages.Find(x => x.GetReceiverId() == receiver).PrintMessage());
+                ReceivedMessages.Add(Messages.Find(x => x.GetReceiverId == receiver));
+                WaitingMessages.Remove(Messages.Find(x => x.GetReceiverId == receiver));
+                Messages.Remove(Messages.Find(x => x.GetReceiverId == receiver).PrintMessage());
                 return true;
             }
         }
