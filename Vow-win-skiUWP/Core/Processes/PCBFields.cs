@@ -35,6 +35,7 @@ namespace Vow_win_skiUWP.Core.Processes
     public partial class PCB : INotifyPropertyChanged
     {
         private int _currentPriority = 7;
+
         /// <remarks>0 - najwyższy priorytet, 7 - najniższy</remarks>
         public int CurrentPriority
         {
@@ -101,7 +102,8 @@ namespace Vow_win_skiUWP.Core.Processes
 
         private ProcessState _state = ProcessState.Terminated;
 
-        public ProcessState State {
+        public ProcessState State
+        {
             get { return _state; }
             set
             {

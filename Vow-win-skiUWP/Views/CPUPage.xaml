@@ -43,7 +43,7 @@
                 <StackPanel Orientation="Vertical" Width="600">
                     <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Procesor List</TextBlock>
                     <ScrollViewer Margin="20">
-                        <ListView x:Name="ReadProcessesListView" ItemsSource="{Binding list, Mode=OneWay}">
+                        <ListView x:Name="ReadProcessesListView" ItemsSource="{Binding list, Mode=OneWay}" Height="400">
                             <ListView.HeaderTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

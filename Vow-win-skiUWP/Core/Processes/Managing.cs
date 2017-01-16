@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace Vow_win_skiUWP.Core.Processes
     public partial class PCB
     {
 
-        private static LinkedList<PCB> _CreatedPCBs = new LinkedList<PCB>();
+        private static ObservableCollection<PCB> _CreatedPCBs { get; set; } = new ObservableCollection<PCB>();
         private static int _NextPID = -1;
 
         /// <summary>
@@ -126,7 +127,7 @@ namespace Vow_win_skiUWP.Core.Processes
 
             Memory.GetInstance.AllocateMemory(this, Program);
 
-            _CreatedPCBs.AddLast(this);
+            _CreatedPCBs.Add(this);
             Console.WriteLine("Utworzono proces: " + this.ToString());
         }
 
@@ -146,7 +147,7 @@ namespace Vow_win_skiUWP.Core.Processes
         /// <remarks>Znalezienie bloku PCB o danej nazwie - XN</remarks>
         public static PCB GetPCB(int PID)
         {
-            LinkedList<PCB>.Enumerator en = _CreatedPCBs.GetEnumerator();
+            var en = _CreatedPCBs.GetEnumerator();
 
             while (en.MoveNext())
             {
@@ -164,7 +165,7 @@ namespace Vow_win_skiUWP.Core.Processes
         /// <remarks>Znalezienie bloku PCB o danej nazwie - XN</remarks>
         public static PCB GetPCB(string Name)
         {
-            LinkedList<PCB>.Enumerator en = _CreatedPCBs.GetEnumerator();
+            var en = _CreatedPCBs.GetEnumerator();
 
             while (en.MoveNext())
             {
@@ -181,7 +182,7 @@ namespace Vow_win_skiUWP.Core.Processes
 
         public static void PrintAllPCBs()
         {
-            LinkedList<PCB>.Enumerator en = _CreatedPCBs.GetEnumerator();
+            var en = _CreatedPCBs.GetEnumerator();
 
             Console.WriteLine("Procesy aktualnie obecne w systemie:");
 
@@ -196,7 +197,7 @@ namespace Vow_win_skiUWP.Core.Processes
 
         public static void RunAllNewProcesses()
         {
-            LinkedList<PCB>.Enumerator en = _CreatedPCBs.GetEnumerator();
+            var en = _CreatedPCBs.GetEnumerator();
 
             while (en.MoveNext())
             {
@@ -206,7 +207,7 @@ namespace Vow_win_skiUWP.Core.Processes
 
         private bool IsProcessNameUsed(string Name)
         {
-            LinkedList<PCB>.Enumerator en = _CreatedPCBs.GetEnumerator();
+            var en = _CreatedPCBs.GetEnumerator();
 
             while (en.MoveNext())
             {
@@ -216,7 +217,7 @@ namespace Vow_win_skiUWP.Core.Processes
             return false;
         }
 
-        public static LinkedList<PCB> GetPcbsList()
+        public static ObservableCollection<PCB> GetPcbsList()
         {
             return _CreatedPCBs;
         }
