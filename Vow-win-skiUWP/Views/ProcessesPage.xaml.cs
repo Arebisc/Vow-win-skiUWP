@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -18,6 +19,10 @@ using Vow_win_skiUWP.Core.Processes;
 
 namespace Vow_win_skiUWP.Views
 {
+    public class ProcessesPageModel
+    {
+        public ObservableCollection<PCB> list { get; set; } = PCB.GetPcbsList();
+    }
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -25,9 +30,9 @@ namespace Vow_win_skiUWP.Views
     {
         public ProcessesPage()
         {
+            var model = new ProcessesPageModel();
             this.InitializeComponent();
-
-            this.ProcessList.ItemsSource = PCB.GetPcbsList();
+            this.DataContext = model;
 
             UserInterface.CreateProcess("Nazwa", "Path1");
             UserInterface.CreateProcess("Nazwa1", "Path2");

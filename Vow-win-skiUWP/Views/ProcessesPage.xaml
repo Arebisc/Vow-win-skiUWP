@@ -12,7 +12,7 @@
             <StackPanel Orientation="Vertical" Width="600">
                 <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Process List</TextBlock>
                 <ScrollViewer Margin="20">
-                    <ListView x:Name="ProcessList">
+                    <ListView x:Name="ProcessList" ItemsSource="{Binding list, Mode=OneWay}" Height="400">
                         <ListView.HeaderTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -26,10 +26,10 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Name}" Margin="10" />
-                                    <TextBlock Text="{Binding State}" Margin="10" />
-                                    <TextBlock Text="{Binding StartPriority}" Margin="10" />
-                                    <TextBlock Text="{Binding CurrentPriority}" Margin="10" />
+                                    <TextBlock Text="{Binding Name, Mode=OneWay}" Margin="10" />
+                                    <TextBlock Text="{Binding State, Mode=OneWay}" Margin="10" />
+                                    <TextBlock Text="{Binding StartPriority, Mode=OneWay}" Margin="10" />
+                                    <TextBlock Text="{Binding CurrentPriority, Mode=OneWay}" Margin="10" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
