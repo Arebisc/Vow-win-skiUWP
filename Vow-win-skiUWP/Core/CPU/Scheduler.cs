@@ -52,13 +52,23 @@ namespace Vow_win_skiUWP.Core.CPU
 
         public void RemoveProcess(PCB process)
         {
-            //WaitingForProcessor.RemoveAt(element => element.PID == process.PID);
+            foreach (var item in WaitingForProcessor)
+            {
+                if(item.PID == process.PID)
+                    WaitingForProcessor.Remove(item);
+            }
         }
 
-        //public PCB SearchForProcessInList(PCB process)
-        //{
-        //    //return WaitingForProcessor.Find(element => element.PID == process.PID);
-        //}
+        public PCB SearchForProcessInList(PCB process)
+        {
+            foreach (var item in WaitingForProcessor)
+            {
+                if (item.PID == process.PID)
+                    return item;
+            }
+
+            return default(PCB);
+        }
 
         public void PrintList()
         {
