@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Vow_win_skiUWP.Core.IPC;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,8 +25,20 @@ namespace Vow_win_skiUWP.Views
     public sealed partial class IPCPage : Page
     {
         public IPCPage()
-        {
+        {                    
+            var collection = new MessageCollection();           
             this.InitializeComponent();
+            this.DataContext = collection;            
         }
     }
+
+    public class MessageCollection
+    {
+        
+        public ObservableCollection<Message> WaitingMessages { get; set; } = PipeServer.GetServer.ShowWaiting();
+        public ObservableCollection<Message> ReceivedMessages { get; set; } = PipeServer.GetServer.ShowHistory();
+
+    }
+    
+        
 }

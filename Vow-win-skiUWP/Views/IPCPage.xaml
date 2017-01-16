@@ -1,13 +1,75 @@
 ﻿<Page
-    x:Class="Vow_win_skiUWP.Views.IPCPage"
+    x:Class="Vow_win_skiUWP.Views.IPCPage"        
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Vow_win_skiUWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        
+       
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock>IPC</TextBlock>
+
+
+        <StackPanel Orientation="Horizontal" Margin="-10,0,10,0">
+            <StackPanel Orientation="Vertical" Width="600">
+                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" Text="Waiting Messages" />
+                <ScrollViewer Margin="20">
+                    <ListView x:Name="WaitingMessages" ItemsSource="{Binding WaitingMessages, Mode=OneWay}">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Receiver" Margin="10" FontWeight="Bold" />
+                                    <TextBlock Text="Sender" Margin="10" FontWeight="Bold" />
+                                    <TextBlock Text="Message" Margin="10" FontWeight="Bold" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="{Binding GetReceiverId}" Margin="10" HorizontalAlignment="Center" />
+                                    <TextBlock Text="{Binding GetSenderId}" Margin="10" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding GetMessage}" Margin="10" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="600">
+                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" Text="Received Messages" />
+                <ScrollViewer Margin="20">
+                    <ListView x:Name="ReceivedMesseges" ItemsSource="{Binding ReceivedMessages, Mode=OneWay}">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Receiver" Margin="10" FontWeight="Bold" />
+                                    <TextBlock Text="Sender" Margin="10" FontWeight="Bold" />
+                                    <TextBlock Text="Message" Margin="10" FontWeight="Bold" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding GetReceiverId}" Margin="10" HorizontalAlignment="Center" />
+                                    <TextBlock Text="{Binding GetSenderId}" Margin="10" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding GetMessage}" Margin="10" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
+            </StackPanel>
+        </StackPanel>
+       
     </Grid>
+
+   
+
+ 
 </Page>

@@ -135,7 +135,7 @@ namespace Vow_win_skiUWP.Core
                         break;
                     //===================================================
                     case "SAM":
-                        PipeServer.GetServer.Show();
+                        PipeServer.GetServer.ShowWaiting();
                         break;
                     case "SMH":
                         PipeServer.GetServer.ShowHistory();

@@ -19,18 +19,20 @@ namespace Vow_win_skiUWP.Core.IPC
             this.message = message;
             this.senderId = senderId;
         }
+
         //===================================================================================================================================
-        public string GetReceiverId()
+        public string GetReceiverId
         {
-            return receiverId;
+           get { return receiverId;}
+            
         }
-        public string GetMessage()
+        public string GetMessage
         {
-            return message;
+            get { return message; }
         }
-        public string GetSenderId()
+        public string GetSenderId
         {
-            return senderId;
+            get { return senderId; }
         }
         //===================================================================================================================================
         public override string ToString()
