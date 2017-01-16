@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="Vow_win_skiUWP.Views.Helpers.IPCUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Vow_win_skiUWP.Views.Helpers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Margin="0,0,-557,-45">
+        <TextBlock x:Name="MainLeft" HorizontalAlignment="Left" Height="30" Margin="79,10,0,0" TextWrapping="Wrap" Text="Waiting Messages" VerticalAlignment="Top" Width="296" FontFamily="Vivaldi" FontSize="24" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="MainRight" HorizontalAlignment="Left" Height="30" Margin="554,10,0,0" TextWrapping="Wrap" Text="Messages History" VerticalAlignment="Top" Width="315" FontFamily="Vivaldi" FontSize="24" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="Receiver" HorizontalAlignment="Left" Margin="66,40,0,0" TextWrapping="Wrap" Text="Receiver" VerticalAlignment="Top" Width="63" Height="19" FontSize="14" TextAlignment="Center" FontWeight="Bold" />
+        <TextBlock x:Name="Sender" HorizontalAlignment="Left" Margin="129,40,0,0" TextWrapping="Wrap" Text="Sender" VerticalAlignment="Top" Width="66" Height="19" FontSize="14" TextAlignment="Center" FontWeight="Bold" />
+        <TextBlock x:Name="Message" HorizontalAlignment="Left" Margin="195,40,0,0" TextWrapping="Wrap" Text="Message" VerticalAlignment="Top" Width="180" Height="19" FontSize="14" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="ReceiverBlock" HorizontalAlignment="Left" Margin="66,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="214" Width="63"/>
+        <TextBlock x:Name="SenderBlock" HorizontalAlignment="Left" Margin="129,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="214" Width="66"/>
+        <TextBlock x:Name="MessageBlock" HorizontalAlignment="Left" Margin="195,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="214" Width="180"/>
+        <TextBlock x:Name="Receiver_Copy" HorizontalAlignment="Left" Margin="554,40,0,0" TextWrapping="Wrap" Text="Receiver" VerticalAlignment="Top" Width="63" Height="19" FontSize="14" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="Sender_Copy" HorizontalAlignment="Left" Margin="617,40,0,0" TextWrapping="Wrap" Text="Sender" VerticalAlignment="Top" Width="66" Height="19" FontSize="14" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="Message_Copy" HorizontalAlignment="Left" Margin="683,40,0,0" TextWrapping="Wrap" Text="Message" VerticalAlignment="Top" Width="180" Height="19" FontSize="14" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="ReceiverBlock_Copy" HorizontalAlignment="Left" Margin="554,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="214" Width="63"/>
+        <TextBlock x:Name="SenderBlock_Copy" HorizontalAlignment="Left" Margin="617,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="214" Width="66"/>
+        <TextBlock x:Name="MessageBlock_Copy" HorizontalAlignment="Left" Margin="683,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="214" Width="180"/>
+
+    </Grid>
+</UserControl>
