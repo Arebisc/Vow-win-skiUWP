@@ -24,6 +24,8 @@ namespace Vow_win_skiUWP.Views
     /// </summary>
     public sealed partial class CPUPage : Page
     {
+        private Page mainPage;
+
         public CPUPage()
         {
             this.InitializeComponent();

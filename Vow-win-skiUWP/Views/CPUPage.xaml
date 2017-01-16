@@ -5,27 +5,56 @@
     xmlns:local="using:Vow_win_skiUWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:Vow_win_skiUWP.Views.Helpers"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" Width="200" Height="200">
-                <TextBlock FontSize="20">Rejestry procesora</TextBlock>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <StackPanel Width="40">
-                        <TextBlock FontSize="20">A</TextBlock>
-                        <TextBlock FontSize="20">B</TextBlock>
-                        <TextBlock FontSize="20">C</TextBlock>
-                        <TextBlock FontSize="20">D</TextBlock>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical" Margin="0, 0, 100, 0">
+                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Rejestry</TextBlock>
+                <RelativePanel Width="200" Height="200">
+                    <StackPanel Width="75" Height="75" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True">
+                        <TextBlock FontSize="20" TextAlignment="Center">A</TextBlock>
+                        <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
+                            <TextBlock FontSize="20" Text="{Binding Path=A}" TextAlignment="Center" />
+                        </Border>
                     </StackPanel>
-                    <StackPanel Margin="20, 0, 0, 0" Width="40">
-                        <TextBlock FontSize="20" Text="{Binding Path=A}" />
-                        <TextBlock FontSize="20" Text="{Binding Path=B}" />
-                        <TextBlock FontSize="20" Text="{Binding Path=C}" />
-                        <TextBlock FontSize="20" Text="{Binding Path=D}" />
+                    <StackPanel Width="75" Height="75" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True">
+                        <TextBlock FontSize="20" TextAlignment="Center">B</TextBlock>
+                        <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
+                            <TextBlock FontSize="20" Text="{Binding Path=B}" TextAlignment="Center" />
+                        </Border>
                     </StackPanel>
+                    <StackPanel Width="75" Height="75" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWithPanel="True">
+                        <TextBlock FontSize="20" TextAlignment="Center">C</TextBlock>
+                        <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
+                            <TextBlock FontSize="20" Text="{Binding Path=C}" TextAlignment="Center" />
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Width="75" Height="75" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWithPanel="True">
+                        <TextBlock FontSize="20" TextAlignment="Center">D</TextBlock>
+                        <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
+                            <TextBlock FontSize="20" Text="{Binding Path=D}" TextAlignment="Center" />
+                        </Border>
+                    </StackPanel>
+                </RelativePanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Can get procesor</TextBlock>
+                    <ScrollViewer Margin="20">
+                        <StackPanel Orientation="Vertical">
+                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
+                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
+                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
+                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
+                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
+                            <helpers:ProcessMinBox></helpers:ProcessMinBox>
+                        </StackPanel>
+                    </ScrollViewer>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
 </Page>
+

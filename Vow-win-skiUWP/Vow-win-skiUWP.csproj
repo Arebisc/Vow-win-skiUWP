@@ -141,8 +141,13 @@
     <Compile Include="Views\Helpers\HelpPopupDialog.xaml.cs">
       <DependentUpon>HelpPopupDialog.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Views\Helpers\IPCUserControl.xaml.cs">
       <DependentUpon>IPCUserControl.xaml</DependentUpon>
+=======
+    <Compile Include="Views\Helpers\ProcessMinBox.xaml.cs">
+      <DependentUpon>ProcessMinBox.xaml</DependentUpon>
+>>>>>>> 88b66684d469f92973e4a16a0605ce5cf77e0f49
     </Compile>
     <Compile Include="Views\Helpers\Watermark.cs" />
     <Compile Include="Views\IPCPage.xaml.cs">
@@ -199,7 +204,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
     <Page Include="Views\Helpers\IPCUserControl.xaml">
+=======
+    <Page Include="Views\Helpers\ProcessMinBox.xaml">
+>>>>>>> 88b66684d469f92973e4a16a0605ce5cf77e0f49
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
