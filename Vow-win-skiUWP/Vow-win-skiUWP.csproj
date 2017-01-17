@@ -174,7 +174,12 @@
     <Content Include="Assets\CoreAssets\close.wav" />
     <Content Include="Assets\CoreAssets\spin.wav" />
     <Content Include="Assets\CoreAssets\start.wav" />
+    <Content Include="Assets\guard.png" />
+    <Content Include="Assets\postman-pat-2.png" />
+    <Content Include="Assets\procesor.png" />
     <Content Include="Assets\ProcessorIcon.png" />
+    <Content Include="Assets\ram.png" />
+    <Content Include="Assets\ram2.png" />
     <Content Include="idle.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

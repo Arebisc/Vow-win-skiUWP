@@ -8,8 +8,8 @@
     mc:Ignorable="d">
     
     
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
-        
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,-127" >
+        <Image Source="../Assets/postman-pat-2.png" x:Name="image2" HorizontalAlignment="Left" Height="290" Margin="455,357,0,0" VerticalAlignment="Top" Width="326"/>
        
 
 

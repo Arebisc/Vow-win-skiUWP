@@ -7,25 +7,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,-244">
+        <Image Source="../Assets/ram.png" x:Name="image" HorizontalAlignment="Left" Height="408" Margin="62,330,0,0" VerticalAlignment="Top" Width="470"/>
+        <Image Source="../Assets/ram2.png" x:Name="image2" HorizontalAlignment="Left" Height="290" Margin="944,414,0,0" VerticalAlignment="Top" Width="326"/>
 
-        
-            
-            <StackPanel Height="556" Margin="404,85,0,0" VerticalAlignment="Top" Width="480">
-                <TextBlock Text  ="{Binding PhysicalMemory}" Height="547"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="1270" Margin="0,0,10,0">
+            <StackPanel Width="232" />
+            <StackPanel  Height="671" VerticalAlignment="Top" Width="142" Margin="0,10,0,0">
+                <TextBlock Text="FIFO" FontFamily="Wide Latin" FontSize="20" TextAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Text ="{Binding QueueState}" Height="640" TextAlignment="Center" FontFamily="Stencil" />
             </StackPanel>
-       
-         
-        
-        <StackPanel  Height="556" Margin="79,85,1021,0" VerticalAlignment="Top" Width="180">
-            <TextBlock Text ="{Binding FreeFramesList}" RenderTransformOrigin="0.489,0.474"/>
+
+            <StackPanel   Width="480" Margin="0,10,0,39">
+                <TextBlock Text="MEMORY" FontSize="20" FontFamily="Wide Latin" FontWeight="Bold" TextAlignment="Center"/>
+                <TextBlock Text  ="{Binding PhysicalMemory}" Height="892" TextAlignment="Center" FontFamily="Stencil" FontSize="14"/>
+            </StackPanel>
+            <StackPanel   Width="296" Margin="0,10,0,39" >
+                <TextBlock Text="FREE FRAMES" FontSize="20" FontFamily="Wide Latin" FontWeight="Bold" Height="31"/>
+                <TextBlock Text ="{Binding FreeFramesList}"  Height="640" TextAlignment="Center" FontFamily="Stencil" />
+            </StackPanel>
+
         </StackPanel>
-        
-        
-        <StackPanel  Height="556" Margin="969,85,131,0" VerticalAlignment="Top" Width="180">
-            <TextBlock Text ="{Binding QueueState}" />
-        </StackPanel>
-        
-        
+
     </Grid>
 </Page>
