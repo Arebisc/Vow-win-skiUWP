@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,13 +10,13 @@ namespace Vow_win_skiUWP.Core.Processes
     public class Lockers
     {
         private byte open = 0;
-        private List<PCB> waiting;
+        public ObservableCollection<PCB> waiting { get; set; }
         private string Name;
-        PCB proces;
+        public PCB proces { get; set; }
 
         public Lockers()
         {
-            waiting = new List<PCB>();
+            waiting = new ObservableCollection<PCB>();
         }
 
         public void Lock(PCB Proces)
