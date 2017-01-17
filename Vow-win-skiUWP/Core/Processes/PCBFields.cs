@@ -71,7 +71,17 @@ namespace Vow_win_skiUWP.Core.Processes
             }
         }
 
-        public Register Registers = new Register();
+        private Register _registers = new Register();
+
+        public Register Registers
+        {
+            get { return _registers; }
+            set
+            {
+                _registers = value;
+                OnPropertyChanged("Registers");
+            }
+        }
 
         private string _name = string.Empty;
         /// <summary>
@@ -112,37 +122,120 @@ namespace Vow_win_skiUWP.Core.Processes
             }
         }
 
-        public int InstructionCounter = 0;
+        private int _instructionCounter = 0;
 
-        public ProcessPages MemoryBlocks = null;
+        public int InstructionCounter
+        {
+            get { return _instructionCounter; }
+            set
+            {
+                _instructionCounter = value;
+                OnPropertyChanged("InstructionCounter");
+            }
+        }
 
-        public int MaxMemory = 0;
+        private ProcessPages _memoryBlocks = null;
 
+        public ProcessPages MemoryBlocks
+        {
+            get
+            {
+                return _memoryBlocks;
+            }
+            set
+            {
+                _memoryBlocks = value;
+                OnPropertyChanged("MemoryBlocks");
+            }
+        }
+
+        private int _maxMemory = 0;
+
+        public int MaxMemory
+        {
+            get { return _maxMemory; }
+            set
+            {
+                _maxMemory = value;
+                OnPropertyChanged("MaxMemory");
+            }
+        }
+
+        private int _receiverMessageLock = 0;
         /// <summary>
         /// 1, jeśli proces został uśpiony z powodu oczekiwania na wiadomość
         /// </summary>
-        public int ReceiverMessageLock = 0;
+        public int ReceiverMessageLock
+        {
+            get { return _receiverMessageLock; }
+            set
+            {
+                _receiverMessageLock = value;
+                OnPropertyChanged("ReceiverMessageLock");
+            }
+        }
+
+        private Lockers _stopperLock = new Lockers();
 
         /// <summary>
         /// Zamek oczekiwania na zatrzymanie - jeśli zatrzymywany proces
         /// ma stan inny niż Running, proces zatrzymujący blokuje się
         /// pod tym zamkiem i odblokowuje dopiero po zamknięciu procesu
         /// </summary>
-        Lockers StopperLock = new Lockers();
+        private Lockers StopperLock
+        {
+            get { return _stopperLock; }
+            set
+            {
+                _stopperLock = value;
+                OnPropertyChanged("StopperLock");
+            }
+        }
+
+        private PCB _closingProcess = null;
 
         /// <summary>
         /// Proces zamykający ten proces
         /// </summary>
-        PCB ClosingProcess = null;
+        private PCB ClosingProcess
+        {
+            get { return _closingProcess; }
+            set
+            {
+                _closingProcess = value;
+                OnPropertyChanged("ClosingProcess");
+            }
+        }
 
+
+        private bool _waitingForStopping = false;
         /// <summary>
         /// True, jeśli podczas zamykania procesu proces miał stan inny niż Running
         /// </summary>
-        private bool WaitingForStopping = false;
+        private bool WaitingForStopping
+        {
+            get { return _waitingForStopping; }
+            set
+            {
+                _waitingForStopping = value;
+                OnPropertyChanged("WaitingForStopping");
+            }
+        }
 
-        //private PipeClient client = null;
+        private SourceOfCode _source = SourceOfCode.WindowsDisc;
 
-        public SourceOfCode Source = SourceOfCode.WindowsDisc;
+        public SourceOfCode Source
+        {
+            get
+            {
+                return _source;
+            }
+            set
+            {
+                _source = value;
+                OnPropertyChanged("Source");
+            }
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

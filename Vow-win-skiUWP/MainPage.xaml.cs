@@ -179,8 +179,6 @@ namespace Vow_win_skiUWP
 
         private async void NextOrderButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Scheduler.GetInstance.PriorityAlgorithm().Name = "NazwaInna";
-
             //var popup = new HelpPopupDialog();
             //popup.setText("Jeszcze nie działam!");
             //await popup.ShowAsync();

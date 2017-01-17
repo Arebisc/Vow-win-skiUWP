@@ -9,13 +9,65 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical" Margin="0, 0, 0, 20">
+                    <StackPanel Width="600" Height="300" Orientation="Vertical">
+                        <TextBlock>cos</TextBlock>
+                    </StackPanel>
+                    <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi">Dane PCB</TextBlock>
+                    <StackPanel Width="600" Height="300" Orientation="Horizontal">
+                        <StackPanel Width="150">
+                            <TextBlock>PID</TextBlock>
+                            <TextBlock>Name</TextBlock>
+                            <TextBlock>Current Priority</TextBlock>
+                            <TextBlock>Start Priority</TextBlock>
+                            <TextBlock>Waiting for processor</TextBlock>
+                            <TextBlock>Registers</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="A"></TextBlock>
+                                    <TextBlock Text="B"></TextBlock>
+                                    <TextBlock Text="C"></TextBlock>
+                                    <TextBlock Text="D"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock>State</TextBlock>
+                            <TextBlock>Instruction counter</TextBlock>
+                            <TextBlock>Memory pages</TextBlock>
+                            <TextBlock>Lock message receiver</TextBlock>
+                            <TextBlock>Waiting for closing</TextBlock>
+                        </StackPanel>
+                        <StackPanel Width="300">
+                            <TextBlock Text="{Binding SPCB.PID, Mode=OneWay}"></TextBlock>
+                            <TextBlock Text="{Binding SPCB.Name, Mode=OneWay}">Name</TextBlock>
+                            <TextBlock Text="{Binding SPCB.CurrentPriority, Mode=OneWay}">Current Priority</TextBlock>
+                            <TextBlock Text="{Binding SPCB.StartPriority, Mode=OneWay}">Start Priority</TextBlock>
+                            <TextBlock Text="{Binding SPCB.WaitingForProcessorTime, Mode=OneWay}">Waiting for processor time</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding SPCB.Registers.A, Mode=OneWay}"></TextBlock>
+                                    <TextBlock Text="{Binding SPCB.Registers.B, Mode=OneWay}"></TextBlock>
+                                    <TextBlock Text="{Binding SPCB.Registers.C, Mode=OneWay}"></TextBlock>
+                                    <TextBlock Text="{Binding SPCB.Registers.D, Mode=OneWay}"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock Text="{Binding SPCB.State, Mode=OneWay}">State</TextBlock>
+                            <TextBlock Text="{Binding SPCB.InstructionCounter, Mode=OneWay}">Instruction counter</TextBlock>
+                            <TextBlock Text="{Binding SPCB.MemoryBlocks, Mode=OneWay}">Memory pages</TextBlock>
+                            <TextBlock Text="{Binding SPCB.LockMessageReceiver, Mode=OneWay}">Lock message receiver</TextBlock>
+                            <TextBlock Text="{Binding SPCB.WaitingForStopping, Mode=OneWay}">Waiting for closing</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
             <StackPanel Orientation="Vertical" Width="600">
                 <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Process List</TextBlock>
                 <ScrollViewer Margin="20">
-                    <ListView x:Name="ProcessList" ItemsSource="{Binding list, Mode=OneWay}" Height="400">
+                    <ListView ItemsSource="{Binding list, Mode=OneWay}" Height="400" SelectionChanged="ProcessList_OnSelectionChanged">
                         <ListView.HeaderTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="PID" Margin="10" FontWeight="Bold" />
                                     <TextBlock Text="Name" Margin="10" FontWeight="Bold" />
                                     <TextBlock Text="State" Margin="10" FontWeight="Bold" />
                                     <TextBlock Text="Start Priority" Margin="10" FontWeight="Bold" />
@@ -26,6 +78,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding PID, Mode=OneWay}" Margin="10" />
                                     <TextBlock Text="{Binding Name, Mode=OneWay}" Margin="10" />
                                     <TextBlock Text="{Binding State, Mode=OneWay}" Margin="10" />
                                     <TextBlock Text="{Binding StartPriority, Mode=OneWay}" Margin="10" />
@@ -35,9 +88,6 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </ScrollViewer>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock>No coś tu muszę napisać nie?</TextBlock>
             </StackPanel>
         </StackPanel>
     </Grid>
