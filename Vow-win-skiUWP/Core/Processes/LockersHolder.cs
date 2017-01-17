@@ -32,5 +32,10 @@ namespace Vow_win_skiUWP.Core.Processes
         {
             return ProcLock.waiting;
         }
+
+        public PCB GetProces()
+        {
+            return ProcLock.proces;
+        }
     }
 }
