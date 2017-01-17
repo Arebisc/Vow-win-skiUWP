@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Streaming.Adaptive;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,21 +23,31 @@ namespace Vow_win_skiUWP.Views
     public class ProcessesPageModel
     {
         public ObservableCollection<PCB> list { get; set; } = PCB.GetPcbsList();
+        public PCB SPCB { get; set; } = null;
     }
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class ProcessesPage : Page
     {
+        private ProcessesPageModel model;
+
         public ProcessesPage()
         {
-            var model = new ProcessesPageModel();
+            model = new ProcessesPageModel();
             this.InitializeComponent();
             this.DataContext = model;
 
-            UserInterface.CreateProcess("Nazwa", "Path1");
-            UserInterface.CreateProcess("Nazwa1", "Path2");
-            UserInterface.CreateProcess("Nazwa2", "Path3");
+            UserInterface.CreateProcess("Nazwa", "silnia12.txt");
+            UserInterface.CreateProcess("Nazwa1", "idle.txt");
+            UserInterface.CreateProcess("Nazwa2", "nadawca.txt");
+        }
+
+        private void ProcessList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+
+            model.SPCB = PCB.GetPCB((sender as PCB).PID);
         }
     }
 }
