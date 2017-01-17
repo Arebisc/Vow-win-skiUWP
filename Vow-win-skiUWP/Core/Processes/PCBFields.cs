@@ -212,7 +212,7 @@ namespace Vow_win_skiUWP.Core.Processes
         /// <summary>
         /// True, jeśli podczas zamykania procesu proces miał stan inny niż Running
         /// </summary>
-        private bool WaitingForStopping
+        public bool WaitingForStopping
         {
             get { return _waitingForStopping; }
             set

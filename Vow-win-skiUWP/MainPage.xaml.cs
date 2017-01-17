@@ -179,6 +179,7 @@ namespace Vow_win_skiUWP
 
         private async void NextOrderButton_OnClick(object sender, RoutedEventArgs e)
         {
+            PCB.GetPCB("Nazwa").WaitingForStopping = true;
             //var popup = new HelpPopupDialog();
             //popup.setText("Jeszcze nie działam!");
             //await popup.ShowAsync();

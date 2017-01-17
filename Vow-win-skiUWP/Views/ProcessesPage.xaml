@@ -23,14 +23,6 @@
                             <TextBlock>Start Priority</TextBlock>
                             <TextBlock>Waiting for processor</TextBlock>
                             <TextBlock>Registers</TextBlock>
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="A"></TextBlock>
-                                    <TextBlock Text="B"></TextBlock>
-                                    <TextBlock Text="C"></TextBlock>
-                                    <TextBlock Text="D"></TextBlock>
-                                </StackPanel>
-                            </StackPanel>
                             <TextBlock>State</TextBlock>
                             <TextBlock>Instruction counter</TextBlock>
                             <TextBlock>Memory pages</TextBlock>
@@ -39,10 +31,10 @@
                         </StackPanel>
                         <StackPanel Width="300">
                             <TextBlock Text="{Binding SPCB.PID, Mode=OneWay}"></TextBlock>
-                            <TextBlock Text="{Binding SPCB.Name, Mode=OneWay}">Name</TextBlock>
-                            <TextBlock Text="{Binding SPCB.CurrentPriority, Mode=OneWay}">Current Priority</TextBlock>
-                            <TextBlock Text="{Binding SPCB.StartPriority, Mode=OneWay}">Start Priority</TextBlock>
-                            <TextBlock Text="{Binding SPCB.WaitingForProcessorTime, Mode=OneWay}">Waiting for processor time</TextBlock>
+                            <TextBlock Text="{Binding SPCB.Name, Mode=OneWay}"></TextBlock>
+                            <TextBlock Text="{Binding SPCB.CurrentPriority, Mode=OneWay}"></TextBlock>
+                            <TextBlock Text="{Binding SPCB.StartPriority, Mode=OneWay}"></TextBlock>
+                            <TextBlock Text="{Binding SPCB.WaitingForProcessorTime, Mode=OneWay}"></TextBlock>
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding SPCB.Registers.A, Mode=OneWay}"></TextBlock>
@@ -52,10 +44,10 @@
                                 </StackPanel>
                             </StackPanel>
                             <TextBlock Text="{Binding SPCB.State, Mode=OneWay}">State</TextBlock>
-                            <TextBlock Text="{Binding SPCB.InstructionCounter, Mode=OneWay}">Instruction counter</TextBlock>
-                            <TextBlock Text="{Binding SPCB.MemoryBlocks, Mode=OneWay}">Memory pages</TextBlock>
-                            <TextBlock Text="{Binding SPCB.LockMessageReceiver, Mode=OneWay}">Lock message receiver</TextBlock>
-                            <TextBlock Text="{Binding SPCB.WaitingForStopping, Mode=OneWay}">Waiting for closing</TextBlock>
+                            <TextBlock Text="{Binding SPCB.InstructionCounter, Mode=OneWay}"></TextBlock>
+                            <TextBlock Text="{Binding SPCB.MemoryBlocks, Mode=OneWay}" Tapped="MemoryBlocks_OnClick"></TextBlock>
+                            <TextBlock Text="{Binding SPCB.ReceiverMessageLock, Mode=OneWay}"></TextBlock>
+                            <TextBlock Text="{Binding SPCB.WaitingForStopping, Mode=OneWay}"></TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
