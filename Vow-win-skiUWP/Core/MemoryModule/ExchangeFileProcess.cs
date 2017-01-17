@@ -9,6 +9,6 @@ namespace Vow_win_skiUWP.Core.MemoryModule
     class ExchangeFileProcess
     {
         public ProcessPages TakenProcessPages;
-        public List<Frame> TakenFrames;
+        public List<MemoryAllocationUnit> TakenFrames;
     }
 }

@@ -26,7 +26,7 @@ namespace Vow_win_skiUWP.Core.MemoryModule
             _exchangeFile = new ExchangeFile();
             _fifoQueue = new FifoQueue();
             _physicalMemory = new PhysicalMemory(FramesCount, FramesSize);
-            _freeFramesList = new FreeFramesList(FramesCount - 2);
+            _freeFramesList = new FreeFramesList(FramesCount );
             ProcessPages = new List<ProcessPages>();
             _messageLength = 0;
         }
@@ -78,8 +78,8 @@ namespace Vow_win_skiUWP.Core.MemoryModule
         public void UploadChanges(int id, int frameNumber, int pageNumber)
         {
             //pobranie danych z danej ramki
-            Frame tempdata = _physicalMemory.GetFrame(frameNumber);
-            char[] data = tempdata.ReadFrame();
+            MemoryAllocationUnit tempdata = _physicalMemory.GetFrame(frameNumber);
+            char[] data = tempdata.ReadAllocationUnit();
 
             //wpisanie ich do pliku wymiany
             _exchangeFile.UpdateData(id, pageNumber, data);
@@ -156,10 +156,10 @@ namespace Vow_win_skiUWP.Core.MemoryModule
         public void AllocateMemory(PCB processData, string program)
         {
             //obliczenie ilosci stron 
-            int pages = (int)Math.Ceiling((double)program.Length / FramesSize);
+            int pagesCount = (int)Math.Ceiling((double)program.Length / FramesSize);
 
             //przypisnie Stron procesu i delegatow do Listy stron i do PCB
-            ProcessPages temp = new ProcessPages(processData.PID, pages);
+            ProcessPages temp = new ProcessPages(processData.PID, pagesCount);
             temp.GetChar = GetByte;
             temp.ChangeByteDel = ChangeByte;
             ProcessPages.Add(temp);
@@ -167,11 +167,11 @@ namespace Vow_win_skiUWP.Core.MemoryModule
             processData.MaxMemory = program.Length - 1;
 
             //uzupelnienie stron
-            var frames = new List<Frame>();
-            for (int i = 0; i < pages; i++)
+            var pages = new List<MemoryAllocationUnit>();
+            for (int i = 0; i < pagesCount; i++)
             {
-                frames.Add(new Frame(FramesSize));
-                frames[i].WriteFrame(program.Select(x => x)
+                pages.Add(new MemoryAllocationUnit(FramesSize));
+                pages[i].WriteAllocationUnit(program.Select(x => x)
                     .Skip(FramesSize * i)
                     .Take((program.Length - FramesSize * i < FramesSize) ? program.Length - FramesSize * i : FramesSize)
                     .ToArray());
@@ -181,7 +181,7 @@ namespace Vow_win_skiUWP.Core.MemoryModule
             ExchangeFileProcess newProcess = new ExchangeFileProcess()
             {
                 TakenProcessPages = temp,
-                TakenFrames = frames
+                TakenFrames = pages
             };
             _exchangeFile.PlaceIntoMemory(newProcess);
 
@@ -197,7 +197,7 @@ namespace Vow_win_skiUWP.Core.MemoryModule
                     Id = processData.PID
                 });
                 //wprowadzenie 0 strony do pamieci fizycznej
-                _physicalMemory.SetFrame(index, frames[0].ReadFrame());
+                _physicalMemory.SetFrame(index, pages[0].ReadAllocationUnit());
                 //wprowadzenie do tablicy stron ze strona 0 znajduje sie w danym miejscu
                 foreach (ProcessPages process in ProcessPages)
                 {
@@ -222,7 +222,7 @@ namespace Vow_win_skiUWP.Core.MemoryModule
                     Id = processData.PID
                 });
                 //wprowadzenie do pamieci fizycznej danej strony
-                _physicalMemory.SetFrame(index, frames[0].ReadFrame());
+                _physicalMemory.SetFrame(index, pages[0].ReadAllocationUnit());
                 //wpisanie do tablicy stron ze dana strona znajduje sie w pamieci
                 foreach (var processPage in ProcessPages)
                 {
@@ -339,10 +339,11 @@ namespace Vow_win_skiUWP.Core.MemoryModule
             }
         }
 
-        public void DisplayPageList(int id)
+        public string DisplayPageList(int id)
         {
             try
             {
+                StringBuilder pageList = new StringBuilder();
                 ProcessPages pages = ProcessPages.SingleOrDefault(x => x.Id == id);
 
                 for (int i = 0; i < pages.PagesCount; i++)
@@ -350,68 +351,83 @@ namespace Vow_win_skiUWP.Core.MemoryModule
                     if (pages.IsPageInMemory(i))
                     {
                         Console.WriteLine("Strona " + i + " znajduje się w ramce nr " + pages.ReadFrameNumber(i));
+                        pageList.Append("Strona " + i + " znajduje się w ramce nr " + pages.ReadFrameNumber(i)+"\n");
                     }
                     else
                     {
-                        Console.WriteLine("Strona " + i + " nie ma przypisanej ramki.");
+                        //Console.WriteLine("Strona " + i + " nie ma przypisanej ramki.");
+                        pageList.Append("Strona " + i + " nie ma przypisanej ramki.\n");
                     }
                 }
+                return pageList.ToString();
             }
             catch (NullReferenceException)
             {
                 Console.WriteLine("Tego procesu nie ma w pamięci");
+                return "Tego procesu nie ma w pamięci.\n";
             }
         }
 
-        public void DisplayPageContent(int id, int number)
+        public string DisplayPageContent(int id, int number)
         {
             try
             {
                 ProcessPages pages = ProcessPages.FirstOrDefault(x => x.Id == id);
+                StringBuilder pageContent = new StringBuilder();
 
                 if (pages.IsPageInMemory(number))
                 {
-                    Console.WriteLine("Zawarość ramki nr: " + number);
-                    _physicalMemory.GetFrame(pages.ReadFrameNumber(number)).ShowFrame();
+                    //Console.WriteLine("Zawarość ramki nr: " + number);
+                    //pageContent.Append("Zawartość ramki nr " + number+": ");
+                    pageContent.Append(_physicalMemory.GetFrame(pages.ReadFrameNumber(number)).ShowAllocationUnit()+"\n");
+                    return pageContent.ToString();
                 }
                 else
                 {
-                    Console.WriteLine("Danej strony nie ma w pamięci.");
+                    //Console.WriteLine("Danej strony nie ma w pamięci.");
+                    pageContent.Append("Danej strony nie ma w pamięci.\n");
+                    return pageContent.ToString();
                 }
 
             }
             catch (Exception)
             {
-                Console.WriteLine("Nie ma danego procesu w pamieci.");
+                //Console.WriteLine("Nie ma danego procesu w pamieci.");
+                return "Nie ma danego procesu w pamieci.\n";
             }
         }
 
-        public void DisplayFreeFrames()
+        public string DisplayFreeFrames()
         {
             if (_freeFramesList.FreeFramesCount == 0)
             {
-                Console.WriteLine("Brak wolnych ramek.");
+                //Console.WriteLine("Brak wolnych ramek.");
+                return "";
             }
             else
             {
-                Console.WriteLine("Lista wolnych ramek.");
-                _freeFramesList.DisplayFreeFrames();
+                //Console.WriteLine("Lista wolnych ramek.");
+                return _freeFramesList.DisplayFreeFrames();
             }
         }
 
-        public void DisplayPhysicalMemory()
+        public string DisplayPhysicalMemory()
         {
-            Console.WriteLine("Wyświetlenie całej pamięci.");
+            StringBuilder physicalMemory = new StringBuilder();
+            //Console.WriteLine("Wyświetlenie całej pamięci.");
             for (int i = 0; i < FramesCount; i++)
             {
-                Console.Write("Ramka nr " + i + ": ");
-                _physicalMemory.ShowFrame(i);
+                //Console.Write("Ramka nr " + i + ": ");
+               // physicalMemory.Append("Ramka nr " + i + ": ");
+                physicalMemory.Append(_physicalMemory.ShowFrame(i));
+                physicalMemory.Append("\n");
             }
+            return physicalMemory.ToString();
         }
 
-        public void DisplayFifoQueue()
+        public string DisplayFifoQueue()
         {
-            _fifoQueue.DisplayQueue();
+            return _fifoQueue.DisplayQueue();
         }
 
         public void TestFillMemory(PCB testProcessData)
@@ -452,7 +468,7 @@ namespace Vow_win_skiUWP.Core.MemoryModule
                 foreach (var frame in frames)
                 {
                     _freeFramesList.AddToList(frame);
-                    _physicalMemory.GetFrame(frame).ClearFrame();
+                    _physicalMemory.GetFrame(frame).ClearAllocationUnit();
                     _fifoQueue.RemoveChoosenProcess(ProcessPages[i].Id);
                     _exchangeFile.RemoveFromMemory(ProcessPages[i].Id);
                 }
@@ -477,7 +493,7 @@ namespace Vow_win_skiUWP.Core.MemoryModule
             {
                 _physicalMemory.SetFrame(FramesCount - 2,
                     message.Take(_messageLength).ToArray());
-                _physicalMemory.GetFrame(FramesCount - 1).ClearFrame();
+                _physicalMemory.GetFrame(FramesCount - 1).ClearAllocationUnit();
                 // Console.WriteLine(message.Take(_messageLength).ToArray());
 
             }
@@ -497,8 +513,8 @@ namespace Vow_win_skiUWP.Core.MemoryModule
         {
             if (_messageLength > 0)
             {
-                string temp = new string(_physicalMemory.GetFrame(FramesCount - 2).ReadFrame());
-                string temp1 = new string(_physicalMemory.GetFrame(FramesCount - 1).ReadFrame());
+                string temp = new string(_physicalMemory.GetFrame(FramesCount - 2).ReadAllocationUnit());
+                string temp1 = new string(_physicalMemory.GetFrame(FramesCount - 1).ReadAllocationUnit());
 
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append(temp);

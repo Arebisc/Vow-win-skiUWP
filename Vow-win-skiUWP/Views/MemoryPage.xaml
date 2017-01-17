@@ -8,23 +8,24 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
         
-        
-        <ListView>
-            <StackPanel HorizontalAlignment="Left" Height="556" Margin="404,85,0,0" VerticalAlignment="Top" Width="480">
-                <TextBlock />
+            
+            <StackPanel Height="556" Margin="404,85,0,0" VerticalAlignment="Top" Width="480">
+                <TextBlock Text  ="{Binding PhysicalMemory}" Height="547"/>
             </StackPanel>
-        </ListView>
-        <ListView>
-        <StackPanel HorizontalAlignment="Left" Height="556" Margin="164,85,0,0" VerticalAlignment="Top" Width="180">
-            <TextBlock />
+       
+         
+        
+        <StackPanel  Height="556" Margin="79,85,1021,0" VerticalAlignment="Top" Width="180">
+            <TextBlock Text ="{Binding FreeFramesList}" RenderTransformOrigin="0.489,0.474"/>
         </StackPanel>
-        </ListView>
-        <ListView>
-        <StackPanel HorizontalAlignment="Left" Height="556" Margin="961,85,0,0" VerticalAlignment="Top" Width="180">
-            <TextBlock />
+        
+        
+        <StackPanel  Height="556" Margin="969,85,131,0" VerticalAlignment="Top" Width="180">
+            <TextBlock Text ="{Binding QueueState}" />
         </StackPanel>
-        </ListView>
+        
         
     </Grid>
 </Page>
