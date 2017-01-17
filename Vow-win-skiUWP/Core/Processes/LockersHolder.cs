@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,5 +27,10 @@ namespace Vow_win_skiUWP.Core.Processes
         }
 
         public static LockersHolder GetInstance => _instance;
+
+        public ObservableCollection<PCB> GetCollection()
+        {
+            return ProcLock.waiting;
+        }
     }
 }
