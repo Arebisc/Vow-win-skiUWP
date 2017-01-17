@@ -12,23 +12,23 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Vow_win_skiUWP.Core.Processes;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
+// The Content Dialog item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Vow_win_skiUWP.Views.Helpers
 {
-    public sealed partial class ProcessMinBox : UserControl
+    public sealed partial class CppDialog : ContentDialog
     {
-        public ProcessMinBox()
+        public CppDialog()
         {
             this.InitializeComponent();
         }
 
-        public ProcessMinBox(string processName, string processPriority)
-            :this()
+        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            ProcessName.Text = processName;
-            ProcessPriority.Text = processPriority;
+            ListBoxItem selectedList = PriorityList.SelectedItem as ListBoxItem;
+            UserInterface.ChangePriority(OldProcessName.Text, selectedList.Content.ToString());
         }
     }
 }

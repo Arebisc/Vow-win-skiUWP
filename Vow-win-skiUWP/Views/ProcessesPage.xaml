@@ -11,8 +11,17 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <ScrollViewer>
                 <StackPanel Orientation="Vertical" Margin="0, 0, 0, 20">
-                    <StackPanel Width="600" Height="300" Orientation="Vertical">
-                        <TextBlock>cos</TextBlock>
+                    <StackPanel Width="600" Height="200" Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Choose action</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <Button Click="CPButton_Clicked" Background="#536dfe" Margin="10" >Create new process</Button>
+                                    <Button Click="CppButton_OnClick" Background="#536dfe" Margin="10">Change process priority</Button>
+                                </StackPanel>
+                                <Button Click="NprAllButton_OnClick" Background="#536dfe" Margin="10">Run all new processess</Button>
+                            </StackPanel>
+                        </StackPanel>
                     </StackPanel>
                     <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi">Dane PCB</TextBlock>
                     <StackPanel Width="600" Height="300" Orientation="Horizontal">
@@ -25,7 +34,6 @@
                             <TextBlock>Registers</TextBlock>
                             <TextBlock>State</TextBlock>
                             <TextBlock>Instruction counter</TextBlock>
-                            <TextBlock>Memory pages</TextBlock>
                             <TextBlock>Lock message receiver</TextBlock>
                             <TextBlock>Waiting for closing</TextBlock>
                         </StackPanel>
@@ -45,9 +53,9 @@
                             </StackPanel>
                             <TextBlock Text="{Binding SPCB.State, Mode=OneWay}">State</TextBlock>
                             <TextBlock Text="{Binding SPCB.InstructionCounter, Mode=OneWay}"></TextBlock>
-                            <TextBlock Text="{Binding SPCB.MemoryBlocks, Mode=OneWay}" Tapped="MemoryBlocks_OnClick"></TextBlock>
                             <TextBlock Text="{Binding SPCB.ReceiverMessageLock, Mode=OneWay}"></TextBlock>
                             <TextBlock Text="{Binding SPCB.WaitingForStopping, Mode=OneWay}"></TextBlock>
+                            <Button Margin="0 , 10, 0, 0" Click="MemoryBlocks_OnClick" Visibility="Collapsed" Name="MemoryBlocksBtn">Show memory blocks</Button>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -75,6 +83,9 @@
                                     <TextBlock Text="{Binding State, Mode=OneWay}" Margin="10" />
                                     <TextBlock Text="{Binding StartPriority, Mode=OneWay}" Margin="10" />
                                     <TextBlock Text="{Binding CurrentPriority, Mode=OneWay}" Margin="10" />
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE768;" Tapped="StartProcess_OnTapped" />
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE769;" Tapped="SleepProcess_OnTapped" />
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE71A;" Tapped="StopProcess_OnTapped" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

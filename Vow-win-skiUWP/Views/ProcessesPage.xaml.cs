@@ -81,6 +81,7 @@ namespace Vow_win_skiUWP.Views
             var selectedItem = listView.ContainerFromIndex(selectedItemIndex) as ListViewItem;
             PCB selectedPCB = selectedItem.Content as PCB;
             model.SPCB = selectedPCB;
+            MemoryBlocksBtn.Visibility = Visibility.Visible;
         }
 
         private async void MemoryBlocks_OnClick(object sender, RoutedEventArgs e)
@@ -88,6 +89,38 @@ namespace Vow_win_skiUWP.Views
             var popup = new HelpPopupDialog();
             popup.setText("Jeszcze nie działam!");
             await popup.ShowAsync();
+        }
+
+        private async void CPButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            var popup = new Helpers.CPDialog();
+            await popup.ShowAsync();
+        }
+
+        private async void CppButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var popup = new Helpers.CppDialog();
+            await popup.ShowAsync();
+        }
+
+        private void NprAllButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            PCB.RunAllNewProcesses();
+        }
+
+        private void StartProcess_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            UserInterface.RunNewProcess(model.SPCB.Name);
+        }
+
+        private void StopProcess_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            UserInterface.StopProcess(model.SPCB.Name);
+        }
+
+        private void SleepProcess_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            UserInterface.SleepProcess(model.SPCB.Name);
         }
     }
 }

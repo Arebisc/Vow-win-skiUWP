@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <RelativePanel>
             <Button Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="36" Click="HamburgerButton_Click" HorizontalAlignment="Stretch" />
-            <Button FontFamily="Segoe MDL2 Assets" FontSize="36" Content="&#xE11B;" Width="120" Click="HelpButton_OnClick" RelativePanel.AlignHorizontalCenterWithPanel="True" />
+            <Button FontFamily="Segoe MDL2 Assets" FontSize="36" Content="&#xE11B;" Width="120" RelativePanel.AlignHorizontalCenterWithPanel="True" />
             <Button RelativePanel.AlignRightWithPanel="True" FontFamily="Segoe MDL2 Assets" FontSize="36" Content="&#xE0AB;" Width="120" Click="NextOrderButton_OnClick"/>
         </RelativePanel>
         <SplitView Name="MySplitView"
@@ -69,7 +69,6 @@
                 <ScrollViewer>
                     <StackPanel Orientation="Vertical" Margin="50">
                         <Frame x:Name="RootFrame" Width="Auto" Height="500" />
-                        <TextBox Name="CmdTb" GotFocus="TextBox_OnGotFocus" LostFocus="TextBox_OnFocusLost" KeyUp="Cmd_EnterPressed"></TextBox>
                     </StackPanel>
                 </ScrollViewer>
             </SplitView.Content>
