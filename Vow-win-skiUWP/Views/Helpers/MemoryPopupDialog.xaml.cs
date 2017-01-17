@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Vow_win_skiUWP.Views.Helpers
 {
-    public sealed partial class HelpPopupDialog : ContentDialog
+    public sealed partial class MemoryPopupDialog : ContentDialog
     {
-        public HelpPopupDialog()
+        public MemoryPopupDialog()
         {
             this.InitializeComponent();
         }

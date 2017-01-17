@@ -70,9 +70,14 @@ namespace Vow_win_skiUWP
 
         private async void NextOrderButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var popup = new HelpPopupDialog();
+            var popup = new MemoryPopupDialog();
             popup.setText("Jeszcze nie działam!");
             await popup.ShowAsync();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
