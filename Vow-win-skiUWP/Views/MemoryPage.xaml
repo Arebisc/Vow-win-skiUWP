@@ -8,6 +8,23 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock>Memory</TextBlock>
+        
+        
+        <ListView>
+            <StackPanel HorizontalAlignment="Left" Height="556" Margin="404,85,0,0" VerticalAlignment="Top" Width="480">
+                <TextBlock />
+            </StackPanel>
+        </ListView>
+        <ListView>
+        <StackPanel HorizontalAlignment="Left" Height="556" Margin="164,85,0,0" VerticalAlignment="Top" Width="180">
+            <TextBlock />
+        </StackPanel>
+        </ListView>
+        <ListView>
+        <StackPanel HorizontalAlignment="Left" Height="556" Margin="961,85,0,0" VerticalAlignment="Top" Width="180">
+            <TextBlock />
+        </StackPanel>
+        </ListView>
+        
     </Grid>
 </Page>
