@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Vow_win_skiUWP.Core.MemoryModule
     public class FreeFramesList
     {
         public int FreeFramesCount;
-        private List<int> _freeFrames;
+        public List<int> _freeFrames;
 
         public FreeFramesList(int framesCount)
         {
@@ -35,12 +36,15 @@ namespace Vow_win_skiUWP.Core.MemoryModule
             FreeFramesCount = _freeFrames.Count;
         }
 
-        public void DisplayFreeFrames()
+        public string DisplayFreeFrames()
         {
+            StringBuilder displayStringBuilder = new StringBuilder();
             foreach (var frame in _freeFrames)
             {
-                Console.WriteLine(frame);
+                //Console.WriteLine(frame);
+                displayStringBuilder.Append(frame+"\n");
             }
+            return displayStringBuilder.ToString();
         }
     }
 }
