@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -13,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Vow_win_skiUWP.Annotations;
 using Vow_win_skiUWP.Core.Processes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -28,30 +31,47 @@ namespace Vow_win_skiUWP.Views
         {
             var WaitingList = new LockersCollection();
             this.InitializeComponent();
-            this.DataContext = WaitingList;
-
-           // WaitingList.LockerProces= new PCB("Proces0",1);
-            WaitingList.LockersWaiting.Add(new PCB("Proces1",1));
-            WaitingList.LockersWaiting.Add(new PCB("Proces2", 1));
-            WaitingList.LockersWaiting.Add(new PCB("Proces3", 1));
-            WaitingList.LockersWaiting.Add(new PCB("Proces4", 1));
+            this.DataContext = WaitingList;   
+                  
         }   
              
     }
 
-    public class LockersCollection
+    public class LockersCollection : INotifyPropertyChanged
     {
-        public ObservableCollection<PCB> LockersWaiting { get; set; } /*= LockersHolder.GetInstance.GetCollection();*/
-        public PCB LockerProces { get; set; }
+        private PCB _lockerProces = null;
+        public ObservableCollection<PCB> LockersWaiting { get; set; } 
+
+        public PCB LockerProces
+        {
+            get
+            {
+                return _lockerProces;
+            }
+            set
+            {
+                _lockerProces = value;
+                OnPropertyChanged();
+            }
+        }
 
         public LockersCollection()
         {
-            LockersWaiting = new ObservableCollection<PCB>();
-            LockerProces = new PCB("Proces0",1);
-            //if (LockersHolder.GetInstance.GetCollection().First() != null)
-            //{
-            //    LockerProces = LockersHolder.GetInstance.GetCollection().First();
-            //}
+            if (LockersHolder.GetInstance.GetProces() != null)
+            {
+                LockersHolder.GetInstance.GetProces();
+            }
+
+            LockersWaiting = LockersHolder.GetInstance.GetCollection();
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

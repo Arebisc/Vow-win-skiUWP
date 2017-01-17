@@ -47,7 +47,7 @@ namespace Vow_win_skiUWP.Views
         {
             
 
-            model.SPCB = PCB.GetPCB((sender as PCB).PID);
+         
         }
     }
 }

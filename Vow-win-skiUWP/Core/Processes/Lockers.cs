@@ -17,6 +17,7 @@ namespace Vow_win_skiUWP.Core.Processes
         public Lockers()
         {
             waiting = new ObservableCollection<PCB>();
+
         }
 
         public void Lock(PCB Proces)
