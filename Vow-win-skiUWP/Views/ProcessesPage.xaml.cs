@@ -70,10 +70,6 @@ namespace Vow_win_skiUWP.Views
             model = new ProcessesPageModel();
             this.InitializeComponent();
             this.DataContext = model;
-
-            UserInterface.CreateProcess("Nazwa", "silnia12.txt");
-            UserInterface.CreateProcess("Nazwa1", "idle.txt");
-            UserInterface.CreateProcess("Nazwa2", "nadawca.txt");
         }
 
         private void ProcessList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
