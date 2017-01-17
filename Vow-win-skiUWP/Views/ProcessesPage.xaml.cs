@@ -17,8 +17,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Vow_win_skiUWP.Annotations;
+using Vow_win_skiUWP.Core.MemoryModule;
 using Vow_win_skiUWP.Core.Processes;
 using Vow_win_skiUWP.Views.Helpers;
+using Page = Windows.UI.Xaml.Controls.Page;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -86,8 +88,8 @@ namespace Vow_win_skiUWP.Views
 
         private async void MemoryBlocks_OnClick(object sender, RoutedEventArgs e)
         {
-            var popup = new HelpPopupDialog();
-            popup.setText("Jeszcze nie działam!");
+            var popup = new MemoryPopupDialog();
+            //popup.setText(Memory.GetInstance.DisplayPageList(model.SPCB.PID));
             await popup.ShowAsync();
         }
 

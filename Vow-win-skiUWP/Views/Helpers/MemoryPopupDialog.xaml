@@ -41,7 +41,7 @@
                                         TextWrapping="Wrap"
                                         ScrollViewer.VerticalScrollBarVisibility="Visible"   
                                         ScrollViewer.ZoomMode="Enabled"
-                                        Name="PopupContentTb"/>
+                                        Name="PopupContentTb" />
             </ScrollViewer>
         </StackPanel>
     </Grid>
