@@ -85,7 +85,7 @@ namespace Vow_win_skiUWP.Views
         private async void MemoryBlocks_OnClick(object sender, RoutedEventArgs e)
         {
             var popup = new MemoryPopupDialog();
-            //popup.setText(Memory.GetInstance.DisplayPageList(model.SPCB.PID));
+            popup.setText(Memory.GetInstance.DisplayPageList(model.SPCB.PID));
             await popup.ShowAsync();
         }
 

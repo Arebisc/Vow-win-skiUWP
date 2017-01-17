@@ -75,9 +75,11 @@ namespace Vow_win_skiUWP
             await popup.ShowAsync();
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private async void RunToEnd_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var popup = new MemoryPopupDialog();
+            popup.setText("Jeszcze nie działam!");
+            await popup.ShowAsync();
         }
     }
 }
