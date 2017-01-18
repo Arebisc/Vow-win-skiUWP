@@ -28,6 +28,27 @@ namespace Vow_win_skiUWP.Core.MemoryModule
                 .ToList();
         }
 
+        public string DisplayProgramData(int id)
+        {
+            var processData = _takenProcesses.Select(x => x).SingleOrDefault(x => x.TakenProcessPages.Id == id);
+
+            if (processData != null)
+            {
+                var data = processData.TakenFrames;
+                StringBuilder program = new StringBuilder();
+                foreach (var allocationUnit in data)
+                {
+                    program.Append(allocationUnit.ReadAllocationUnit());
+                }
+                program.Append("\n");
+                return program.ToString();
+            }
+            else
+            {
+                return "No such process.";
+            }
+        }
+
         public char[] ReadFromExchangeFile(int id, int pageNumber)
         {
             var data = _takenProcesses.Select(x => x).SingleOrDefault(x => x.TakenProcessPages.Id == id);

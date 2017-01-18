@@ -38,10 +38,6 @@ namespace Vow_win_skiUWP.Views
             var model = new CPUPageModel();
             this.InitializeComponent();
             this.DataContext = model;
-
-            Scheduler.GetInstance.AddProcess(new PCB("Nazwa", 1));
-            Scheduler.GetInstance.AddProcess(new PCB("Nazwa1", 2));
-            Scheduler.GetInstance.AddProcess(new PCB("Nazwa2", 3));
         }
     }
 }

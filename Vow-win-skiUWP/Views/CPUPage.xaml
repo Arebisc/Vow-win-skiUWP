@@ -9,40 +9,40 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,-220">
-        <Image Source="../Assets/procesor.png" x:Name="image2" HorizontalAlignment="Left" Height="290" Margin="244,351,0,0" VerticalAlignment="Top" Width="326"/>
+        <Image Source="../Assets/ProcessorIcon.png" x:Name="image" HorizontalAlignment="Left" Height="399" Margin="54,36,0,0" VerticalAlignment="Top" Width="398"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical" Margin="0, 0, 100, 0">
-                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Registers</TextBlock>
-                <RelativePanel Width="200" Height="200">
+                <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin" >Registers</TextBlock>
+                <RelativePanel Width="200" Height="200" Margin="0, 110">
                     <StackPanel Width="75" Height="75" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True">
-                        <TextBlock FontSize="20" TextAlignment="Center">A</TextBlock>
-                        <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
-                            <TextBlock FontSize="20" Text="{Binding register.A, Mode=OneWay}" TextAlignment="Center" />
+                        <TextBlock FontSize="20" TextAlignment="Center" Foreground="White">A</TextBlock>
+                        <Border BorderBrush="#363636" BorderThickness="0" Height="45" Width="45">
+                            <TextBlock FontSize="20" Text="{Binding register.A, Mode=OneWay}" Foreground="White" TextAlignment="Center" />
                         </Border>
                     </StackPanel>
                     <StackPanel Width="75" Height="75" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True">
-                        <TextBlock FontSize="20" TextAlignment="Center">B</TextBlock>
-                        <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
-                            <TextBlock FontSize="20" Text="{Binding register.B, Mode=OneWay}" TextAlignment="Center" />
+                        <TextBlock FontSize="20" TextAlignment="Center" Foreground="White">B</TextBlock>
+                        <Border BorderBrush="#363636" BorderThickness="0" Height="45" Width="45">
+                            <TextBlock FontSize="20" Text="{Binding register.B, Mode=OneWay}" TextAlignment="Center" Foreground="White" />
                         </Border>
                     </StackPanel>
                     <StackPanel Width="75" Height="75" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWithPanel="True">
-                        <TextBlock FontSize="20" TextAlignment="Center">C</TextBlock>
-                        <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
-                            <TextBlock FontSize="20" Text="{Binding register.C, Mode=OneWay}" TextAlignment="Center" />
+                        <TextBlock FontSize="20" TextAlignment="Center" Foreground="White">C</TextBlock>
+                        <Border BorderBrush="#363636" BorderThickness="0" Height="45" Width="45">
+                            <TextBlock FontSize="20" Text="{Binding register.C, Mode=OneWay}" TextAlignment="Center" Foreground="White" />
                         </Border>
                     </StackPanel>
                     <StackPanel Width="75" Height="75" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWithPanel="True">
-                        <TextBlock FontSize="20" TextAlignment="Center">D</TextBlock>
-                        <Border BorderBrush="#363636" BorderThickness="2" Height="45" Width="45">
-                            <TextBlock FontSize="20" Text="{Binding register.D, Mode=OneWay}" TextAlignment="Center" />
+                        <TextBlock FontSize="20" TextAlignment="Center" Foreground="White">D</TextBlock>
+                        <Border BorderBrush="#363636" BorderThickness="0" Height="45" Width="45">
+                            <TextBlock FontSize="20" Text="{Binding register.D, Mode=OneWay}" TextAlignment="Center" Foreground="White" />
                         </Border>
                     </StackPanel>
                 </RelativePanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical" Width="600">
-                    <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Procesor List</TextBlock>
+                    <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin" >Procesor List</TextBlock>
                     <ScrollViewer Margin="20">
                         <ListView x:Name="ReadProcessesListView" ItemsSource="{Binding list, Mode=OneWay}" Height="400">
                             <ListView.HeaderTemplate>

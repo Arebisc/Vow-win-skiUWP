@@ -49,6 +49,11 @@ namespace Vow_win_skiUWP.Core.MemoryModule
             }
         }
 
+        public string DisplayProgram(int id)
+        {
+            return _exchangeFile.DisplayProgramData(id);
+        }
+
         private void RemoveFrame(int id, int frameNumber)
         {
             foreach (ProcessPages processPages in ProcessPages)

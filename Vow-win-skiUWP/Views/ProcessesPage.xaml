@@ -13,7 +13,7 @@
                 <StackPanel Orientation="Vertical" Margin="0, 0, 0, 20">
                     <StackPanel Width="600" Height="200" Orientation="Vertical">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                            <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Choose action</TextBlock>
+                            <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin">Choose action</TextBlock>
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Orientation="Vertical">
                                     <Button Click="CPButton_Clicked" Background="#536dfe" Margin="10" >Create new process</Button>
@@ -23,8 +23,8 @@
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                    <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi">Dane PCB</TextBlock>
-                    <StackPanel Width="600" Height="300" Orientation="Horizontal">
+                    <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin">Dane PCB</TextBlock>
+                    <StackPanel Width="600" Height="300" Orientation="Horizontal" Visibility="Collapsed" Name="SPCBStack">
                         <StackPanel Width="150">
                             <TextBlock>PID</TextBlock>
                             <TextBlock>Name</TextBlock>
@@ -55,13 +55,14 @@
                             <TextBlock Text="{Binding SPCB.InstructionCounter, Mode=OneWay}"></TextBlock>
                             <TextBlock Text="{Binding SPCB.ReceiverMessageLock, Mode=OneWay}"></TextBlock>
                             <TextBlock Text="{Binding SPCB.WaitingForStopping, Mode=OneWay}"></TextBlock>
-                            <Button Margin="0 , 10, 0, 0" Click="MemoryBlocks_OnClick" Visibility="Collapsed" Name="MemoryBlocksBtn">Show memory blocks</Button>
+                            <Button Margin="0 , 10, 0, 0" Click="MemoryBlocks_OnClick">Show memory blocks</Button>
+                            <Button Margin="0 , 10, 0, 0" Click="MemoryProgram_OnClicked">Show program</Button>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
             <StackPanel Orientation="Vertical" Width="600">
-                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" >Process List</TextBlock>
+                <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin" >Process List</TextBlock>
                 <ScrollViewer Margin="20">
                     <ListView ItemsSource="{Binding list, Mode=OneWay}" Height="400" SelectionChanged="ProcessList_OnSelectionChanged">
                         <ListView.HeaderTemplate>

@@ -16,7 +16,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="-10,0,10,0" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical" Width="600">
-                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" Text="Waiting Messages" />
+                <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin" Text="Waiting Messages" />
                 <ScrollViewer Margin="20">
                     <ListView x:Name="WaitingMessages" Height="400" ItemsSource="{Binding WaitingMessages, Mode=OneWay}">
                         <ListView.HeaderTemplate>
@@ -41,7 +41,7 @@
                 </ScrollViewer>
             </StackPanel>
             <StackPanel Orientation="Vertical" Width="600">
-                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" Text="Received Messages" />
+                <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin" Text="Received Messages" />
                 <ScrollViewer Margin="20">
                     <ListView x:Name="ReceivedMesseges" Height="400" ItemsSource="{Binding ReceivedMessages, Mode=OneWay}">
                         <ListView.HeaderTemplate>

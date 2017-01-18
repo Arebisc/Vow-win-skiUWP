@@ -19,18 +19,15 @@ namespace Vow_win_skiUWP.Views.Helpers
 {
     public sealed partial class MemoryPopupDialog : ContentDialog
     {
-        public MemoryPopupDialog()
+        public MemoryPopupDialog(string title, string content)
         {
             this.InitializeComponent();
+            this.Title = title;
+            this.Content = content;
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-        }
-
-        public void setText(string text)
-        {
-            PopupContentTb.Text = text;
         }
     }
 }

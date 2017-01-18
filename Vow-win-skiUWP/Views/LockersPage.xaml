@@ -11,7 +11,7 @@
         <Image Source="../Assets/guard.png" x:Name="image2" HorizontalAlignment="Left" Height="290" Margin="247,230,0,0" VerticalAlignment="Top" Width="223"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical" Width="600" >
-                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" Text="Locker Proces" />
+                <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin" Text="Locker Proces" />
                 <StackPanel Height="30"/>
 
 
@@ -34,7 +34,7 @@
 
             </StackPanel>
             <StackPanel Orientation="Vertical" Width="600" HorizontalAlignment="Right">
-                <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Vivaldi" Text="Waiting Proceses List" />
+                <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin" Text="Waiting Proceses List" />
                 <ScrollViewer Margin="20">
                     <ListView x:Name="WaitingProceses" ItemsSource="{Binding LockersWaiting, Mode=OneWay}" Height="400">
                         <ListView.HeaderTemplate>

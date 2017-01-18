@@ -79,13 +79,12 @@ namespace Vow_win_skiUWP.Views
             var selectedItem = listView.ContainerFromIndex(selectedItemIndex) as ListViewItem;
             PCB selectedPCB = selectedItem.Content as PCB;
             model.SPCB = selectedPCB;
-            MemoryBlocksBtn.Visibility = Visibility.Visible;
+            SPCBStack.Visibility = Visibility.Visible;
         }
 
         private async void MemoryBlocks_OnClick(object sender, RoutedEventArgs e)
         {
-            var popup = new MemoryPopupDialog();
-            popup.setText(Memory.GetInstance.DisplayPageList(model.SPCB.PID));
+            var popup = new MemoryPopupDialog("Memory blocks", Memory.GetInstance.DisplayPageList(model.SPCB.PID));
             await popup.ShowAsync();
         }
 
@@ -119,6 +118,12 @@ namespace Vow_win_skiUWP.Views
         private void SleepProcess_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             UserInterface.SleepProcess(model.SPCB.Name);
+        }
+
+        private async void MemoryProgram_OnClicked(object sender, RoutedEventArgs e)
+        {
+            var popup = new MemoryPopupDialog("Program", Memory.GetInstance.DisplayProgram(model.SPCB.PID));
+            await popup.ShowAsync();
         }
     }
 }
