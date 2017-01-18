@@ -8,6 +8,55 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock>Disc</TextBlock>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical" Margin="0, 0, 0, 20">
+                    <StackPanel Width="600" Height="200" Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin">Choose action</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <Button Click="CFButton_OnClick" Background="#536dfe" Margin="10" >Create file</Button>
+                                    <Button Click="CWButton_OnClick" Background="#536dfe" Margin="10">Create file from windows</Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <Button Click="SDBButton_Clicked" Background="#536dfe" Margin="10" >Show data blocks</Button>
+                                    <Button Click="SaveButton_OnClick" Background="#536dfe" Margin="10">Save</Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin">Dane PCB</TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+            <StackPanel Orientation="Vertical" Width="600">
+                <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin" >Process List</TextBlock>
+                <ScrollViewer Margin="20">
+                    <ListView ItemsSource="{Binding list, Mode=OneWay}" Height="400" SelectionChanged="File_OnSelectionChanged">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="File name" Margin="10" FontWeight="Bold" />
+                                    <TextBlock Text="File size" Margin="10" FontWeight="Bold" />
+                                    <TextBlock Text="Creation time" Margin="10" FontWeight="Bold" />
+                                    <TextBlock Text="Data block pointer" Margin="10" FontWeight="Bold" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FileName, Mode=OneWay}" Margin="10" />
+                                    <TextBlock Text="{Binding FileSize, Mode=OneWay}" Margin="10" />
+                                    <TextBlock Text="{Binding CreationDateTime, Mode=OneWay}" Margin="10" />
+                                    <TextBlock Text="{Binding DataBlockPointer, Mode=OneWay}" Margin="10" />
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE107;" Tapped="DeleteFile_OnTapped" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

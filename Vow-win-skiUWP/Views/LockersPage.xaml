@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,-223" >
-        <Image Source="../Assets/guard.png" x:Name="image2" HorizontalAlignment="Left" Height="290" Margin="247,230,0,0" VerticalAlignment="Top" Width="223"/>
+        <Image Source="../Assets/guard.png" x:Name="image2" HorizontalAlignment="Left" Height="290" Margin="247,274,0,0" VerticalAlignment="Top" Width="223"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical" Width="600" >
                 <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin" Text="Locker Proces" />

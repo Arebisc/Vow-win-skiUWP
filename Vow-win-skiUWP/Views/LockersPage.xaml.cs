@@ -34,7 +34,6 @@ namespace Vow_win_skiUWP.Views
             this.DataContext = WaitingList;   
                   
         }   
-             
     }
 
     public class LockersCollection : INotifyPropertyChanged
