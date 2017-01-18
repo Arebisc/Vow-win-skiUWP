@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vow_win_skiUWP.Core.FileSystem
 {
-    class File
+    public class File
     {
         public string FileName { get; private set; }
         public int FileSize { get; private set; }
