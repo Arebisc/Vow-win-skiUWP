@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
         private Block[] _blocks;
         private BitArray _occupiedBlocksArray;
         private Folder _rootFolder;
+        public ObservableCollection <File> FileList { get; private set; }
 
 
         public static void InitDisc(string numberOfBlocks)
@@ -46,6 +48,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             _blocks = new Block[_numberOfBlocks].Select(b => new Block()).ToArray(); //initialize elements in array
             _occupiedBlocksArray = new BitArray(_numberOfBlocks);
             _rootFolder = new Folder();
+            FileList = new ObservableCollection<File>(_rootFolder.FilesInDirectory);
         }
 
         private Disc(int numberOfblocks)
@@ -55,6 +58,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             _blocks = new Block[_numberOfBlocks].Select(b => new Block()).ToArray(); //initialize elements in array
             _occupiedBlocksArray = new BitArray(_numberOfBlocks);
             _rootFolder = new Folder();
+            FileList = new ObservableCollection<File>(_rootFolder.FilesInDirectory);
         }
 
         //=================================================================================================================================
@@ -119,7 +123,6 @@ namespace Vow_win_skiUWP.Core.FileSystem
         //=================================================================================================================================
         public bool CreateFile(string nameForNewFile, string data)
         {
-
             if (data.Any(d => d > 255))
             {
                 Console.WriteLine("Błąd: dane zawierają niedozwolony znak");
@@ -198,6 +201,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             }
 
             _rootFolder.FilesInDirectory.Add(new File(nameForNewFile, newFileSize, blocksToBeOccupied[0]));
+            FileList = new ObservableCollection<File>(_rootFolder.FilesInDirectory);
             Console.WriteLine("Nowy plik \"" + nameForNewFile + "\" został utworzony w folderze root\\");
             return true;
         }
@@ -254,6 +258,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             _rootFolder.FilesInDirectory.RemoveAll(x => x.FileName == filenameToDelete);
 
             Console.WriteLine("Plik \"" + filenameToDelete + "\" został usunięty");
+            FileList = new ObservableCollection<File>(_rootFolder.FilesInDirectory);
             return true;
         }
 
@@ -383,5 +388,91 @@ namespace Vow_win_skiUWP.Core.FileSystem
         }
 
         //=================================================================================================================================
+
+        public bool SaveToFile(string filenameToOverwrite, string data)
+        {
+            File fileToSave = _rootFolder.FilesInDirectory.Single(x => x.FileName == filenameToOverwrite);
+
+            if (data.Any(d => d > 255))
+            {
+                Console.WriteLine("Błąd: dane zawierają niedozwolony znak");
+                return false;
+            }
+
+            int blocksToBeFreed = 0;
+            foreach (var datablocknr in _blocks[fileToSave.DataBlockPointer].BlockData)
+            {
+                blocksToBeFreed++;
+                if (datablocknr == 255) break;
+            }
+
+            int freeBlocks = (from bool bit in _occupiedBlocksArray where !bit select bit).Count() + blocksToBeFreed;
+
+
+            int dataToSaveSize = data.Length;
+
+            int blocksneeded = dataToSaveSize / _blockSize + 1;
+            if (dataToSaveSize % _blockSize > 0) blocksneeded++;
+            if (blocksneeded > _blockSize + 1)
+            {
+                Console.WriteLine("Błąd: Przekroczono maksymalny rozmiar pliku");
+                Console.WriteLine("Wymagany rozmiar: " + dataToSaveSize + " B\tMaksymalny dozwolony rozmiar: " +
+                                  _blockSize * _blockSize + " B");
+                return false;
+            }
+
+            if (blocksneeded > freeBlocks)
+            {
+                Console.WriteLine("Za mało wolnych bloków by zapisać plik");
+                Console.WriteLine("Wymagane: " + blocksneeded + "\tDostępne: " + freeBlocks);
+                return false;
+            }
+            //gut to go
+
+            foreach (var datablocknr in _blocks[fileToSave.DataBlockPointer].BlockData)
+            {
+                if (datablocknr == 255) break;
+                _occupiedBlocksArray[datablocknr] = false;
+            }
+
+            int[] blocksToBeOccupied = new int[blocksneeded];
+            for (int i = 0; i < blocksneeded; i++)
+            {
+                for (int j = 0; j < _numberOfBlocks; j++)
+                {
+                    if (_occupiedBlocksArray[j] == false)
+                    {
+                        blocksToBeOccupied[i] = j;
+                        _occupiedBlocksArray[j] = true;
+                        break;
+                    }
+                }
+            }
+
+            //fills index block
+            _blocks[blocksToBeOccupied[0]].SetBlank();
+            for (int i = 0, j = 1; j < blocksneeded; i++, j++)
+            {
+                _blocks[blocksToBeOccupied[0]].BlockData[i] = Convert.ToByte(blocksToBeOccupied[j]);
+            }
+
+            //fills data blocks
+            int inBlockPointer = 0, blockPointer = 1;
+            while (data != "")
+            {
+                if (inBlockPointer == _blockSize)
+                {
+                    inBlockPointer = 0;
+                    blockPointer++;
+                }
+                _blocks[blocksToBeOccupied[blockPointer]].BlockData[inBlockPointer] = Convert.ToByte(data[0]);
+                inBlockPointer++;
+
+                data = data.Substring(1);
+            }
+
+            Console.WriteLine("Plik \"" + filenameToOverwrite + "\" został zapisany");
+            return true;
+        }
     }
 }
