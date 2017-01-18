@@ -382,7 +382,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
                 data = data.Substring(1);
             }
-            fileToAppend.Append(allBytesToAppend);
+            fileToAppend.SetSize(allBytesToAppend + fileToAppend.FileSize);
             Console.WriteLine(allBytesToAppend + " B zostało dopisane do pliku \"" + filenameToAppend + "\"");
             return true;
         }
@@ -471,6 +471,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
                 data = data.Substring(1);
             }
 
+            fileToSave.SetSize(dataToSaveSize);
             Console.WriteLine("Plik \"" + filenameToOverwrite + "\" został zapisany");
             return true;
         }
