@@ -128,5 +128,11 @@ namespace Vow_win_skiUWP.Views
             var popup = new MemoryPopupDialog("Program", Memory.GetInstance.DisplayProgram(model.SPCB.PID));
             await popup.ShowAsync();
         }
+
+        private void WakeupProcess_Click(object sender, RoutedEventArgs e)
+        {
+            if(model.SPCB != null)
+                UserInterface.ResumeProcess(model.SPCB.Name);
+        }
     }
 }

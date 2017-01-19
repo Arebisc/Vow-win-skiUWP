@@ -28,7 +28,7 @@ namespace Vow_win_skiUWP.Views.Helpers
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             ListBoxItem selectedFile = FileList.SelectedItem as ListBoxItem;
-            UserInterface.CreateProcess(ProcessName.Text, selectedFile.Content.ToString());
+            if(selectedFile != null) UserInterface.CreateProcess(ProcessName.Text, selectedFile.Content.ToString());
         }
     }
 }
