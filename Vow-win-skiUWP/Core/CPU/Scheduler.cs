@@ -52,7 +52,7 @@ namespace Vow_win_skiUWP.Core.CPU
 
         public void RemoveProcess(PCB process)
         {
-            foreach (var item in WaitingForProcessor)
+            foreach (var item in WaitingForProcessor.ToList())
             {
                 if(item.PID == process.PID)
                     WaitingForProcessor.Remove(item);
@@ -61,7 +61,7 @@ namespace Vow_win_skiUWP.Core.CPU
 
         public PCB SearchForProcessInList(PCB process)
         {
-            foreach (var item in WaitingForProcessor)
+            foreach (var item in WaitingForProcessor.ToList())
             {
                 if (item.PID == process.PID)
                     return item;
@@ -79,7 +79,7 @@ namespace Vow_win_skiUWP.Core.CPU
         {
             string result = string.Empty;
 
-            foreach (var elem in WaitingForProcessor)
+            foreach (var elem in WaitingForProcessor.ToList())
             {
                 result += (elem.PID + " " + elem.Name + "\n");
             }
@@ -105,7 +105,7 @@ namespace Vow_win_skiUWP.Core.CPU
         {
             if (!ListEmpty())
             {
-                foreach (var pcb in WaitingForProcessor)
+                foreach (var pcb in WaitingForProcessor.ToList())
                 {
                     if (pcb.State != ProcessState.Running && !pcb.IsIdleProcess())
                         pcb.WaitingForProcessorTime++;
@@ -117,7 +117,7 @@ namespace Vow_win_skiUWP.Core.CPU
         {
             if (!ListEmpty())
             {
-                foreach (var pcb in WaitingForProcessor)
+                foreach (var pcb in WaitingForProcessor.ToList())
                 {
                     if (pcb.State != ProcessState.Running && !pcb.IsIdleProcess())
                         pcb.WaitingForProcessorTime--;
@@ -129,7 +129,7 @@ namespace Vow_win_skiUWP.Core.CPU
         {
             if (!ListEmpty())
             {
-                foreach (var pcb in WaitingForProcessor)
+                foreach (var pcb in WaitingForProcessor.ToList())
                 {
                     if (pcb.WaitingForProcessorTime % 3 == 0 && pcb.State != ProcessState.Running &&
                         !pcb.IsIdleProcess() && pcb.CurrentPriority - 1 >= 0)
