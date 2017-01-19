@@ -120,8 +120,6 @@
     <Compile Include="Core\Processes\PCBFields.cs" />
     <Compile Include="Core\Processes\PCBMethods.cs" />
     <Compile Include="Core\Processes\UserInterface.cs" />
-    <Compile Include="Core\OldCoreProgram.cs" />
-    <Compile Include="Core\Shell.cs" />
     <Compile Include="Database\ConnectionHolder.cs" />
     <Compile Include="Database\ORM\Entities\Entity.cs" />
     <Compile Include="Database\ORM\Entities\SystemExceptions.cs" />
