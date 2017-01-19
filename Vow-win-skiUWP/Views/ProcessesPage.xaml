@@ -19,7 +19,10 @@
                                     <Button Click="CPButton_Clicked" Background="#536dfe" Margin="10" >Create new process</Button>
                                     <Button Click="CppButton_OnClick" Background="#536dfe" Margin="10">Change process priority</Button>
                                 </StackPanel>
-                                <Button Click="NprAllButton_OnClick" Background="#536dfe" Margin="10">Run all new processess</Button>
+                                <StackPanel>
+                                    <Button Click="NprAllButton_OnClick" Background="#536dfe" Margin="10">Run all new processess</Button>
+                                    <Button Click="WakeupProcess_Click" Background="#536dfe" Margin="10">Wake up process</Button>
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
@@ -45,9 +48,16 @@
                             <TextBlock Text="{Binding SPCB.WaitingForProcessorTime, Mode=OneWay}"></TextBlock>
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontWeight="Bold">A:</TextBlock>
                                     <TextBlock Text="{Binding SPCB.Registers.A, Mode=OneWay}"></TextBlock>
+                                    <TextBlock Text=";"></TextBlock>
+                                    <TextBlock FontWeight="Bold">B:</TextBlock>
                                     <TextBlock Text="{Binding SPCB.Registers.B, Mode=OneWay}"></TextBlock>
+                                    <TextBlock Text=";"></TextBlock>
+                                    <TextBlock FontWeight="Bold">C:</TextBlock>
                                     <TextBlock Text="{Binding SPCB.Registers.C, Mode=OneWay}"></TextBlock>
+                                    <TextBlock Text=";"></TextBlock>
+                                    <TextBlock FontWeight="Bold">D:</TextBlock>
                                     <TextBlock Text="{Binding SPCB.Registers.D, Mode=OneWay}"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
