@@ -77,9 +77,12 @@ namespace Vow_win_skiUWP.Views
             ListView listView = sender as ListView;
             int selectedItemIndex = listView.SelectedIndex;
             var selectedItem = listView.ContainerFromIndex(selectedItemIndex) as ListViewItem;
-            PCB selectedPCB = selectedItem.Content as PCB;
-            model.SPCB = selectedPCB;
-            SPCBStack.Visibility = Visibility.Visible;
+            if (selectedItem != null)
+            {
+                PCB selectedPCB = selectedItem.Content as PCB;
+                model.SPCB = selectedPCB;
+                SPCBStack.Visibility = Visibility.Visible;
+            }
         }
 
         private async void MemoryBlocks_OnClick(object sender, RoutedEventArgs e)

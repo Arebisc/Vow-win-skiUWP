@@ -14,8 +14,8 @@ namespace Vow_win_skiUWP.Core.IPC
     public class PipeServer
     {
         private static PipeServer _instance;
-        private List<Message> Messages;
-        private List<Message> History;
+        //private List<Message> Messages;
+        //private List<Message> History;
 
         private ObservableCollection<Message> WaitingMessages;
         private ObservableCollection<Message> ReceivedMessages;
@@ -38,8 +38,8 @@ namespace Vow_win_skiUWP.Core.IPC
 
         public void Build()
         {
-            Messages = new List<Message>();
-            History = new List<Message>();
+            //Messages = new List<Message>();
+            //History = new List<Message>();
             WaitingMessages = new ObservableCollection<Message>();
             ReceivedMessages = new ObservableCollection<Message>();
         }
@@ -58,23 +58,33 @@ namespace Vow_win_skiUWP.Core.IPC
 
         public void SendMessage(string message, string receiver, string sender)
         {
-            Messages.Add(new Message(message, receiver, sender));
-            History.Add(new Message(message, receiver, sender));
+            //Messages.Add(new Message(message, receiver, sender));
+            //History.Add(new Message(message, receiver, sender));
             WaitingMessages.Add(new Message(message, receiver, sender));
         }
 
 
         public bool ReadMessage(string receiver)
         {
-            if (Messages.All(x => x.GetReceiverId != receiver))
+            if (WaitingMessages.All(x => x.GetReceiverId != receiver))
             {
                 return false;
             }
             else
             {
-                ReceivedMessages.Add(Messages.Find(x => x.GetReceiverId == receiver));
-                WaitingMessages.Remove(Messages.Find(x => x.GetReceiverId == receiver));
-                Messages.Remove(Messages.Find(x => x.GetReceiverId == receiver).PrintMessage());
+                foreach (var item in WaitingMessages)
+                {
+                    if (item.GetReceiverId == receiver)
+                    {
+                        ReceivedMessages.Add(item);
+                        WaitingMessages.Remove(item);
+                        break;
+                    }
+                }
+
+              //  ReceivedMessages.Add(WaitingMessages);
+              //  WaitingMessages.Remove(Messages.Find(x => x.GetReceiverId == receiver));
+              ////  Messages.Remove(Messages.Find(x => x.GetReceiverId == receiver));
                 return true;
             }
         }
