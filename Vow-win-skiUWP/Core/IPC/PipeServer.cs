@@ -14,9 +14,7 @@ namespace Vow_win_skiUWP.Core.IPC
     public class PipeServer
     {
         private static PipeServer _instance;
-        //private List<Message> Messages;
-        //private List<Message> History;
-
+      
         private ObservableCollection<Message> WaitingMessages;
         private ObservableCollection<Message> ReceivedMessages;
 
@@ -38,8 +36,7 @@ namespace Vow_win_skiUWP.Core.IPC
 
         public void Build()
         {
-            //Messages = new List<Message>();
-            //History = new List<Message>();
+           
             WaitingMessages = new ObservableCollection<Message>();
             ReceivedMessages = new ObservableCollection<Message>();
         }
@@ -58,8 +55,7 @@ namespace Vow_win_skiUWP.Core.IPC
 
         public void SendMessage(string message, string receiver, string sender)
         {
-            //Messages.Add(new Message(message, receiver, sender));
-            //History.Add(new Message(message, receiver, sender));
+           
             WaitingMessages.Add(new Message(message, receiver, sender));
         }
 
@@ -80,11 +76,7 @@ namespace Vow_win_skiUWP.Core.IPC
                         WaitingMessages.Remove(item);
                         break;
                     }
-                }
-
-              //  ReceivedMessages.Add(WaitingMessages);
-              //  WaitingMessages.Remove(Messages.Find(x => x.GetReceiverId == receiver));
-              ////  Messages.Remove(Messages.Find(x => x.GetReceiverId == receiver));
+                }             
                 return true;
             }
         }
