@@ -136,6 +136,9 @@
     <Compile Include="Views\CPUPage.xaml.cs">
       <DependentUpon>CPUPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Credits.xaml.cs">
+      <DependentUpon>Credits.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DiscPage.xaml.cs">
       <DependentUpon>DiscPage.xaml</DependentUpon>
     </Compile>
@@ -214,6 +217,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CPUPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Credits.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
