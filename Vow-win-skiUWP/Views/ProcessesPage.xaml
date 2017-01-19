@@ -45,9 +45,16 @@
                             <TextBlock Text="{Binding SPCB.WaitingForProcessorTime, Mode=OneWay}"></TextBlock>
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontWeight="Bold">A:</TextBlock>
                                     <TextBlock Text="{Binding SPCB.Registers.A, Mode=OneWay}"></TextBlock>
+                                    <TextBlock Text=";"></TextBlock>
+                                    <TextBlock FontWeight="Bold">B:</TextBlock>
                                     <TextBlock Text="{Binding SPCB.Registers.B, Mode=OneWay}"></TextBlock>
+                                    <TextBlock Text=";"></TextBlock>
+                                    <TextBlock FontWeight="Bold">C:</TextBlock>
                                     <TextBlock Text="{Binding SPCB.Registers.C, Mode=OneWay}"></TextBlock>
+                                    <TextBlock Text=";"></TextBlock>
+                                    <TextBlock FontWeight="Bold">D:</TextBlock>
                                     <TextBlock Text="{Binding SPCB.Registers.D, Mode=OneWay}"></TextBlock>
                                 </StackPanel>
                             </StackPanel>

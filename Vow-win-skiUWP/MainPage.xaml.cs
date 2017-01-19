@@ -68,15 +68,15 @@ namespace Vow_win_skiUWP
             }
         }
 
-        private async void NextOrderButton_OnClick(object sender, RoutedEventArgs e)
+        private void NextOrderButton_OnClick(object sender, RoutedEventArgs e)
         {
             Interpreter.GetInstance.InterpretOrder();
         }
 
-        private async void RunToEnd_OnClick(object sender, RoutedEventArgs e)
+        private void RunToEnd_OnClick(object sender, RoutedEventArgs e)
         {
-            var popup = new MemoryPopupDialog("ups", "jeszcze nie działam :(");
-            await popup.ShowAsync();
+            while (!Scheduler.GetInstance.ListEmpty())
+                Interpreter.GetInstance.InterpretOrder();
         }
     }
 }
