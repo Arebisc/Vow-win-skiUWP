@@ -24,7 +24,7 @@ namespace Vow_win_skiUWP.Log
             logTb = mainPage.FindName("logpanel") as TextBlock;
         }
 
-        public static void AddLog(string text)
+        public void AddLog(string text)
         {
             logTb.Text = text;
         }

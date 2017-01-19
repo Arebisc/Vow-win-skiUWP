@@ -19,6 +19,7 @@ using Vow_win_skiUWP.Core.IPC;
 using Vow_win_skiUWP.Database.ORM;
 using Vow_win_skiUWP.Database.ORM.Entities;
 using Vow_win_skiUWP.Core.Processes;
+using Vow_win_skiUWP.Log;
 
 namespace Vow_win_skiUWP
 {
