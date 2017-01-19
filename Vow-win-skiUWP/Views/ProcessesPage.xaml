@@ -19,7 +19,10 @@
                                     <Button Click="CPButton_Clicked" Background="#536dfe" Margin="10" >Create new process</Button>
                                     <Button Click="CppButton_OnClick" Background="#536dfe" Margin="10">Change process priority</Button>
                                 </StackPanel>
-                                <Button Click="NprAllButton_OnClick" Background="#536dfe" Margin="10">Run all new processess</Button>
+                                <StackPanel>
+                                    <Button Click="NprAllButton_OnClick" Background="#536dfe" Margin="10">Run all new processess</Button>
+                                    <Button Click="WakeupProcess_Click" Background="#536dfe" Margin="10">Wake up process</Button>
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
