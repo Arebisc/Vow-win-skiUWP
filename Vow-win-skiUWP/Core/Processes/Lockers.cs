@@ -50,12 +50,11 @@ namespace Vow_win_skiUWP.Core.Processes
                         {
                             if (name == i.Name)
                             {
-                                proces = i;
+                                i.StopWaiting();
+                                waiting.Remove(i);
                                 break;
                             }
                         }
-                        proces.StopWaiting();
-                        this.Name = proces.Name;
                     }
                 }
                 else if (waiting.Count() == 0)
