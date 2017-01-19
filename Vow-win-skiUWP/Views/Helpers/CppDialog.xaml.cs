@@ -28,7 +28,7 @@ namespace Vow_win_skiUWP.Views.Helpers
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             ListBoxItem selectedList = PriorityList.SelectedItem as ListBoxItem;
-            UserInterface.ChangePriority(OldProcessName.Text, selectedList.Content.ToString());
+            if(selectedList != null) UserInterface.ChangePriority(OldProcessName.Text, selectedList.Content.ToString());
         }
     }
 }
