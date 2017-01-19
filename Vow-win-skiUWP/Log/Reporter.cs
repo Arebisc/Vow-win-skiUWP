@@ -26,7 +26,7 @@ namespace Vow_win_skiUWP.Log
 
         public static void AddLog(string text)
         {
-            logTb.Text = text + '\n' + logTb.Text;
+            logTb.Text = text;
         }
         
         public static void Report(Exception e)
