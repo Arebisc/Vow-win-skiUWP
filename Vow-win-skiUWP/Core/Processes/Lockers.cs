@@ -33,7 +33,7 @@ namespace Vow_win_skiUWP.Core.Processes
             else
             {
                 waiting.Add(Proces);
-                proces.WaitForSomething();
+                Proces.WaitForSomething();
                 Proces.InstructionCounter--;
             }
         }
@@ -62,14 +62,6 @@ namespace Vow_win_skiUWP.Core.Processes
                 {
                     if (Check(name))
                     {
-                        foreach (var i in waiting)
-                        {
-                            if (name == i.Name)
-                            {
-                                proces = i;
-                                break;
-                            }
-                        }
                         proces.StopWaiting();
                         open = 0;
                     }
