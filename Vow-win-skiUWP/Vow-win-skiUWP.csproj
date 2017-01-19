@@ -139,6 +139,9 @@
     <Compile Include="Views\DiscPage.xaml.cs">
       <DependentUpon>DiscPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Helpers\CFDialog.xaml.cs">
+      <DependentUpon>CFDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Helpers\CPDialog.xaml.cs">
       <DependentUpon>CPDialog.xaml</DependentUpon>
     </Compile>
@@ -218,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DiscPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Helpers\CFDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

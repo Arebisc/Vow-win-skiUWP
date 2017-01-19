@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Vow_win_skiUWP.Core.FileSystem;
 using Vow_win_skiUWP.Core.IPC;
 using Vow_win_skiUWP.Database.ORM;
 using Vow_win_skiUWP.Database.ORM.Entities;
@@ -30,6 +31,7 @@ namespace Vow_win_skiUWP
         {
             LockersHolder.InitLockers();
             PipeServer.InitServer();
+            Disc.InitDisc();
             PCB.CreateIdleProcess();
         }
 
