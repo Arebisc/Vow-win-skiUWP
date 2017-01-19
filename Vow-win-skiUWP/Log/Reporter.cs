@@ -13,23 +13,22 @@ namespace Vow_win_skiUWP.Log
 {
     class Reporter
     {
+        private Frame rootFrame;
+        private Page mainPage;
         private static TextBlock logTb;
-        public static AddLogToMainPage addLog;
 
-        public Reporter(){ }
-
-        //public static void InitStaticReporter()
-        //{
-        //    Frame rootFrame = Window.Current.Content as Frame;
-        //    Page mainPage = rootFrame.Content as MainPage;
-        //    logTb = mainPage.FindName("LogTb") as TextBlock;
-        //}
+        public Reporter()
+        {
+            rootFrame = Window.Current.Content as Frame;
+            mainPage = rootFrame.Content as MainPage;
+            logTb = mainPage.FindName("logpanel") as TextBlock;
+        }
 
         public static void AddLog(string text)
         {
             logTb.Text = text + '\n' + logTb.Text;
         }
-
+        
         public static void Report(Exception e)
         {
             Console.WriteLine(e.Message + " " + e.StackTrace);
