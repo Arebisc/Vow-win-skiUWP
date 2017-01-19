@@ -9,7 +9,7 @@ using Vow_win_skiUWP.Annotations;
 
 namespace Vow_win_skiUWP.Core.FileSystem
 {
-    public class File : INotifyPropertyChanged
+    public class File : INotifyPropertyChanged, IEquatable<File>
     {
         private string _fileName;
         private int _fileSize;
@@ -74,6 +74,33 @@ namespace Vow_win_skiUWP.Core.FileSystem
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public static bool operator ==(File a, File b)
+        {
+            if (System.Object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            if (((object)a == null) || ((object)b == null))
+            {
+                return false;
+            }
+
+            if (a.FileName == b.FileName)
+                return true;
+            return false;
+        }
+
+        public static bool operator !=(File a, File b)
+        {
+            return !(a == b);
+        }
+
+        public bool Equals(File other)
+        {
+            return this == other;
         }
     }
 }

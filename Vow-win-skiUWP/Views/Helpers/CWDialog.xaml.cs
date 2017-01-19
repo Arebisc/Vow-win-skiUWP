@@ -12,22 +12,22 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Vow_win_skiUWP.Core.FileSystem;
 
 // The Content Dialog item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Vow_win_skiUWP.Views.Helpers
 {
-    public sealed partial class MemoryPopupDialog : ContentDialog
+    public sealed partial class CWDialog : ContentDialog
     {
-        public MemoryPopupDialog(string title, string content)
+        public CWDialog()
         {
             this.InitializeComponent();
-            this.Title = title;
-            this.PopupContentTb.Text = content;
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            Disc.GetDisc.CreateFromWindows(FileName.Text, FileNameFromWindows.Text);
         }
     }
 }

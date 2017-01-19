@@ -12,7 +12,7 @@
     <Grid>
         
         <StackPanel Orientation="Vertical">
-            <ScrollViewer ZoomMode="Enabled" Name="ScrollTb" VerticalScrollMode="Auto" Height="600">
+            <ScrollViewer ZoomMode="Enabled" Name="ScrollTb" VerticalScrollMode="Auto" Height="500">
                 <TextBlock VerticalAlignment="Stretch" Margin="10"
                                         HorizontalAlignment="Stretch"
                                         TextWrapping="Wrap"

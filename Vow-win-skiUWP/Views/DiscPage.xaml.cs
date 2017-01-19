@@ -23,26 +23,13 @@ using Vow_win_skiUWP.Views.Helpers;
 
 namespace Vow_win_skiUWP.Views
 {
-    public class DiscPageModel : INotifyPropertyChanged
+    public class DiscPageModel
     {
-        public ObservableCollection<Vow_win_skiUWP.Core.FileSystem.File> _list { get; set; } = Disc.GetDisc.FileList;
+        public ObservableCollection<Vow_win_skiUWP.Core.FileSystem.File> list { get; set; }
+            = Disc.GetDisc.RootFolder.FilesInDirectory;
 
-        public ObservableCollection<Vow_win_skiUWP.Core.FileSystem.File> list
-        {
-            get { return _list; }
-            set
-            {
-                _list = value;
-                OnPropertyChanged();
-            }
-        }
+        public Vow_win_skiUWP.Core.FileSystem.File selectedFile = null;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 
     /// <summary>
@@ -50,9 +37,13 @@ namespace Vow_win_skiUWP.Views
     /// </summary>
     public sealed partial class DiscPage : Page
     {
+        private DiscPageModel model;
+
         public DiscPage()
         {
             this.InitializeComponent();
+            model = new DiscPageModel();
+            this.DataContext = model;
         }
 
         private async void CFButton_OnClick(object sender, RoutedEventArgs e)
@@ -61,21 +52,23 @@ namespace Vow_win_skiUWP.Views
             await dialog.ShowAsync();
         }
         
-        private void CWButton_OnClick(object sender, RoutedEventArgs e)
+        private async void CWButton_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var dialog = new CWDialog();
+            await dialog.ShowAsync();
         }
 
-        private void SDBButton_Clicked(object sender, RoutedEventArgs e)
+        private async void SDBButton_Clicked(object sender, RoutedEventArgs e)
         {
-            //var dialog = new MemoryPopupDialog("Data blocks", Disc.GetDisc.ShowDataBlocks());
-            //await dialog.ShowAsync();
-            throw new NotImplementedException();
+            var dialog = new MemoryPopupDialog("Data blocks", Disc.GetDisc.ShowDataBlocks());
+            await dialog.ShowAsync();
         }
 
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if(model.list.ToList().Count != 0)
+                if(model.selectedFile != null)
+                    Disc.GetDisc.SaveToFile(model.selectedFile.FileName, FileContent.Text);
         }
 
         private void File_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -83,12 +76,18 @@ namespace Vow_win_skiUWP.Views
             ListView listView = sender as ListView;
             int selectedItemIndex = listView.SelectedIndex;
             var selectedItem = listView.ContainerFromIndex(selectedItemIndex) as ListViewItem;
-            Vow_win_skiUWP.Core.FileSystem.File selectedFile = selectedItem.Content as Vow_win_skiUWP.Core.FileSystem.File;
+            if (selectedItem != null)
+            {
+                Vow_win_skiUWP.Core.FileSystem.File selectedFile = selectedItem.Content as Vow_win_skiUWP.Core.FileSystem.File;
+                model.selectedFile = selectedFile;
+                FileContent.Text = Disc.GetDisc.GetFileData(selectedFile.FileName);
+            }
         }
 
         private void DeleteFile_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Disc.GetDisc.DeleteFile(model.selectedFile.FileName);
+            this.FileContent.Text = string.Empty;
         }
     }
 }

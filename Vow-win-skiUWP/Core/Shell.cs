@@ -165,7 +165,7 @@ namespace Vow_win_skiUWP.Core
                         Disc.GetDisc.AppendToFile(p1, p2);
                         break;
                     case "SDB":
-                        Disc.GetDisc.ShowDataBlocks(p1);
+                        Disc.GetDisc.ShowDataBlocks();
                         break;
                     default:
                         Console.WriteLine("Nieznane polecenie\nWpisz \"help\" aby wyświetlić listę dostępnych poleceń");

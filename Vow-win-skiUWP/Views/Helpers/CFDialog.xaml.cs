@@ -29,5 +29,10 @@ namespace Vow_win_skiUWP.Views.Helpers
         {
             Disc.GetDisc.CreateFile(ProcessName.Text, string.Empty);
         }
+
+        public void setTitle(string text)
+        {
+            this.Title = text;
+        }
     }
 }

@@ -16,8 +16,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
         private static int _numberOfBlocks;
         private Block[] _blocks;
         private BitArray _occupiedBlocksArray;
-        private Folder _rootFolder;
-        public ObservableCollection <File> FileList { get; private set; }
+        public Folder RootFolder;
 
 
         public static void InitDisc(string numberOfBlocks)
@@ -47,8 +46,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             _numberOfBlocks = 32;
             _blocks = new Block[_numberOfBlocks].Select(b => new Block()).ToArray(); //initialize elements in array
             _occupiedBlocksArray = new BitArray(_numberOfBlocks);
-            _rootFolder = new Folder();
-            FileList = new ObservableCollection<File>(_rootFolder.FilesInDirectory);
+            RootFolder = new Folder();
         }
 
         private Disc(int numberOfblocks)
@@ -57,8 +55,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
             _numberOfBlocks = numberOfblocks;
             _blocks = new Block[_numberOfBlocks].Select(b => new Block()).ToArray(); //initialize elements in array
             _occupiedBlocksArray = new BitArray(_numberOfBlocks);
-            _rootFolder = new Folder();
-            FileList = new ObservableCollection<File>(_rootFolder.FilesInDirectory);
+            RootFolder = new Folder();
         }
 
         //=================================================================================================================================
@@ -66,14 +63,14 @@ namespace Vow_win_skiUWP.Core.FileSystem
         public void ShowDirectory()
         {
             Console.WriteLine("Zawartość folderu root\\\n");
-            if (_rootFolder.FilesInDirectory.Count == 0)
+            if (RootFolder.FilesInDirectory.Count == 0)
             {
                 Console.WriteLine("Folder jest pusty.");
                 return;
             }
 
             Console.WriteLine("Nazwa pliku".PadRight(17) + "Rozmiar\t" + "Data utworzenia\t\t" + "Nr bloku indeksowego");
-            foreach (var file in _rootFolder.FilesInDirectory)
+            foreach (var file in RootFolder.FilesInDirectory)
             {
                 Console.WriteLine(file.FileName.PadRight(17) + file.FileSize + " B\t\t" + file.CreationDateTime + "\t" + file.DataBlockPointer);
             }
@@ -81,43 +78,35 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
         //=================================================================================================================================
 
-        public void ShowDataBlocks(string modulo)
+        public string ShowDataBlocks()
         {
-            int mod, temp = 0;
-            if (!int.TryParse(modulo, out mod))
-                mod = _numberOfBlocks;
+            StringBuilder result = new StringBuilder();
+
 
             int freeblocks = (from bool bit in _occupiedBlocksArray where !bit select bit).Count();
             int occupiedblocks = (from bool bit in _occupiedBlocksArray where bit select bit).Count();
 
-            Console.WriteLine("\nIlość bloków: " + _numberOfBlocks + "\tRozmiar bloku: " + _blockSize + " B");
-            Console.WriteLine("Pojemność: " + _numberOfBlocks * _blockSize + " B");
-            Console.WriteLine("Wolne miejsce: " + freeblocks * _blockSize + " B (" +
+            result.Append("\nIlość bloków: " + _numberOfBlocks + "\tRozmiar bloku: " + _blockSize + " B\n");
+            result.Append("Pojemność: " + _numberOfBlocks * _blockSize + " B\n");
+            result.Append("Wolne miejsce: " + freeblocks * _blockSize + " B (" +
                               (float)freeblocks / _numberOfBlocks * 100 + "%)\tZajęte miejsce: " +
-                              occupiedblocks * _blockSize + " B (" + (float)occupiedblocks / _numberOfBlocks * 100 + "%)");
-            Console.WriteLine("Wolne bloki: " + freeblocks + "\t\tZajęte bloki: " + occupiedblocks + "\n");
+                              occupiedblocks * _blockSize + " B (" + (float)occupiedblocks / _numberOfBlocks * 100 + "%)\n");
+            result.Append("Wolne bloki: " + freeblocks + "\t\tZajęte bloki: " + occupiedblocks + "\n\n");
 
             for (var i = 0; i < _numberOfBlocks; i++)
             {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("[Blok nr " + i + "]: ");
-                Console.Write(_occupiedBlocksArray[i] ? "Zajęty\n" : "Wolny\n");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                //Console.ForegroundColor = ConsoleColor.White;
+                result.Append("\n[Blok nr " + i + "]: ");
+                result.Append(_occupiedBlocksArray[i] ? "Zajęty\n" : "Wolny\n");
+                //Console.ForegroundColor = ConsoleColor.Gray;
 
                 foreach (byte t in _blocks[i].BlockData)
                 {
-                    Console.Write(t.ToString().PadRight(5));
+                    result.Append(t.ToString().PadRight(5));
                 }
-                temp++;
-                if (temp == mod)
-                {
-                    if (mod == _numberOfBlocks) continue;
-                    temp = 0;
-                    Console.Write("Naciśnij dowolny klawisz...");
-                    Console.ReadKey();
-                    Console.WriteLine();
-                }
+
             }
+            return result.ToString();
         }
 
         //=================================================================================================================================
@@ -131,7 +120,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
             int newFileSize = data.Length;
 
-            if (_rootFolder.FilesInDirectory.Any(file => file.FileName == nameForNewFile))
+            if (RootFolder.FilesInDirectory.Any(file => file.FileName == nameForNewFile))
             {
                 Console.WriteLine("Błąd: Plik \"" + nameForNewFile + "\" już istnieje");
                 return false;
@@ -200,8 +189,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
                 data = data.Substring(1);
             }
 
-            _rootFolder.FilesInDirectory.Add(new File(nameForNewFile, newFileSize, blocksToBeOccupied[0]));
-            FileList = new ObservableCollection<File>(_rootFolder.FilesInDirectory);
+            RootFolder.FilesInDirectory.Add(new File(nameForNewFile, newFileSize, blocksToBeOccupied[0]));
             Console.WriteLine("Nowy plik \"" + nameForNewFile + "\" został utworzony w folderze root\\");
             return true;
         }
@@ -210,13 +198,13 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
         public string GetFileData(string fileToOpen)
         {
-            if (_rootFolder.FilesInDirectory.All(x => x.FileName != fileToOpen))
+            if (RootFolder.FilesInDirectory.All(x => x.FileName != fileToOpen))
             {
                 Console.WriteLine("Błąd: Wskazany plik \"" + fileToOpen + "\" nie istnieje w folderze root\\");
                 return null;
             }
-            int indexBlock = _rootFolder.FilesInDirectory.Single(x => x.FileName == fileToOpen).DataBlockPointer;
-            int length = _rootFolder.FilesInDirectory.Single(x => x.FileName == fileToOpen).FileSize;
+            int indexBlock = RootFolder.FilesInDirectory.Single(x => x.FileName == fileToOpen).DataBlockPointer;
+            int length = RootFolder.FilesInDirectory.Single(x => x.FileName == fileToOpen).FileSize;
             List<byte> dataBlocksToRead = new List<byte>();
 
             dataBlocksToRead.AddRange(_blocks[indexBlock].BlockData.Where(x => x != 255));
@@ -242,12 +230,12 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
         public bool DeleteFile(string filenameToDelete)
         {
-            if (_rootFolder.FilesInDirectory.All(x => x.FileName != filenameToDelete))
+            if (RootFolder.FilesInDirectory.All(x => x.FileName != filenameToDelete))
             {
                 Console.WriteLine("Błąd: Wskazany plik \"" + filenameToDelete + "\" nie istnieje w folderze root\\");
                 return false;
             }
-            File fileToDelete = _rootFolder.FilesInDirectory.Single(x => x.FileName == filenameToDelete);
+            File fileToDelete = RootFolder.FilesInDirectory.Single(x => x.FileName == filenameToDelete);
 
             _occupiedBlocksArray[fileToDelete.DataBlockPointer] = false;
             foreach (var datablocknr in _blocks[fileToDelete.DataBlockPointer].BlockData)
@@ -255,10 +243,10 @@ namespace Vow_win_skiUWP.Core.FileSystem
                 if (datablocknr == 255) break;
                 _occupiedBlocksArray[datablocknr] = false;
             }
-            _rootFolder.FilesInDirectory.RemoveAll(x => x.FileName == filenameToDelete);
+            //_rootFolder.FilesInDirectory.RemoveAll(x => x.FileName == filenameToDelete);
+            RootFolder.FilesInDirectory.Remove(fileToDelete);
 
             Console.WriteLine("Plik \"" + filenameToDelete + "\" został usunięty");
-            FileList = new ObservableCollection<File>(_rootFolder.FilesInDirectory);
             return true;
         }
 
@@ -283,12 +271,12 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
         public bool AppendToFile(string filenameToAppend, string data)
         {
-            if (_rootFolder.FilesInDirectory.All(x => x.FileName != filenameToAppend))
+            if (RootFolder.FilesInDirectory.All(x => x.FileName != filenameToAppend))
             {
                 Console.WriteLine("Błąd: Wskazany plik \"" + filenameToAppend + "\" nie istnieje w folderze root\\");
                 return false;
             }
-            File fileToAppend = _rootFolder.FilesInDirectory.Single(x => x.FileName == filenameToAppend);
+            File fileToAppend = RootFolder.FilesInDirectory.Single(x => x.FileName == filenameToAppend);
 
             if (data.Any(d => d > 255))
             {
@@ -391,7 +379,7 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
         public bool SaveToFile(string filenameToOverwrite, string data)
         {
-            File fileToSave = _rootFolder.FilesInDirectory.Single(x => x.FileName == filenameToOverwrite);
+            File fileToSave = RootFolder.FilesInDirectory.Single(x => x.FileName == filenameToOverwrite);
 
             if (data.Any(d => d > 255))
             {
@@ -402,8 +390,8 @@ namespace Vow_win_skiUWP.Core.FileSystem
             int blocksToBeFreed = 0;
             foreach (var datablocknr in _blocks[fileToSave.DataBlockPointer].BlockData)
             {
-                blocksToBeFreed++;
                 if (datablocknr == 255) break;
+                blocksToBeFreed++;
             }
 
             int freeBlocks = (from bool bit in _occupiedBlocksArray where !bit select bit).Count() + blocksToBeFreed;
@@ -411,9 +399,9 @@ namespace Vow_win_skiUWP.Core.FileSystem
 
             int dataToSaveSize = data.Length;
 
-            int blocksneeded = dataToSaveSize / _blockSize + 1;
+            int blocksneeded = dataToSaveSize / _blockSize;
             if (dataToSaveSize % _blockSize > 0) blocksneeded++;
-            if (blocksneeded > _blockSize + 1)
+            if (blocksneeded > _blockSize)
             {
                 Console.WriteLine("Błąd: Przekroczono maksymalny rozmiar pliku");
                 Console.WriteLine("Wymagany rozmiar: " + dataToSaveSize + " B\tMaksymalny dozwolony rozmiar: " +
@@ -450,14 +438,14 @@ namespace Vow_win_skiUWP.Core.FileSystem
             }
 
             //fills index block
-            _blocks[blocksToBeOccupied[0]].SetBlank();
-            for (int i = 0, j = 1; j < blocksneeded; i++, j++)
+            _blocks[fileToSave.DataBlockPointer].SetBlank();
+            for (int i = 0, j = 0; j < blocksneeded; i++, j++)
             {
-                _blocks[blocksToBeOccupied[0]].BlockData[i] = Convert.ToByte(blocksToBeOccupied[j]);
+                _blocks[fileToSave.DataBlockPointer].BlockData[i] = Convert.ToByte(blocksToBeOccupied[j]);
             }
 
             //fills data blocks
-            int inBlockPointer = 0, blockPointer = 1;
+            int inBlockPointer = 0, blockPointer = 0;
             while (data != "")
             {
                 if (inBlockPointer == _blockSize)

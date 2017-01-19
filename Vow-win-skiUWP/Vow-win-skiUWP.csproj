@@ -151,6 +151,9 @@
     <Compile Include="Views\Helpers\CppDialog.xaml.cs">
       <DependentUpon>CppDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Helpers\CWDialog.xaml.cs">
+      <DependentUpon>CWDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Helpers\MemoryPopupDialog.xaml.cs">
       <DependentUpon>MemoryPopupDialog.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="odbiorca.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="plik.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Properties\Default.rd.xml" />
@@ -242,6 +248,10 @@
     <Page Include="Views\Helpers\CppDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Helpers\CWDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Helpers\MemoryPopupDialog.xaml">
       <SubType>Designer</SubType>
