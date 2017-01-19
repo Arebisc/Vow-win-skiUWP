@@ -88,7 +88,7 @@ namespace Vow_win_skiUWP.Core.CPU
 
         public PCB PriorityAlgorithm()
         {
-            var process = WaitingForProcessor
+            var process = WaitingForProcessor.Reverse()
                 .Aggregate((elem1, elem2) =>
                     (elem1.CurrentPriority < elem2.CurrentPriority ? elem1 : elem2));
 
