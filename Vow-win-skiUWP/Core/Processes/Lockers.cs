@@ -1,20 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Vow_win_skiUWP.Annotations;
 
 namespace Vow_win_skiUWP.Core.Processes
 {
-    public class Lockers
+    public class Lockers : INotifyPropertyChanged
     {
+        private static Lockers _instance;
+        private PCB _proces = null;
         private byte open = 0;
         public ObservableCollection<PCB> waiting { get; set; }
         private string Name;
-        public PCB proces { get; set; }
 
-        public Lockers()
+        public static void InitLockers()
+        {
+            _instance = new Lockers();
+        }
+
+        public static Lockers GetInstance() => _instance;
+
+
+
+        public PCB proces
+        {
+            get
+            {
+                return _proces;
+            }
+            set
+            {
+                _proces = value;
+                OnPropertyChanged(nameof(proces));
+            }
+        }
+
+        private Lockers()
         {
             waiting = new ObservableCollection<PCB>();
 
@@ -104,6 +130,14 @@ namespace Vow_win_skiUWP.Core.Processes
                 return true;
             else
                 return false;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

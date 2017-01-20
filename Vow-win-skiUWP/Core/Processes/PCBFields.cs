@@ -165,32 +165,32 @@ namespace Vow_win_skiUWP.Core.Processes
         /// <summary>
         /// 1, jeśli proces został uśpiony z powodu oczekiwania na wiadomość
         /// </summary>
-        public int ReceiverMessageLock
-        {
-            get { return _receiverMessageLock; }
-            set
-            {
-                _receiverMessageLock = value;
-                OnPropertyChanged("ReceiverMessageLock");
-            }
-        }
+        //public int ReceiverMessageLock
+        //{
+        //    get { return _receiverMessageLock; }
+        //    set
+        //    {
+        //        _receiverMessageLock = value;
+        //        OnPropertyChanged("ReceiverMessageLock");
+        //    }
+        //}
 
-        private Lockers _stopperLock = new Lockers();
+        //private Lockers _stopperLock = new Lockers();
 
-        /// <summary>
-        /// Zamek oczekiwania na zatrzymanie - jeśli zatrzymywany proces
-        /// ma stan inny niż Running, proces zatrzymujący blokuje się
-        /// pod tym zamkiem i odblokowuje dopiero po zamknięciu procesu
-        /// </summary>
-        private Lockers StopperLock
-        {
-            get { return _stopperLock; }
-            set
-            {
-                _stopperLock = value;
-                OnPropertyChanged("StopperLock");
-            }
-        }
+        ///// <summary>
+        ///// Zamek oczekiwania na zatrzymanie - jeśli zatrzymywany proces
+        ///// ma stan inny niż Running, proces zatrzymujący blokuje się
+        ///// pod tym zamkiem i odblokowuje dopiero po zamknięciu procesu
+        ///// </summary>
+        //private Lockers StopperLock
+        //{
+        //    get { return _stopperLock; }
+        //    set
+        //    {
+        //        _stopperLock = value;
+        //        OnPropertyChanged("StopperLock");
+        //    }
+        //}
 
         private PCB _closingProcess = null;
 
