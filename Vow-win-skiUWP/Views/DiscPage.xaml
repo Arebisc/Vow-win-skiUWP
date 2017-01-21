@@ -59,7 +59,7 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <TextBlock FontSize="20" TextAlignment="Center" FontFamily="Wide Latin">File Content</TextBlock>
-                    <TextBox Name="FileContent" Width="600" Height="400"></TextBox>
+                    <TextBox Name="FileContent" Width="600" Height="400" TextWrapping="Wrap" HorizontalAlignment="Stretch" ></TextBox>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
