@@ -119,7 +119,6 @@
     <Compile Include="Core\MemoryModule\PhysicalMemory.cs" />
     <Compile Include="Core\MemoryModule\ProcessPages.cs" />
     <Compile Include="Core\Processes\Lockers.cs" />
-    <Compile Include="Core\Processes\LockersHolder.cs" />
     <Compile Include="Core\Processes\Managing.cs" />
     <Compile Include="Core\Processes\PCBFields.cs" />
     <Compile Include="Core\Processes\PCBMethods.cs" />
