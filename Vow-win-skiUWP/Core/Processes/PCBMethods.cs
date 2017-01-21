@@ -100,7 +100,7 @@ namespace Vow_win_skiUWP.Core.Processes
                 if (Reason == ReasonOfProcessTerminating.KilledByOther)
                 {
                     this.ClosingProcess = ClosingProcess;
-                    StopperLock.Lock(ClosingProcess);
+                //    StopperLock.Lock(ClosingProcess);
                 }
 
                 return 1;
@@ -152,7 +152,7 @@ namespace Vow_win_skiUWP.Core.Processes
                     //odblokuj proces zamykający
                     if (ClosingProcess != null)
                     {
-                        StopperLock.Unlock(this.Name);
+                        //StopperLock.Unlock(this.Name);
                         ClosingProcess = null;
                     }
 
@@ -308,14 +308,14 @@ namespace Vow_win_skiUWP.Core.Processes
             Console.WriteLine("Licznik instrukcji: " + InstructionCounter);
             Console.WriteLine("Strony pamieci: ");
             MemoryModule.Memory.GetInstance.DisplayPageList(PID);
-            Console.WriteLine("Zamek odbioru wiadomosci: " + ReceiverMessageLock);
+          //  Console.WriteLine("Zamek odbioru wiadomosci: " + ReceiverMessageLock);
             Console.WriteLine("Oczekiwanie na zamkniecie: " + WaitingForStopping);
             Console.WriteLine();
         }
 
         public void Send(string receivername, string message)
         {
-            LockersHolder.ProcLock.Unlock(receivername);
+            Lockers.GetInstance().Unlock(receivername);
             PipeServer.GetServer.SendMessage(message, receivername, Name);
         }
 
@@ -323,7 +323,7 @@ namespace Vow_win_skiUWP.Core.Processes
         {
             if (PipeServer.GetServer.ReadMessage(Name) == false)
             {
-                LockersHolder.ProcLock.Lock(this);
+                Lockers.GetInstance().Lock(this);
             }
         }
 

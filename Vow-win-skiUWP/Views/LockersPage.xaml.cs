@@ -36,41 +36,21 @@ namespace Vow_win_skiUWP.Views
         }   
     }
 
-    public class LockersCollection : INotifyPropertyChanged
+    public class LockersCollection 
     {
-        private PCB _lockerProces = null;
+      
         public ObservableCollection<PCB> LockersWaiting { get; set; } 
 
-        public PCB LockerProces
-        {
-            get
-            {
-                return _lockerProces;
-            }
-            set
-            {
-                _lockerProces = value;
-                OnPropertyChanged();
-            }
-        }
-
+        public PCB LockerProces { get; set; }
+      
         public LockersCollection()
         {
-            if (LockersHolder.GetInstance.GetProces() != null)
-            {
-                LockersHolder.GetInstance.GetProces();
-            }
+            LockerProces = Lockers.GetInstance().proces;
 
-            LockersWaiting = LockersHolder.GetInstance.GetCollection();
+            LockersWaiting = Lockers.GetInstance().waiting;
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+     
     }
 }

@@ -30,7 +30,7 @@ namespace Vow_win_skiUWP
     {
         void InitializeSystemResources()
         {
-            LockersHolder.InitLockers();
+            Lockers.InitLockers();
             PipeServer.InitServer();
             Disc.InitDisc();
             PCB.CreateIdleProcess();
