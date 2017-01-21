@@ -95,6 +95,7 @@ namespace Vow_win_skiUWP.Core.Processes
                     if (Check(name))
                     {
                         proces.StopWaiting();
+                        this.proces = null;
                         open = 0;
                     }
                 }
