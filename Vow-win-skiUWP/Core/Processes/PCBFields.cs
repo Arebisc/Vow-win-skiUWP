@@ -161,7 +161,7 @@ namespace Vow_win_skiUWP.Core.Processes
             }
         }
 
-        private int _receiverMessageLock = 0;
+     //   private int _receiverMessageLock = 0;
         /// <summary>
         /// 1, jeśli proces został uśpiony z powodu oczekiwania na wiadomość
         /// </summary>
