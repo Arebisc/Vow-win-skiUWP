@@ -27,7 +27,8 @@ namespace Vow_win_skiUWP.Views.Helpers
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            Disc.GetDisc.CreateFile(ProcessName.Text, string.Empty);
+            if(ProcessName.Text != string.Empty)
+                Disc.GetDisc.CreateFile(ProcessName.Text, string.Empty);
         }
 
         public void setTitle(string text)

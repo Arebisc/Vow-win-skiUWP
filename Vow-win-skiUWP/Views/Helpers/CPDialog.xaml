@@ -17,7 +17,7 @@
                 <TextBox Name="ProcessName" Width="130"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <TextBlock FontWeight="Bold">Wybierz plik</TextBlock>
+                <TextBlock FontWeight="Bold">Choose file</TextBlock>
                 <ListBox Name="FileList">
                     <ListBoxItem Content="silnia.txt"></ListBoxItem>
                     <ListBoxItem Content="silnia12.txt"></ListBoxItem>

@@ -27,7 +27,8 @@ namespace Vow_win_skiUWP.Views.Helpers
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            Disc.GetDisc.CreateFromWindows(FileName.Text, FileNameFromWindows.Text);
+            if(FileName.Text != string.Empty && FileNameFromWindows.Text != string.Empty)
+                Disc.GetDisc.CreateFromWindows(FileName.Text, FileNameFromWindows.Text);
         }
     }
 }
