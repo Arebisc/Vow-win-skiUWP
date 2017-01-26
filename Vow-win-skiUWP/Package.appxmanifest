@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="06f7c47e-227b-4fef-9d1a-038a5dfc4270" Publisher="CN=Arebis" Version="1.0.0.0" />
+  <Identity Name="06f7c47e-227b-4fef-9d1a-038a5dfc4270" Publisher="CN=Arebis" Version="1.1.1.0" />
   <mp:PhoneIdentity PhoneProductId="06f7c47e-227b-4fef-9d1a-038a5dfc4270" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Vow-win-skiUWP</DisplayName>

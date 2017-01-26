@@ -36,6 +36,7 @@ namespace Vow_win_skiUWP
         public MainPage()
         {
             this.InitializeComponent();
+            IconsListBox.SelectedItem = ProcessesListBoxItem;
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
