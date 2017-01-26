@@ -7,10 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Wide Latin" >Registers</TextBlock>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center">
+        <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Wide Latin" >Credits</TextBlock>
         <ScrollViewer Margin="0, 100, 0, 0">
-            <StackPanel Orientation="Horizontal" Width="600">
+            <StackPanel Orientation="Horizontal" Width="900">
                 <StackPanel Orientation="Vertical">
                     <TextBlock FontSize="20" TextAlignment="Center">Michał "Arebis" Sibera</TextBlock>
                     <StackPanel Orientation="Horizontal" Margin="40">

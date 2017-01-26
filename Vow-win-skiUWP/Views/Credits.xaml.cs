@@ -25,8 +25,16 @@ namespace Vow_win_skiUWP.Views
         public Credits()
         {
             this.InitializeComponent();
-            creditsMichal.Text = "Lead UWP Developer\nCore.CPU";
-
+            creditsMichal.Text = "Lead UWP Developer\n" +
+                                 "Core.CPU\n" +
+                                 "GUI Pages: Main Page, CPU, Disc, Processess, Credits";
+            creditsDawidW.Text = "UWP Developer\n" +
+                                 "Core.IPC\n" +
+                                 "GUI Pages: IPC, Lockers, Memory, Credits";
+            creditsDaniel.Text = "Core.Lockers";
+            creditsDawid.Text = "Core.Memory";
+            creditsRobert.Text = "Core.Disc";
+            creditsOrczyk.Text = "Core.Processess";
         }
     }
 }
