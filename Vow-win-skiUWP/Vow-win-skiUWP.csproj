@@ -184,12 +184,18 @@
     <Content Include="Assets\CoreAssets\close.wav" />
     <Content Include="Assets\CoreAssets\spin.wav" />
     <Content Include="Assets\CoreAssets\start.wav" />
+    <Content Include="Assets\Daniel.jpg" />
+    <Content Include="Assets\Dawid.jpg" />
+    <Content Include="Assets\DawidW.jpg" />
     <Content Include="Assets\guard.png" />
+    <Content Include="Assets\Marcin.jpg" />
+    <Content Include="Assets\Michal.jpg" />
     <Content Include="Assets\postman-pat-2.png" />
     <Content Include="Assets\procesor.png" />
     <Content Include="Assets\ProcessorIcon.png" />
     <Content Include="Assets\ram.png" />
     <Content Include="Assets\ram2.png" />
+    <Content Include="Assets\Robert.jpg" />
     <Content Include="idle.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

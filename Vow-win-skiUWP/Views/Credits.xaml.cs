@@ -25,6 +25,7 @@ namespace Vow_win_skiUWP.Views
         public Credits()
         {
             this.InitializeComponent();
+            creditsMichal.Text = "Lead UWP Developer\nCore.CPU";
         }
     }
 }

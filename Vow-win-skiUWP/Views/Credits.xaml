@@ -8,6 +8,17 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer>
+            <StackPanel Orientation="Horizontal" Width="600">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="100" Source="../Assets/Michal.jpg"/>
+                        <TextBlock TextWrapping="Wrap" Name="creditsMichal"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        
 
     </Grid>
 </Page>
