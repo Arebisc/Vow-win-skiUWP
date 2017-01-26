@@ -66,6 +66,9 @@ namespace Vow_win_skiUWP
                 case "DiscListBoxItem":
                     RootFrame.Navigate(typeof(Views.DiscPage));
                     break;
+                case "CreditsBoxItem":
+                    RootFrame.Navigate(typeof(Views.Credits));
+                    break;
             }
         }
 

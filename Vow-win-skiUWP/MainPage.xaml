@@ -63,6 +63,14 @@
                             <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE105;" />
                             <TextBlock Text="Disc" FontSize="24" Margin="20,0,0,0" />
                         </StackPanel>
+                        
+                    </ListBoxItem>
+                    <ListBoxItem Name="CreditsBoxItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE187;" />
+                            <TextBlock Text="Credits" FontSize="24" Margin="20,0,0,0" />
+                        </StackPanel>
+
                     </ListBoxItem>
                 </ListBox>
             </SplitView.Pane>
