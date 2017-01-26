@@ -8,12 +8,39 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer>
+        <TextBlock FontSize="60" TextAlignment="Center" FontFamily="Wide Latin" >Registers</TextBlock>
+        <ScrollViewer Margin="0, 100, 0, 0">
             <StackPanel Orientation="Horizontal" Width="600">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="100" Source="../Assets/Michal.jpg"/>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="20" TextAlignment="Center">Michał "Arebis" Sibera</TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="40">
+                        <Image Height="200" Source="../Assets/Michal.jpg" Margin="0, 0, 20, 0"/>
                         <TextBlock TextWrapping="Wrap" Name="creditsMichal"></TextBlock>
+                    </StackPanel>
+                    <TextBlock FontSize="20" TextAlignment="Center">Dawid "TheSensej" Wojciechowski</TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="40">
+                        <Image Height="200" Source="../Assets/DawidW.jpg" Margin="0, 0, 20, 0"/>
+                        <TextBlock TextWrapping="Wrap" Name="creditsDawidW"></TextBlock>
+                    </StackPanel>
+                    <TextBlock FontSize="20" TextAlignment="Center">Daniel "Dannylach" Lachowicz</TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="40">
+                        <Image Height="200" Source="../Assets/Daniel.jpg" Margin="0, 0, 20, 0"/>
+                        <TextBlock TextWrapping="Wrap" Name="creditsDaniel"></TextBlock>
+                    </StackPanel>
+                    <TextBlock FontSize="20" TextAlignment="Center">Dawid "Kulis" Kuliński</TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="40">
+                        <Image Height="200" Source="../Assets/Dawid.jpg" Margin="0, 0, 20, 0"/>
+                        <TextBlock TextWrapping="Wrap" Name="creditsDawid"></TextBlock>
+                    </StackPanel>
+                    <TextBlock FontSize="20" TextAlignment="Center">Robert "Kosert" Kosakowski</TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="40">
+                        <Image Height="200" Source="../Assets/Robert.jpg" Margin="0, 0, 20, 0"/>
+                        <TextBlock TextWrapping="Wrap" Name="creditsRobert"></TextBlock>
+                    </StackPanel>
+                    <TextBlock FontSize="20" TextAlignment="Center">Marcin "Kwant" Orczyk</TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="40">
+                        <Image Height="200" Source="../Assets/Marcin.jpg" Margin="0, 0, 20, 0"/>
+                        <TextBlock TextWrapping="Wrap" Name="creditsOrczyk"></TextBlock>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
